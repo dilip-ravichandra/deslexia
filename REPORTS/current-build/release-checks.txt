@@ -1,0 +1,1 @@
+2026-10-15 release checks passed: Python compilation; JavaScript syntax; selected-occurrence routing context; survey-based initial route; idempotent session closure; profile deletion. Earlier complete run: 64 passed, 2 warnings. Native generator follow-up not confirmed complete after runtime reset.

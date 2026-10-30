@@ -1,0 +1,88 @@
+{
+  "models": [
+    {
+      "folder": "minilm",
+      "repo": "sentence-transformers/all-MiniLM-L6-v2",
+      "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "license": "apache-2.0",
+      "source_url": "https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2",
+      "files": [
+        {
+          "path": "onnx/model.onnx",
+          "size": 90405214,
+          "sha256": "6fd5d72fe4589f189f8ebc006442dbb529bb7ce38f8082112682524616046452"
+        },
+        {
+          "path": "tokenizer.json",
+          "size": 466247,
+          "sha256": "be50c3628f2bf5bb5e3a7f17b1f74611b2561a3a27eeab05e5aa30f411572037"
+        },
+        {
+          "path": "config.json",
+          "size": 612,
+          "sha256": "953f9c0d463486b10a6871cc2fd59f223b2c70184f49815e7efbcab5d8908b41"
+        },
+        {
+          "path": "README.md",
+          "size": 10502,
+          "sha256": "dcd602d2fd35c203a247304a06fec6654a12f7941b739f9221a064fe8dc3b7f0"
+        }
+      ]
+    },
+    {
+      "folder": "qwen",
+      "repo": "Qwen/Qwen2.5-1.5B-Instruct-GGUF",
+      "revision": "91cad51170dc346986eccefdc2dd33a9da36ead9",
+      "license": "apache-2.0",
+      "source_url": "https://huggingface.co/Qwen/Qwen2.5-1.5B-Instruct-GGUF",
+      "files": [
+        {
+          "path": "qwen2.5-1.5b-instruct-q4_k_m.gguf",
+          "size": 1117320736,
+          "sha256": "6a1a2eb6d15622bf3c96857206351ba97e1af16c30d7a74ee38970e434e9407e"
+        },
+        {
+          "path": "LICENSE",
+          "size": 11343,
+          "sha256": "832dd9e00a68dd83b3c3fb9f5588dad7dcf337a0db50f7d9483f310cd292e92e"
+        },
+        {
+          "path": "README.md",
+          "size": 4856,
+          "sha256": "57c72d4010fb11a98fc8e62dc8ef112b23a7a7525b71e571ca978d35cb3b2eec"
+        }
+      ]
+    },
+    {
+      "folder": "nli",
+      "repo": "cross-encoder/nli-MiniLM2-L6-H768",
+      "revision": "b95119ce93d3e065de6214e38cd4a97b0f2f2c6d",
+      "license": "apache-2.0",
+      "source_url": "https://huggingface.co/cross-encoder/nli-MiniLM2-L6-H768",
+      "files": [
+        {
+          "path": "onnx/model.onnx",
+          "size": 328649957,
+          "sha256": "807d33fffefd95ad60e2a91f54eed50a92aa53c077945a6842bb587a49a3fdf3"
+        },
+        {
+          "path": "tokenizer.json",
+          "size": 1356048,
+          "sha256": "82139106e603ee4e1d5bc99d056ccbed5a92bc24848b1b5a7137c26e00d0dbf6"
+        },
+        {
+          "path": "config.json",
+          "size": 875,
+          "sha256": "8b0e41caff7567c0f53e6983f35591c3dec59507c9173ab125c5823394fb57f3"
+        },
+        {
+          "path": "README.md",
+          "size": 2695,
+          "sha256": "1a6e3f880df3584acc1b209c7c667eb22cb7ddd98ab56a5905dda5cfc446ddd1"
+        }
+      ]
+    }
+  ],
+  "runtime": "CPU local inference; no paid endpoint",
+  "provenance": "Downloaded and exercised during this build"
+}

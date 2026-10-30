@@ -1,0 +1,332 @@
+{
+  "scope": "Local engineering audit; temporary fixtures, no human judgments or student outcomes",
+  "python": "3.13.3 (tags/v3.13.3:6280bb5, Apr  8 2025, 14:47:33) [MSC v.1943 64 bit (AMD64)]",
+  "encoding": "cp1252",
+  "hindi_sentences": {
+    "input": "\u092a\u0939\u0932\u093e \u0935\u093e\u0915\u094d\u092f\u0964 \u0926\u0942\u0938\u0930\u093e \u0935\u093e\u0915\u094d\u092f\u0964",
+    "split": [
+      "\u092a\u0939\u0932\u093e \u0935\u093e\u0915\u094d\u092f\u0964",
+      "\u0926\u0942\u0938\u0930\u093e \u0935\u093e\u0915\u094d\u092f\u0964"
+    ],
+    "second_selection_context": "\u0926\u0942\u0938\u0930\u093e \u0935\u093e\u0915\u094d\u092f\u0964"
+  },
+  "handoff_missing": [
+    "ML/grounding.py",
+    "ML/human_review.py",
+    "FRONTEND/human-review.html",
+    "FRONTEND/human-review.js",
+    "HUMAN_REVIEW_GUIDE.md",
+    "TESTS/test_grounding.py",
+    "TESTS/test_human_review.py",
+    "TESTS/test_manual_review_api.py",
+    "REPORTS/current-build/grounded-generation-live.json",
+    "REPORTS/current-build/grounding-review-tests.txt",
+    "REPORTS/current-build/manual-review-browser-checks.json"
+  ],
+  "dependencies": {
+    "llama_cpp": false,
+    "peft": true,
+    "torch": true,
+    "transformers": true,
+    "rapidocr_onnxruntime": false,
+    "pypdfium2": true,
+    "playwright": true
+  },
+  "model_weight_files": [],
+  "routing_pool": {
+    "rows": 100,
+    "languages": {
+      "en": 25,
+      "hi": 25,
+      "kn": 25,
+      "ta": 25
+    },
+    "nonblank_categories": 0,
+    "columns": [
+      "source_id",
+      "document_id",
+      "span_id",
+      "text",
+      "context_before",
+      "context_after",
+      "category",
+      "annotator_id",
+      "guideline_version",
+      "confidence",
+      "rationale",
+      "source_license",
+      "created_at",
+      "annotation_type",
+      "language",
+      "existing_public_task",
+      "existing_public_label"
+    ]
+  },
+  "lexical_runs": [
+    {
+      "run_id": "a96a86265b8a4b6c80bc4bc70fbae444",
+      "status": "interrupted",
+      "selected_arm": null,
+      "task": "English lexical complexity regression (not 3-category routing)",
+      "arms": {
+        "tfidf": {
+          "validation": {
+            "n": 308,
+            "recorded_mae": 0.1112749520704015,
+            "recomputed_mae": 0.1112749520704015
+          },
+          "test": {
+            "n": 887,
+            "recorded_mae": 0.09837004046798524,
+            "recomputed_mae": 0.09837004046798524
+          }
+        }
+      }
+    },
+    {
+      "run_id": "e8c83d66789541ff965aa5344daf6e01",
+      "status": "completed",
+      "selected_arm": "distilbert",
+      "task": "English lexical complexity regression (not 3-category routing)",
+      "arms": {
+        "tfidf": {
+          "validation": {
+            "n": 308,
+            "recorded_mae": 0.1112749520704015,
+            "recomputed_mae": 0.1112749520704015
+          },
+          "test": {
+            "n": 887,
+            "recorded_mae": 0.09837004046798524,
+            "recomputed_mae": 0.09837004046798524
+          }
+        },
+        "distilbert": {
+          "validation": {
+            "n": 308,
+            "recorded_mae": 0.10442265476255656,
+            "recomputed_mae": 0.10442265476255656
+          },
+          "test": {
+            "n": 887,
+            "recorded_mae": 0.10317693323160146,
+            "recomputed_mae": 0.10317693323160146
+          }
+        },
+        "distilbert_features": {
+          "validation": {
+            "n": 308,
+            "recorded_mae": 0.10761756804230324,
+            "recomputed_mae": 0.10761756804230324
+          },
+          "test": {
+            "n": 887,
+            "recorded_mae": 0.10527960859871496,
+            "recomputed_mae": 0.10527960859871496
+          }
+        }
+      }
+    }
+  ],
+  "get_endpoints": {
+    "/api/health": {
+      "status": 200
+    },
+    "/api/model-status": {
+      "status": 200,
+      "body": {
+        "pipeline_version": "0.2.0",
+        "mode": "demo",
+        "research_model_available": false,
+        "research_model": {
+          "available": false,
+          "reason": "no ARTIFACTS/research_model/registry.json"
+        },
+        "warning": "No validated research model is loaded. Category suggestions come from a demo heuristic and nothing produced here is a research result.",
+        "semantic_scorers": {
+          "enabled_by_config": false,
+          "embedding": "disabled",
+          "nli": "disabled"
+        },
+        "lexicon": {
+          "name": "demo_lexicon_v1",
+          "status": "DEMO resource: written by the project assistant, NOT reviewed by a linguist or educator, small and general-purpose. Glosses are plain-language approximations. Replace with a reviewed lexicon before any study."
+        },
+        "logging": {
+          "enabled": false,
+          "text_logged": false
+        },
+        "prototype": {
+          "available": false,
+          "active": null,
+          "data_status": "AI_WEAK_LABEL_PROTOTYPE",
+          "valid_for_scientific_claims": false,
+          "pretrained_embeddings_available": false
+        },
+        "human_routing": {
+          "available": false,
+          "reason": "Human-reviewed routing labels and evaluated comparison required"
+        },
+        "learner_model": {
+          "method": "Online Dirichlet evidence model",
+          "languages": [
+            "en",
+            "hi",
+            "kn",
+            "ta"
+          ],
+          "synthetic_routing_model_active": false
+        },
+        "local_generation": {
+          "available": false,
+          "model": "Qwen3-4B Q4_K_M"
+        },
+        "pretrained_semantic_verification": {
+          "available": false,
+          "model": "nli-MiniLM2-L6-H768"
+        }
+      }
+    },
+    "/api/document-status": {
+      "status": 200,
+      "body": {
+        "ocr_available": false,
+        "pdf_available": true,
+        "native_multilingual_ocr_available": false,
+        "vision_available": false,
+        "max_upload_mb": 25,
+        "storage": "transient_processing_no_retained_uploads"
+      }
+    },
+    "/api/admin/research-evidence": {
+      "status": 200
+    },
+    "/api/admin/learning": {
+      "status": 200
+    },
+    "/api/admin/public-materials?language=hi": {
+      "status": 500
+    },
+    "/human-review.html": {
+      "status": 404
+    }
+  },
+  "support": {
+    "english_single_word": {
+      "status": 200,
+      "detail": null,
+      "input": {
+        "span": "catalyst",
+        "sentence": "The catalyst helps the reaction."
+      },
+      "explanation": {
+        "summary": "A substance that speeds up a chemical reaction while remaining unchanged overall.",
+        "style": "short",
+        "terms": [
+          {
+            "term": "catalyst",
+            "meaning": "A substance that speeds up a chemical reaction while remaining unchanged overall.",
+            "source": "bundled_educational_glossary_v1"
+          }
+        ],
+        "source_statement": "The catalyst helps the reaction.",
+        "relationship": null,
+        "example_from_passage": null,
+        "source": "context_and_bundled_glossary",
+        "is_generated_model_output": false,
+        "meaning_preservation_guaranteed": false,
+        "note": "Supplemental explanation; the original is unchanged. Glossary content has not been validated with learners.",
+        "available": true,
+        "language": "en"
+      }
+    },
+    "english_phrase": {
+      "status": 200,
+      "detail": null,
+      "input": {
+        "span": "chemical reaction",
+        "sentence": "A catalyst speeds up a chemical reaction."
+      },
+      "explanation": {
+        "summary": "A substance that speeds up a chemical reaction while remaining unchanged overall.",
+        "style": "short",
+        "terms": [
+          {
+            "term": "catalyst",
+            "meaning": "A substance that speeds up a chemical reaction while remaining unchanged overall.",
+            "source": "bundled_educational_glossary_v1"
+          }
+        ],
+        "source_statement": "A catalyst speeds up a chemical reaction.",
+        "relationship": null,
+        "example_from_passage": null,
+        "source": "context_and_bundled_glossary",
+        "is_generated_model_output": false,
+        "meaning_preservation_guaranteed": false,
+        "note": "Supplemental explanation; the original is unchanged. Glossary content has not been validated with learners.",
+        "available": true,
+        "language": "en"
+      }
+    },
+    "hindi_missing_model": {
+      "status": 200,
+      "detail": null,
+      "input": {
+        "span": "\u092a\u093e\u0928\u0940",
+        "sentence": "\u092a\u094c\u0927\u094b\u0902 \u0915\u094b \u092a\u093e\u0928\u0940 \u091a\u093e\u0939\u093f\u090f\u0964"
+      },
+      "explanation": {
+        "summary": "\u0907\u0938 \u092d\u093e\u0937\u093e \u092e\u0947\u0902 \u0938\u094d\u0925\u093e\u0928\u0940\u092f \u0935\u094d\u092f\u093e\u0916\u094d\u092f\u093e \u0909\u092a\u0932\u092c\u094d\u0927 \u0928\u0939\u0940\u0902 \u0939\u0948\u0964 \u0906\u092a\u0915\u093e \u092e\u0942\u0932 \u092a\u093e\u0920 \u092c\u0926\u0932\u093e \u0928\u0939\u0940\u0902 \u0917\u092f\u093e \u0939\u0948\u0964",
+        "available": false,
+        "source": "model_unavailable",
+        "language": "hi",
+        "note": "Run model setup; no English substitute is silently supplied."
+      }
+    },
+    "repeated_bank_second": {
+      "status": 200,
+      "detail": null,
+      "input": {
+        "span": "bank",
+        "sentence": "We sat beside the river bank."
+      },
+      "explanation": {
+        "summary": "Do you mean a financial bank, or the land beside a river? The sentence does not give enough context to choose.",
+        "style": "short",
+        "terms": [],
+        "source_statement": "I left money at the bank. We sat beside the river bank.",
+        "relationship": null,
+        "example_from_passage": null,
+        "source": "clarifying_question",
+        "is_generated_model_output": false,
+        "meaning_preservation_guaranteed": false,
+        "note": "Supplemental explanation; the original is unchanged. Glossary content has not been validated with learners.",
+        "needs_clarification": true,
+        "available": true,
+        "language": "en"
+      }
+    }
+  },
+  "duplicate_route_gate": {
+    "before": "OTHER_UNCERTAIN",
+    "after": "VOCABULARY",
+    "parameters_approximately_unchanged": true
+  },
+  "browser": {
+    "/": {
+      "title": "DyslexiAdapt \u2014 Your reading room",
+      "errors": [],
+      "support_text": "You chose: Help with the idea\n\nYou chose this support type. The explanation is generated separately.\n\nCurrent explicit request overrides history.\n\nUnderstanding this part\n\nA substance that speeds up a chemical reaction while remaining unchanged overall.\n\ncatalyst\nA substance that speeds up a chemical reaction while remaining unchanged overall.\n\nSupplemental explanation; the original is unchanged. Glossary content has not been validated with learners.\n\nYour original text stays unchanged. The explanation above gives extra help with its meaning.\n\nTry another way\nOptional feedback\nHow comfortable was this? (optional)\n\uff0b Save to notebook"
+    },
+    "/learning.html": {
+      "title": "DyslexiAdapt \u2014 Train & adapt",
+      "errors": [],
+      "message": "Evidence loaded. Admin actions are protected by the backend access gate."
+    },
+    "/learner-lab.html": {
+      "title": "DyslexiAdapt \u00b7 Learner evidence lab",
+      "errors": [],
+      "message": "Only actual consented learner records are shown. No demo learners are generated."
+    }
+  }
+}

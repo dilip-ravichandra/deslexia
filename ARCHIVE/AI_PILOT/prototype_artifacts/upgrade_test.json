@@ -1,0 +1,100 @@
+{
+  "run_id": "87229885f07a40c08fdebc96456f8344",
+  "evaluation": {
+    "macro_f1": 0.6609848484848484,
+    "per_class": {
+      "VOCABULARY": {
+        "precision": 0.3333333333333333,
+        "recall": 1.0,
+        "f1-score": 0.5,
+        "support": 1.0
+      },
+      "SYNTACTIC": {
+        "precision": 0.6,
+        "recall": 0.75,
+        "f1-score": 0.6666666666666666,
+        "support": 4.0
+      },
+      "CONCEPTUAL": {
+        "precision": 1.0,
+        "recall": 0.6,
+        "f1-score": 0.75,
+        "support": 5.0
+      },
+      "OTHER_UNCERTAIN": {
+        "precision": 0.8,
+        "recall": 0.6666666666666666,
+        "f1-score": 0.7272727272727273,
+        "support": 6.0
+      },
+      "accuracy": 0.6875,
+      "macro avg": {
+        "precision": 0.6833333333333333,
+        "recall": 0.7541666666666667,
+        "f1-score": 0.6609848484848484,
+        "support": 16.0
+      },
+      "weighted avg": {
+        "precision": 0.7833333333333334,
+        "recall": 0.6875,
+        "f1-score": 0.7050189393939393,
+        "support": 16.0
+      }
+    },
+    "confusion_matrix": {
+      "labels": [
+        "VOCABULARY",
+        "SYNTACTIC",
+        "CONCEPTUAL",
+        "OTHER_UNCERTAIN"
+      ],
+      "matrix": [
+        [
+          1,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          3,
+          0,
+          1
+        ],
+        [
+          1,
+          1,
+          3,
+          0
+        ],
+        [
+          1,
+          1,
+          0,
+          4
+        ]
+      ]
+    },
+    "rows": 16,
+    "predictions": [
+      "SYNTACTIC",
+      "VOCABULARY",
+      "VOCABULARY",
+      "OTHER_UNCERTAIN",
+      "VOCABULARY",
+      "CONCEPTUAL",
+      "CONCEPTUAL",
+      "CONCEPTUAL",
+      "OTHER_UNCERTAIN",
+      "OTHER_UNCERTAIN",
+      "SYNTACTIC",
+      "OTHER_UNCERTAIN",
+      "SYNTACTIC",
+      "OTHER_UNCERTAIN",
+      "SYNTACTIC",
+      "SYNTACTIC"
+    ]
+  },
+  "note": "Descriptive repeat on the same frozen GPT-labelled pilot test. Selected using validation only; not a new independent benchmark.",
+  "valid_for_scientific_claims": false
+}

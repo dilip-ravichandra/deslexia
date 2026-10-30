@@ -1,0 +1,2 @@
+# Local adaptive prototype. Optional neural experiments: install ML/requirements.txt separately.
+-r requirements-adaptive.txt

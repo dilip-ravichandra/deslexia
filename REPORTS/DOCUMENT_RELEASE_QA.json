@@ -1,0 +1,67 @@
+{
+  "backend_and_document_checks": 63,
+  "real_text_encoder_generator_nli_checks": 6,
+  "browser_checks": [
+    [
+      "Image upload \u2192 actual OCR \u2192 editable text",
+      "Reviewed OCR text \u2192 reader",
+      "Uploaded text \u2192 selected word \u2192 actual support API",
+      "Research overview \u2192 actual active model, data and validation charts",
+      "Research report export control",
+      "Training lab \u2192 active registry and evaluated versions",
+      "Mobile viewport \u2192 page preview, editable OCR and no horizontal overflow",
+      "No browser JavaScript exceptions"
+    ],
+    [
+      "Keyboard crop \u2192 bounded region",
+      "Browser \u2192 actual Qwen vision projector \u2192 chart explanation",
+      "Opt-in visual helpfulness \u2192 persisted feedback",
+      "Visual answer \u2192 notebook",
+      "Research lab \u2192 actual visual feedback counts",
+      "Forget history \u2192 deletes visual feedback"
+    ],
+    [
+      "Browser PDF embedded-text extraction and page count",
+      "Next page \u2192 actual chart OCR",
+      "Previous page \u2192 restored text and preview",
+      "Dataset navigation \u2192 actual example and disagreement inspector",
+      "Error-analysis navigation \u2192 recorded validation confusion matrix",
+      "Train & adapt \u2192 successful evidence load status"
+    ]
+  ],
+  "browser_total": 20,
+  "total_checks": 89,
+  "vision_direct_outputs": [
+    {
+      "file": "chart.png",
+      "question": "Explain this picture in simple English.",
+      "explanation": "\u2022 The chart is titled \"Books read.\"\n\u2022 There are three groups labeled A, B, and C.\n\u2022 The heights of the bars represent the number of books read in each group.\n\u2022 Group A has 2 books read.\n\u2022 Group B has 4 books read.\n\u2022 Group C has 6 books read.\n\u2022 The vertical axis represents the number of books read.\n\u2022 The horizontal axis represents the groups A, B, and C.",
+      "model": "Qwen2.5-VL-3B-Instruct Q4_K_M + Q8_0 vision projector",
+      "is_real_pretrained_inference": true,
+      "verification": "UNVERIFIED_VISUAL_EXPLANATION",
+      "warning": "Compare this explanation with the original image. Visual answers can misread labels or values.",
+      "license": "Qwen RESEARCH LICENSE: non-commercial research/evaluation use"
+    },
+    {
+      "file": "diagram.png",
+      "question": "Describe the boxes and arrows in this diagram.",
+      "explanation": "\u2022 The diagram shows a sequence of three boxes connected by arrows.\n\u2022 The first box is labeled \"Sun,\" the second is labeled \"Plant,\" and the third is labeled \"Food.\"\n\u2022 The arrows indicate a flow from Sun to Plant, and then from Plant to Food.\n\u2022 The relationship between these elements is that the Sun provides energy for the Plant to grow, and the Plant then produces Food.\n\u2022 The diagram does not provide specific details about the process or the exact nature of the relationship between the Sun and the Plant.",
+      "model": "Qwen2.5-VL-3B-Instruct Q4_K_M + Q8_0 vision projector",
+      "is_real_pretrained_inference": true,
+      "verification": "UNVERIFIED_VISUAL_EXPLANATION",
+      "warning": "Compare this explanation with the original image. Visual answers can misread labels or values.",
+      "license": "Qwen RESEARCH LICENSE: non-commercial research/evaluation use"
+    }
+  ],
+  "optimized_browser_vision_seconds": 70.1,
+  "windows_document_and_neural_wheels": "Successfully downloaded for CPython 3.12 win_amd64; native Windows execution not performed",
+  "setup": "Vision hashes verified and OCR warmup passed; original text model hashes verified",
+  "data": "140 synthetic examples, two GPT passes, 95 agreed and 45 unresolved; unchanged from previous release",
+  "not_claimed": [
+    "human gold labels",
+    "dyslexia student benefit",
+    "universal chart accuracy",
+    "calibrated visual confidence",
+    "native Windows runtime certification"
+  ]
+}

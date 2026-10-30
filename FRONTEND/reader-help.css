@@ -1,0 +1,26 @@
+.help-card .selection-box{margin:12px 0;padding:10px 12px}
+.read-aloud-status{margin:0;padding:8px 20px;background:var(--quiet);color:var(--fg);font-size:14px;line-height:1.5}
+.help-card .help-option{min-height:50px;margin:5px 0;padding:7px 10px}
+.help-card .help-option strong{font-size:13px}
+.help-card .help-option small{font-size:11px}
+.help-card .quick-comfort{padding:13px}
+.help-card .quick-comfort .small{margin:8px 0}
+.help-card .privacy-details{margin:10px 0;font-size:13px}
+.help-card .privacy-details summary{font-weight:600;color:var(--accent)}
+#reader-area #result:not(.hidden){position:fixed;z-index:30;right:clamp(10px,3vw,40px);bottom:12px;width:min(580px,calc(100vw - 20px));max-height:min(76vh,760px);overflow:auto;margin:0;padding:22px clamp(18px,4vw,32px) 26px;border:2px solid var(--accent);border-radius:16px;box-shadow:0 12px 40px rgba(0,0,0,.22);background:var(--surface);font-size:16px;line-height:1.6;overscroll-behavior:contain}
+#result h3{font-size:20px}
+#result .help-dismiss{float:right;margin:0 0 10px 14px}
+#result .help-context{max-width:68ch;padding:10px 14px;border-left:3px solid var(--accent);background:var(--quiet);overflow-wrap:anywhere}
+#result .support-source{max-width:68ch;margin:8px 0;font-size:16px;font-weight:600}
+#result .support-explanation{max-width:68ch;margin:14px 0;padding:20px 24px;border:1px solid var(--border);border-radius:12px;background:var(--bg)}
+#result .support-explanation h3{margin:0 0 10px;font-size:17px}
+#result .support-text{font-family:var(--font);font-size:var(--size);line-height:var(--lh);letter-spacing:var(--ls);white-space:pre-wrap;overflow-wrap:anywhere}
+#result .support-explanation .support-caution{font-size:16px;line-height:1.6}
+#result .support-details{max-width:68ch;margin:12px 0;font-size:15px}
+#result .support-details summary{font-weight:600}
+#result .support-details blockquote{margin:12px 0;padding-left:12px;border-left:3px solid var(--border);overflow-wrap:anywhere}
+#result .note,#result .sub,#result .small{font-size:16px}
+#result button{min-height:44px;font-size:16px}
+#result .cmp{max-width:68ch}
+@media(max-width:740px){#reader-area #result:not(.hidden){right:0;bottom:0;width:100vw;max-height:78vh;border-radius:16px 16px 0 0;padding:20px 18px}#result .support-explanation{padding:16px}}
+@media(min-width:741px) and (max-width:1100px){.reader-layout{grid-template-columns:minmax(0,1fr)}.support-column{grid-template-columns:repeat(2,minmax(0,1fr));align-items:start}}

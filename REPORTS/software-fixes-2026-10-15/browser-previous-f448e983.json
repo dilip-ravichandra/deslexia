@@ -1,0 +1,12 @@
+{
+  "fixture": "Authored browser checks, not human review or student results",
+  "checks": [
+    "Browser support: chemical reaction / CONCEPTUAL",
+    "Browser support: bank / VOCABULARY",
+    "Browser support: word / PRONUNCIATION",
+    "Consented survey, session, actual support route and optional feedback"
+  ],
+  "errors": [],
+  "status": "failed",
+  "error": "AssertionError: Locator expected to contain text '2 latest events'\nActual value: 3 latest events \nCall log:\nLocatorAssertions.to_contain_text with timeout 5000ms\n  - waiting for locator(\"#event-count\")\n  -   locator resolved to <span class=\"badge\" id=\"event-count\">0 recorded</span>\n  -   unexpected value \"0 recorded\"\n  -   locator resolved to <span class=\"badge\" id=\"event-count\">0 recorded</span>\n  -   unexpected value \"0 recorded\"\n  -   locator resolved to <span class=\"badge\" id=\"event-count\">3 latest events</span>\n  -   unexpected value \"3 latest events\"\n  -   locator resolved to <span class=\"badge\" id=\"event-count\">3 latest events</span>\n  -   unexpected value \"3 latest events\"\n  -   locator resolved to <span class=\"badge\" id=\"event-count\">3 latest events</span>\n  -   unexpected value \"3 latest events\"\n  -   locator resolved to <span class=\"badge\" id=\"event-count\">3 latest events</span>\n  -   unexpected value \"3 latest events\"\n  -   locator resolved to <span class=\"badge\" id=\"event-count\">3 latest events</span>\n  -   unexpected value \"3 latest events\"\n  -   locator resolved to <span class=\"badge\" id=\"event-count\">3 latest events</span>\n  -   unexpected value \"3 latest events\"\n  -   locator resolved to <span class=\"badge\" id=\"event-count\">3 latest events</span>\n  -   unexpected value \"3 latest events\"\n"
+}

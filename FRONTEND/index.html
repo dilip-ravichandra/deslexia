@@ -1,0 +1,465 @@
+<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#f7f7ef"><title>DyslexiAdapt — Your reading room</title><link rel="stylesheet" href="workspace.css"><link rel="stylesheet" href="selection-menu.css"><link rel="stylesheet" href="reader-help.css"><link rel="stylesheet" href="paragraph-support.css"><link rel="stylesheet" href="native-fonts.css"><script>window.daReaderKey=()=>{try{return sessionStorage.getItem('da_legacy_active')==='1'?localStorage.getItem('da_learner_key_v1'):null;}catch{return null;}};</script></head><body><a class="skip" href="#main">Skip to reading workspace</a>
+<div id="live" class="sr-only" aria-live="polite"></div><div id="toast" class="toast hidden" role="status"></div>
+<div id="selection-menu" class="selection-menu hidden" role="group" aria-label="Help with selected text"><strong>Help with selected text</strong><button type="button" data-selection-mode="m-auto">Suggest for me</button><button type="button" data-selection-mode="m-v">Explain a word</button><button type="button" data-selection-mode="m-s">Untangle a sentence</button><button type="button" data-selection-mode="m-c">Explore an idea</button><button type="button" data-selection-mode="m-p">Help me pronounce it</button><button type="button" data-selection-mode="m-look">Make reading comfortable</button></div>
+<div class="app-shell">
+<aside class="sidebar" aria-label="Workspace navigation">
+<a class="brand" href="#reader-view"><span class="brand-icon">da<span>✦</span></span><span>DyslexiAdapt<small>A little clarity. Your way.</small></span></a>
+<div class="nav-label">YOUR SPACE</div>
+<nav><button class="nav active" data-view="reader-view" aria-current="page"><span>▤</span> Reading room</button><a class="nav" href="my-progress.html" aria-label="My learner profile and report"><span>◷</span> My progress</a><a class="nav" href="account.html"><span>◇</span> Account / switch user</a><button class="nav" data-view="library-view"><span>▦</span> My library <b id="library-count">0</b></button><button class="nav" data-view="notes-view"><span>✎</span> My notebook <b id="note-count">0</b></button><button class="nav" data-view="comfort-view"><span>◐</span> Reading comfort</button></nav>
+<div class="sidebar-bottom"><div class="gentle-card"><span class="little-flower">✳</span><strong>No rush. No pressure.</strong><p>One word, one idea,<br>one step at a time.</p></div><button class="nav" data-view="guide-view"><span>?</span> How it works</button><a class="nav" href="research-demo.html"><span>⌁</span> Research lab ↗</a><p class="private-label">Saved on this helper when signed in<br><small>Guest saves stay in this browser.</small></p></div>
+</aside>
+<div class="workspace">
+<header class="topbar"><span class="breadcrumb">Your space <span>/</span> <strong id="page-title">Reading room</strong></span><div class="top-actions"><span id="connection" class="pill">Checking helper…</span><button id="logout-now" class="button hidden" type="button">Sign out</button><button class="avatar" aria-label="Open reading comfort" data-open="comfort-view">H</button></div></header>
+<main id="main">
+<section id="reader-view" class="view">
+<div class="page-heading"><div><p class="eyebrow">MAKE ROOM FOR UNDERSTANDING</p><h1>Read at your own rhythm<span class="heading-star">✳</span></h1><p class="muted">A quieter space for your text. A little help when you need it.</p></div><button class="button primary" id="new-text">＋ Add text or upload</button></div>
+<section id="account-entry" class="reading-card padded hidden" aria-labelledby="account-entry-title"><h2 id="account-entry-title">Want your own reading space?</h2><p>Sign in or create a separate account. Older profiles saved in this browser are not used for new accounts.</p><div class="row"><a class="button primary" href="account.html">Sign in or switch account</a><a id="account-create" class="button" href="account.html?create=1">Create a separate account</a></div></section>
+<section class="document-import reading-card padded" aria-labelledby="upload-heading"><div class="row"><div><h2 id="upload-heading">Bring a page. We’ll read it together.</h2><p class="muted">Upload a textbook PDF, a photo, or your notes.</p></div><label class="button primary file-button" for="document-file">↑ Upload document or image<input id="document-file" class="sr-only" type="file" accept=".pdf,.txt,.png,.jpg,.jpeg,.webp"></label></div><p id="document-status" role="status">PDF · JPG · PNG · WEBP · TXT · up to 25 MB. Files are processed by your local helper.</p></section><div id="document-workspace" class="hidden reading-card padded"><div class="row"><h2 id="uploaded-name">Your document</h2><button id="document-close" class="button">Close document</button></div><div class="row"><button id="document-prev" class="button">← Previous page</button><label for="document-page">Page</label><input id="document-page" type="number" min="1" value="1" style="width:90px"><span id="document-count"></span><button id="document-jump" class="button">Open page</button><button id="document-next" class="button">Next page →</button><button id="document-reocr" class="button">Extract text again (OCR)</button></div><div class="document-grid"><section><h3>Original page</h3><p class="muted small">Drag a box around a picture or graph to ask about just that part. You can also use the region controls below.</p><canvas id="document-preview" aria-label="Original uploaded page. Use region controls below to select a part without dragging."></canvas><fieldset><legend>Picture region, as percentages of the page</legend><div class="row"><label>Left <input id="crop-left" type="number" min="0" max="99" value="0"></label><label>Top <input id="crop-top" type="number" min="0" max="99" value="0"></label><label>Width <input id="crop-width" type="number" min="1" max="100" value="100"></label><label>Height <input id="crop-height" type="number" min="1" max="100" value="100"></label></div><button id="crop-apply" class="button">Select region</button><button id="crop-reset" class="button">Use whole page</button></fieldset></section><section><h3>Text from this page</h3><p id="extraction-method" class="muted"></p><textarea id="extracted-text" rows="12" maxlength="50000" aria-label="Editable extracted page text"></textarea><p id="extraction-warning" role="status"></p><button id="read-extracted" class="button primary">Open text in reading room →</button><details><summary>Words detected by OCR</summary><div id="ocr-lines"></div></details><hr><h3>Understand a picture or graph</h3><label for="visual-question">What would you like to understand?</label><textarea id="visual-question" rows="3" maxlength="500">Explain this picture in simple language.</textarea><label for="visual-style">Explanation style</label><select id="visual-style"><option value="auto">Follow what helps me</option><option value="short">Short explanation</option><option value="steps">Step by step</option><option value="example">With an example</option></select><button id="visual-explain" class="button primary">Explain selected picture</button><div id="visual-answer" role="status" tabindex="-1"></div><div class="row"><button id="visual-speak" class="button" disabled>Read explanation aloud</button><button id="visual-save" class="button" disabled>Save to notebook</button></div></section></div></div><section id="survey-panel" class="reading-card padded hidden" aria-labelledby="survey-title"><h2 id="survey-title">Make this reader your own</h2><p>A short starting profile. Later reading choices can update it. You can read without saving a profile.</p><label for="survey-alias">Reader name or nickname (optional)</label><input id="survey-alias" maxlength="60"><label for="survey-language">Preferred explanation language</label><select id="survey-language"><option value="en">English</option><option value="hi">हिन्दी</option><option value="kn">ಕನ್ನಡ</option><option value="ta">தமிழ்</option></select><fieldset><legend>Languages I study in</legend><label><input type="checkbox" name="survey-study" value="en" checked> English</label><label><input type="checkbox" name="survey-study" value="hi"> हिन्दी</label><label><input type="checkbox" name="survey-study" value="kn"> ಕನ್ನಡ</label><label><input type="checkbox" name="survey-study" value="ta"> தமிழ்</label></fieldset><label for="survey-style">Starting explanation style</label><select id="survey-style"><option value="short">Short</option><option value="steps">Step by step</option><option value="example">With an example</option></select><fieldset><legend>What do you sometimes want help with? (optional)</legend><label><input type="checkbox" name="survey-need" value="VOCABULARY"> Word meanings</label><label><input type="checkbox" name="survey-need" value="SYNTACTIC"> Sentence structure</label><label><input type="checkbox" name="survey-need" value="CONCEPTUAL"> Ideas and relationships</label><label><input type="checkbox" name="survey-need" value="PRONUNCIATION"> Pronunciation</label><label><input type="checkbox" name="survey-need" value="VISUAL"> Reading presentation</label></fieldset><label for="survey-consent" class="checkbox"><input id="survey-consent" type="checkbox"> Save my survey and reading signals to personalize later support</label><p class="small muted">Saves selected spans, support choices, explanations shown, timings and setting changes locally. Pauses are not treated as proof of difficulty. Raw uploaded files and audio are not saved. You can delete this history.</p><div class="row"><button id="survey-save" class="button primary">Start my profile</button><button id="survey-skip" class="button">Read without a profile</button></div><p id="survey-message" role="status"></p></section><section class="reading-card padded"><div class="row"><label for="document-language">Document language<select id="document-language"><option value="auto">Detect from text</option><option value="en">English</option><option value="hi">हिन्दी</option><option value="kn">ಕನ್ನಡ</option><option value="ta">தமிழ்</option></select></label><label for="explanation-language">Explain in<select id="explanation-language"><option value="same">Document language</option><option value="en">English</option><option value="hi">हिन्दी</option><option value="kn">ಕನ್ನಡ</option><option value="ta">தமிழ்</option></select></label><button id="profile-setup" class="button">My starting profile</button><button id="end-session" class="button">Finish this session</button></div><p id="learner-live-status" class="small muted" role="status">Reading works without tracking. Profile learning is optional.</p></section><div id="banner" class="status-note" role="status"></div>
+<div class="reader-layout">
+<section class="reading-card" aria-labelledby="h-read">
+<div class="document-head"><div><span class="subject" id="document-tag">PRACTICE PASSAGE</span><h2 id="h-read">Small wonders of science</h2></div><button id="save-passage" class="icon-button" aria-label="Save passage to your library" title="Save to library">♡</button></div>
+<div class="document-meta"><span id="word-count">0 words</span><span class="dot">·</span><span id="read-time">A short read</span><span class="dot">·</span><span>At your pace</span></div>
+<div id="input-area" class="hidden input-box"><label for="passage-title">Passage title</label><input id="passage-title" type="text" maxlength="120" placeholder="e.g. My biology notes"><label for="src">Paste or type something to read</label><textarea id="src" placeholder="Paste your notes, a paragraph, or a story…"></textarea><div class="row"><button id="start" class="button primary">Start reading</button><button id="sample" class="button">Try a short sample</button><label class="button file-button" for="import-text">Import .txt<input id="import-text" type="file" accept=".txt,text/plain" class="sr-only"></label></div><p class="muted small">Text stays in this tab unless you save it. Selected text and nearby context are sent to your local helper when you request support.</p></div>
+<div id="reader-area">
+<div class="reader-tools"><div class="row"><button id="speak" class="tool-button">▷ Read aloud</button><button id="speech-stop" class="tool-button hidden">Stop</button><label class="sr-only" for="speech-rate">Read aloud speed</label><select id="speech-rate" class="compact"><option value="0.8">0.8×</option><option value="1" selected>1× speed</option><option value="1.2">1.2×</option></select><label class="sr-only" for="voice-source">Voice source</label><select id="voice-source" class="compact"><option value="browser" selected>Fast browser voice</option><option value="local">Local voice (slower)</option></select></div><div class="row"><button id="focus-toggle" class="tool-button" aria-pressed="false">◎ Focus</button><button id="edit" class="tool-button">Edit</button><button id="undo" class="tool-button" disabled>Undo</button></div></div>
+<p id="read-aloud-status" class="read-aloud-status" role="status" aria-live="polite">Read aloud uses your browser voice by default.</p>
+<audio id="speech-player" controls hidden aria-label="Read aloud audio"></audio>
+<div class="reading-hint"><span>✦</span> Select a word or sentence, then right-click for quick help or use the support panel.</div>
+<div id="reader" tabindex="0" aria-label="Reading text. Select a word or sentence to get help."></div>
+<section id="paragraph-tools" class="paragraph-tools" aria-label="Paragraph support"><div class="row"><button id="adapt-paragraph" class="button primary" type="button">Adapt this paragraph</button><button id="rewrite-paragraph" class="button" type="button">Make an easier version</button><label for="paragraph-category">Help type</label><select id="paragraph-category"><option value="auto">Follow my profile</option><option value="VOCABULARY">Word help</option><option value="SYNTACTIC">Sentence help</option><option value="CONCEPTUAL">Idea questions</option></select><label for="paragraph-style">Supported view style</label><select id="paragraph-style"><option value="auto">My preferred style</option><option value="short">Short</option><option value="steps">Step by step</option><option value="example">Use the source</option></select></div><p id="paragraph-status" role="status"></p></section>
+<section id="paragraph-result" class="paragraph-result hidden" aria-label="Supported paragraph" tabindex="-1"></section>
+<div class="reader-bottom"><span class="muted small">Your original words. Your choice.</span><div class="row"><button id="export-passage" class="tool-button">↓ Export text</button><button id="finish-reading" class="button">✓ Mark as read</button></div></div>
+<details class="keyboard-help"><summary>Prefer using the keyboard?</summary><label for="typed">Type the exact word or sentence you want help with</label><div class="row"><input id="typed" type="text" maxlength="300"><button id="typed-go" class="button">Select this</button></div><label for="typed-occurrence">If it appears more than once</label><select id="typed-occurrence"><option value="first">First occurrence</option><option value="last">Last occurrence</option></select></details>
+<div id="result" class="hidden" tabindex="-1" role="region" aria-label="Help for selected text"></div>
+</div></section>
+<aside class="support-column">
+<section class="help-card" aria-labelledby="h-help"><div class="card-heading"><span class="accent-symbol">✦</span><h2 id="h-help">A little extra clarity</h2></div><p class="muted small">You choose the help. You keep control.</p><p id="sel-line" class="selection-box">Select a word or sentence in your text to begin.</p><fieldset><legend>What would help you?</legend><label class="help-option" for="m-auto"><input type="radio" name="mode" id="m-auto" value="auto" checked><span><strong>Suggest for me</strong><small>Find a starting point</small></span><span>✦</span></label><label class="help-option" for="m-v"><input type="radio" name="mode" id="m-v" value="VOCABULARY"><span><strong>Explain a word</strong><small>A simple meaning</small></span><span>Aa</span></label><label class="help-option" for="m-s"><input type="radio" name="mode" id="m-s" value="SYNTACTIC"><span><strong>Untangle a sentence</strong><small>Smaller, clearer pieces</small></span><span>≋</span></label><label class="help-option" for="m-c"><input type="radio" name="mode" id="m-c" value="CONCEPTUAL"><span><strong>Explore an idea</strong><small>Context and clear explanations</small></span><span>☼</span></label></fieldset><label class="help-option" for="m-p"><input type="radio" name="mode" id="m-p" value="PRONUNCIATION"><span><strong>Help me pronounce it</strong><small>Listen to this word or phrase</small></span></label><label class="help-option" for="m-look"><input type="radio" name="mode" id="m-look" value="VISUAL"><span><strong>Make reading comfortable</strong><small>Presentation support</small></span></label><button id="go" class="button primary full" disabled>Help me understand <span>↗</span></button></section>
+<section class="quick-comfort"><div class="card-heading"><span>◐</span><h2>Make yourself comfortable</h2></div><div class="row swatches" aria-label="Quick reading themes"><button data-theme="cream" class="swatch cream" aria-label="Cream theme" title="Cream"></button><button data-theme="green" class="swatch green" aria-label="Sage theme" title="Sage"></button><button data-theme="blue" class="swatch blue" aria-label="Blue theme" title="Blue"></button><button data-theme="dark" class="swatch dark" aria-label="Dark theme" title="Dark"></button></div><div class="size-quick"><button id="size-down" class="tool-button" aria-label="Decrease reading text size">A−</button><span id="quick-size">22 px</span><button id="size-up" class="tool-button" aria-label="Increase reading text size">A＋</button></div><button class="text-button" data-open="comfort-view">All reading settings →</button></section>
+<div class="small-tip"><span>☼</span><p>Taking a break is part of learning.<br>You can come back whenever you’re ready.</p></div>
+</aside></div>
+<section class="next-section"><div><p class="eyebrow">KEEP YOUR CURIOSITY</p><h2>Something small to explore</h2></div><div class="sample-grid" id="sample-grid"></div></section>
+</section>
+<section id="library-view" class="view hidden"><div class="page-heading"><div><p class="eyebrow">COME BACK TO WHAT MATTERS</p><h1>Your reading shelf</h1><p class="muted">Saved in this account when signed in; guests save only in this browser.</p></div><button class="button primary" data-new>＋ Add a passage</button></div><label for="library-search" class="sr-only">Search saved passages</label><input id="library-search" class="search" type="search" placeholder="Search your saved passages…"><div id="library-list" class="library-grid"></div><div class="next-section"><h2>Try a practice passage</h2><div class="sample-grid" id="library-samples"></div></div></section>
+<section id="notes-view" class="view hidden"><div class="page-heading"><div><p class="eyebrow">MAKE AN IDEA YOUR OWN</p><h1>Your little notebook</h1><p class="muted">Keep useful words, helpful versions, and your own thoughts.</p></div><button id="export-notes" class="button">↓ Export notes</button></div><div class="notebook-layout"><section class="reading-card padded"><h2>A thought worth keeping</h2><label for="note-title">Title or word</label><input id="note-title" type="text" maxlength="120" placeholder="e.g. What I learned today"><label for="note-body">Your note</label><textarea id="note-body" placeholder="Write in your own words…"></textarea><button id="add-note" class="button primary">＋ Save note</button></section><div id="notes-list"></div></div></section>
+<section id="comfort-view" class="view hidden"><div class="page-heading"><div><p class="eyebrow">YOUR EYES. YOUR PREFERENCES.</p><h1>Find your comfortable</h1><p class="muted">Try a little change. Keep what feels right for you.</p></div></div><div class="comfort-layout"><section class="reading-card padded" aria-labelledby="h-look"><h2 id="h-look">Reading look</h2><label for="s-bg">Page colour</label><select id="s-bg"><option value="cream">Warm cream</option><option value="green">Soft sage</option><option value="blue">Soft blue</option><option value="grey">Light grey</option><option value="yellow">Pale yellow</option><option value="white">Paper white</option><option value="dark">Quiet dark</option></select><label for="s-contrast">Text contrast</label><select id="s-contrast"><option value="soft">Soft</option><option value="standard" selected>Standard</option><option value="strong">Strong</option></select><label for="s-size">Text size <output id="o-size"></output></label><input id="s-size" type="range" min="16" max="34" step="1"><label for="s-lh">Line spacing <output id="o-lh"></output></label><input id="s-lh" type="range" min="1.2" max="2.6" step="0.1"><label for="s-ls">Letter spacing <output id="o-ls"></output></label><input id="s-ls" type="range" min="0" max="0.2" step="0.01"><label for="s-font">Reading font</label><select id="s-font"><option value="sans">Clear sans-serif</option><option value="rounded">Rounded and wide</option><option value="serif">Traditional serif</option><option value="mono">Monospace</option></select><p class="muted small">No single font or colour suits everyone. Choose what you prefer.</p><label class="checkbox" for="s-focus"><input id="s-focus" type="checkbox"> Paragraph focus</label><label class="checkbox" for="reading-ruler"><input id="reading-ruler" type="checkbox"> Reading guide follows your pointer</label><p class="muted small">Keyboard alternative: use paragraph focus and Tab between paragraphs.</p><label for="s-width">Reading column</label><select id="s-width"><option value="comfortable">Comfortable</option><option value="narrow">Narrow</option><option value="wide">Wide</option></select><button id="s-reset" class="button">Reset reading look</button></section><section class="comfort-preview reading-card padded"><span class="subject">LIVE PREVIEW</span><h2>A little space makes a difference.</h2><p class="preview-text">Learning does not have to happen all at once. Sometimes, a clearer word or a shorter sentence is enough to help an idea make sense.</p><div class="preview-callout">These settings only change presentation. They do not change the support category.</div><button class="button primary" data-open="reader-view">Back to your reading →</button></section></div></section>
+<section id="guide-view" class="view hidden"><div class="page-heading"><div><p class="eyebrow">SMALL STEPS. MORE CLARITY.</p><h1>A reading space that follows you</h1><p class="muted">You decide where to pause and what help to try.</p></div></div><div class="guide-grid"><article class="reading-card padded"><span class="step-number">01</span><h2>Bring your text</h2><p>Upload a PDF or textbook photo, or paste your notes. Check extracted text before reading. Choose a comfortable font, colour, and spacing.</p></article><article class="reading-card padded"><span class="step-number">02</span><h2>Choose a difficult part</h2><p>Select a word or a short sentence. You can also type it using the keyboard option.</p></article><article class="reading-card padded"><span class="step-number">03</span><h2>Keep what helps</h2><p>Compare the original with the suggestion. Accept it, try another way, or keep your text. Undo is always available after a change.</p></article></div><section class="reading-card padded"><h2>About your research project</h2><p>The reader combines your current request, saved learner evidence and local explanation models when installed. Uploads support PDF extraction and OCR. Picture explanations use a separate vision model and need checking against the source. Public lexical datasets and human support-routing annotations are evaluated separately. Student benefit has not been evaluated.</p><p>Automatic meaning checks can miss errors. Practice passages are original examples, not a research dataset. Signed-in saved passages and notes are in the helper database; guest saves stay in this browser.</p><div class="row"><a class="button" href="research-demo.html">Open research lab ↗</a><a class="button" href="adjudication.html">Annotation review tool ↗</a><button class="button" id="clear-local">Delete saved passages and notes</button></div></section></section>
+<footer><span class="brand-mini">DyslexiAdapt ✦</span><p id="disclaimer">This is a reading aid. It does not diagnose dyslexia or any condition. Suggestions can be wrong, and you decide what helps.</p></footer>
+</main></div></div><div id="ruler" class="hidden" aria-hidden="true"></div>
+<script>
+"use strict";
+/* ---------- Visual settings layer (presentation only; NEVER sent to the API) ---------- */
+const PRESETS = {cream:["#FBF3DC","#1F2933"],blue:["#DCEBFA","#10243A"],green:["#DDEFD9","#142B18"],
+  grey:["#E6E6E6","#1A1A1A"],yellow:["#FFF6A8","#222222"],white:["#FFFFFF","#111111"],dark:["#15181C","#E8EAED"]};
+const FONTS = {sans:"Verdana,Tahoma,DANotoHi,DANotoKn,DANotoTa,system-ui,sans-serif",serif:"Georgia,'Times New Roman',DANotoHi,DANotoKn,DANotoTa,serif",
+  rounded:"'Trebuchet MS',Verdana,sans-serif",mono:"'Courier New',ui-monospace,monospace"};
+const DEFAULT_LOOK = {bg:"cream",contrast:"standard",size:22,lh:1.8,ls:0.03,font:"sans",focus:false};
+let LOOK_KEY = "da_look_v1";
+const hex = h => [1,3,5].map(i => parseInt(h.slice(i,i+2),16));
+const toHex = a => "#" + a.map(v => Math.round(v).toString(16).padStart(2,"0")).join("");
+const mix = (a,b,t) => toHex(hex(a).map((v,i) => v*(1-t)+hex(b)[i]*t));
+const lum = h => { const [r,g,b] = hex(h).map(v => { v/=255; return v<=0.03928 ? v/12.92 : Math.pow((v+0.055)/1.055,2.4); }); return 0.2126*r+0.7152*g+0.0722*b; };
+const ratio = (a,b) => { const x=lum(a), y=lum(b); return (Math.max(x,y)+0.05)/(Math.min(x,y)+0.05); };
+function colours(bgName, contrast){
+  const [bg, fg] = PRESETS[bgName] || PRESETS.cream;
+  const dark = lum(bg) < 0.3;
+  let text = fg;
+  if (contrast === "strong") text = dark ? "#FFFFFF" : "#000000";
+  if (contrast === "soft") text = mix(fg, bg, 0.22);
+  return {bg, text};
+}
+let look = {...DEFAULT_LOOK};
+function loadLook(){
+ look = {...DEFAULT_LOOK};
+ try { const saved = JSON.parse(localStorage.getItem(LOOK_KEY) || "null"); if (saved && typeof saved === "object") look = {...DEFAULT_LOOK,...saved}; } catch(e){}
+ for (const [key,min,max] of [["size",16,34],["lh",1.2,2.6],["ls",0,.2]]) { const n=Number(look[key]); look[key]=Number.isFinite(n)?Math.max(min,Math.min(max,n)):DEFAULT_LOOK[key]; }
+ if (!Object.hasOwn(PRESETS,look.bg)) look.bg=DEFAULT_LOOK.bg;
+ if (!Object.hasOwn(FONTS,look.font)) look.font=DEFAULT_LOOK.font;
+ if (!["soft","standard","strong"].includes(look.contrast)) look.contrast=DEFAULT_LOOK.contrast;
+ look.focus=look.focus===true;
+}
+function saveLook(){ try { localStorage.setItem(LOOK_KEY, JSON.stringify(look)); } catch(e){} }
+function applyLook(){
+  const c = colours(look.bg, look.contrast), r = document.documentElement.style;
+  r.setProperty("--bg", c.bg); r.setProperty("--fg", c.text);
+  r.setProperty("--accent", lum(c.bg) < 0.3 ? "#9FD8C5" : "#2F5D50");
+  r.setProperty("--accent-fg", lum(c.bg) < 0.3 ? "#10231C" : "#FFFFFF");
+  r.setProperty("--mark", lum(c.bg) < 0.3 ? "#6B5A12" : "#FFE08A");
+  r.setProperty("--size", look.size + "px"); r.setProperty("--lh", look.lh);
+  r.setProperty("--ls", look.ls + "em"); r.setProperty("--font", FONTS[look.font] || FONTS.sans);
+  $("reader").classList.toggle("focus-on", !!look.focus);
+  if (window.refreshComfort) window.refreshComfort();
+  $("o-size").textContent = look.size + " px"; $("o-lh").textContent = look.lh; $("o-ls").textContent = look.ls + " em";
+}
+function syncLookControls(){
+  $("s-bg").value = look.bg; $("s-contrast").value = look.contrast; $("s-size").value = look.size;
+  $("s-lh").value = look.lh; $("s-ls").value = look.ls; $("s-font").value = look.font; $("s-focus").checked = !!look.focus;
+}
+
+/* ---------- Helpers ---------- */
+const $ = id => document.getElementById(id);
+const el = (tag, attrs = {}, ...kids) => { const n = document.createElement(tag);
+  for (const [k,v] of Object.entries(attrs)) { if (k === "class") n.className = v; else n.setAttribute(k, v); }
+  kids.flat().forEach(k => n.append(k instanceof Node ? k : document.createTextNode(k))); return n; };
+const say = msg => { $("live").textContent = ""; setTimeout(() => $("live").textContent = msg, 20); };
+async function api(path, body){
+  const headers = {"Content-Type":"application/json"};
+  const key=window.daReaderKey(); if(key)headers['x-learner-key']=key;
+  const r = await fetch(path, body ? {method:"POST", headers, body:JSON.stringify(body)} : {headers});
+  const d = await r.json().catch(() => ({}));
+  if (!r.ok) throw new Error(typeof d.detail === "string" ? d.detail : "Something went wrong. Please try again.");
+  return d;
+}
+function missingModels(status){
+  const services=status.services||{};
+  const missing=['generation','routing_backbone','semantic_checks','vision'].filter(name=>!services[name]?.ready);
+  for(const language of ['en','hi','kn','ta'])if(!services.speech?.[language]?.ready)missing.push('speech '+language);
+  return missing;
+}
+const SAMPLE = "Although the reaction was slow, the catalyst eventually accelerated it.\n\nPlants use photosynthesis to turn sunlight into food, which allows them to grow and release oxygen into the air.";
+
+/* ---------- Reading workspace ---------- */
+const S = {text:"", sel:null, variant:0, result:null, undo:[], windowStart:0, revision:0, requestId:0};
+function renderReader(){
+  const box = $("reader"); box.textContent = "";
+  (S.text.match(/[^\n]*\n*/g) || []).filter(Boolean).forEach((chunk,i) => box.append(el("span", {class:"para" + (i===0 ? " active" : ""), tabindex:"0"}, chunk)));
+  if (window.refreshWorkspace) window.refreshWorkspace();
+}
+function setActivePara(node){
+  document.querySelectorAll("#reader .para").forEach(p => p.classList.remove("active"));
+  const p = node && (node.nodeType === 3 ? node.parentElement : node).closest(".para"); if (p) p.classList.add("active");
+}
+function startReading(text){
+  S.revision++; S.text = text.replace(/\r\n/g, "\n"); S.sel = null; S.undo = []; $("undo").disabled = true;
+  if (!S.text.trim()) { say("Please add some text first."); return; }
+  $("input-area").classList.add("hidden"); $("reader-area").classList.remove("hidden");
+  renderReader(); window.dispatchEvent(new Event('passage-changed')); window.LEARNER?.prepare(S.text); clearResult(); setSelection(null); $("reader").focus(); say("Ready. Select a word or sentence that feels hard.");
+}
+function selectionOffsets(){
+  const sel = window.getSelection(); if (!sel || sel.rangeCount === 0 || sel.isCollapsed) return null;
+  const r = sel.getRangeAt(0), box = $("reader");
+  if (!box.contains(r.startContainer) || !box.contains(r.endContainer)) return null;
+  const pre = document.createRange(); pre.selectNodeContents(box); pre.setEnd(r.startContainer, r.startOffset);
+  const raw = r.toString(), lead = raw.length - raw.trimStart().length, span = raw.trim();
+  if (!span) return null;
+  return {span, start: pre.toString().length + lead};
+}
+function setSelection(s){
+  closeSelectionMenu();
+  S.sel = s; S.requestId++; clearResult();
+  $("go").disabled = !s;
+  const line = $("sel-line"); line.textContent = "";
+  if (!s) { line.textContent = "Nothing selected yet. Select a word or sentence in your text."; return; }
+  line.append("You selected: ", el("span", {class:"sel"}, "“" + (s.span.length > 90 ? s.span.slice(0,90) + "…" : s.span) + "”"));
+}
+function onSelect(){ const s = selectionOffsets(); if (s && (s.span !== (S.sel && S.sel.span) || s.start !== (S.sel && S.sel.start))) { S.variant = 0; setSelection(s); setActivePara(window.getSelection().anchorNode); } }
+function closeSelectionMenu(){ $("selection-menu").classList.add("hidden"); }
+function openSelectionMenu(event){
+  const selected=selectionOffsets();
+  if(!selected)return;
+  event.preventDefault();
+  if(!S.sel||S.sel.span!==selected.span||S.sel.start!==selected.start){S.variant=0;setSelection(selected);}
+  const menu=$("selection-menu"),range=window.getSelection().getRangeAt(0);
+  const rect=typeof range.getBoundingClientRect==="function"?range.getBoundingClientRect():{left:event.clientX,bottom:event.clientY};
+  menu.classList.remove("hidden");
+  const left=event.clientX||rect.left,top=event.clientY||rect.bottom;
+  menu.style.left=Math.max(8,Math.min(left,window.innerWidth-menu.offsetWidth-8))+"px";
+  menu.style.top=Math.max(8,Math.min(top,window.innerHeight-menu.offsetHeight-8))+"px";
+  menu.querySelector("button").focus({preventScroll:true});
+}
+function chooseSelectionHelp(mode){
+  $(mode).checked=true;
+  S.variant=0;
+  closeSelectionMenu();
+  requestSupport();
+}
+function useTyped(){
+  const v = $("typed").value.trim(); if (!v) return;
+  const i = S.text.indexOf(v);
+  if (i < 0) { say("That exact text was not found. Please copy it exactly as written."); return; }
+  S.variant = 0; setSelection({span: v, start: i});
+}
+
+/* ---------- Support request / result ---------- */
+function clearResult(){ const r = $("result"); r.classList.add("hidden"); r.textContent = ""; S.result = null; }
+function windowed(){   // keep requests small (server limit 5000 chars) without changing the span
+  const {start, span} = S.sel, pad = 1500, a = Math.max(0, start - pad), b = Math.min(S.text.length, start + span.length + pad);
+  return {text: S.text.slice(a, b), span_start: start - a, windowStart:a};
+}
+async function requestSupport(responseMode='quick'){
+  if (!S.sel) return;
+  if(responseMode==='online_ai'&&!window.confirm('Send only this selected sentence and your chosen help style to Groq online AI? The original document and your account details stay local. Online AI may be inaccurate; Groq may retain limited request data under its policy.'))return;
+  const mode = document.querySelector("input[name=mode]:checked").value;
+  if (S.sel.span.length > 300) { showMessage("Select a shorter part—up to 300 characters, about one or two sentences."); return; }
+  const revision = S.revision, selection = {...S.sel}, requestId = ++S.requestId;
+  $("go").disabled = true;
+  try { await window.LEARNER?.prepare(S.text); }
+  catch(e) { showMessage(e.message); $("go").disabled = !S.sel; return; }
+  if(requestId !== S.requestId || revision !== S.revision || !S.sel || S.sel.start !== selection.start || S.sel.span !== selection.span) { $("go").disabled = !S.sel; return; }
+  const w = windowed(); S.windowStart = w.windowStart;
+  const body = {span: S.sel.span, text: w.text, span_start: S.text.slice(S.sel.start, S.sel.start + S.sel.span.length) === S.sel.span ? w.span_start : undefined, span_offset_unit:'utf16', request_id:crypto.randomUUID(), variant: S.variant, response_mode:responseMode, cloud_consent:responseMode==='online_ai'};
+  if (body.span_start === undefined) delete body.span_start;
+  if (mode !== "auto") body.category_override = mode;       // text-support choice only; no visual settings here
+  body.support_style = $('support-style')?.value || 'auto';
+  body.document_language=window.LEARNER?.language()||'en';body.explanation_language=$('explanation-language').value;body.session_id=window.LEARNER?.session()||null;
+  const slow=responseMode!=='quick'||body.document_language!=='en'||!['same','en'].includes(body.explanation_language);
+  const previousResult=responseMode!=='quick'&&S.result?.explanation?.quick_help?S.result:null;
+  const deeperButton=previousResult?$(responseMode==='online_ai'?'online-help':'deeper-help'):null;
+  if(deeperButton)deeperButton.disabled=true;
+  const loading=responseMode==='online_ai'?'Asking online AI for a short, source-checked explanation…':slow?'Generating deeper help with the local AI. This can take a minute on a CPU.':'Finding quick help from the passage and glossary…';
+  let progress=null;
+  if(previousResult){progress=el('p',{class:'note',role:'status'},loading);$('result').prepend(progress);say(loading);}
+  else{S.result=null;showMessage(loading);}
+  $("go").disabled = true;
+  const reminder=slow?setTimeout(()=>{if(requestId===S.requestId){const message=responseMode==='online_ai'?'Still waiting for online AI. Your quick help remains available.':'Still generating locally. You can keep reading the quick help below.';if(progress)progress.textContent=message;else showMessage(message,false);}},12000):null;
+  try { const result = await api("/api/support", body); if (requestId !== S.requestId || revision !== S.revision || !S.sel || S.sel.start !== selection.start || S.sel.span !== selection.span) return; if(previousResult&&!result.explanation?.is_generated_model_output){S.result=previousResult;renderResult(previousResult);$('result').prepend(el('p',{class:'note',role:'status'},result.explanation?.provider_status||result.explanation?.note||'The AI could not produce a checked answer. Your quick help remains below.'));}else{result._windowStart=w.windowStart;S.result=result;renderResult(result);} $("result").focus(); }
+  catch (e) { if (requestId === S.requestId && revision === S.revision){if(progress){progress.textContent='Deeper AI help is unavailable: '+e.message+' Your quick help remains below.';say(e.message);}else showMessage(e.message);} }
+  finally { if(reminder)clearTimeout(reminder);if(requestId!==S.requestId&&progress)progress.remove();if(deeperButton&&deeperButton.isConnected)deeperButton.disabled=false; $("go").disabled = !S.sel; }
+}
+function showMessage(m,scroll=true){ const r = $("result"); r.classList.remove("hidden"); r.textContent = ""; r.append(el("p", {class:"note",role:"status"}, m)); if(scroll&&typeof r.scrollIntoView==="function")r.scrollIntoView({block:"start"}); say(m); }
+const TYPE_LABEL = {VOCABULARY:"Explain a word", SYNTACTIC:"Make the sentence easier", CONCEPTUAL:"Help with the idea", PRONUNCIATION:"Pronunciation support", VISUAL:"Reading presentation", OTHER_UNCERTAIN:"Choose the support you need"};
+const FLAG_TEXT = {numbers:"a number looks different", negation:"a “not/no” word changed", entities:"a name looks different",
+  modality:"a word like “all”, “some” or “may” changed", token_retention:"many of the original words were dropped",
+  length_ratio:"the length changed a lot", embedding_cosine:"the meaning may have drifted", nli:"the meaning may differ"};
+function highlighted(text, diffs){
+  const frag = document.createDocumentFragment(); let rest = text;
+  const adds = (diffs || []).map(d => d.to).filter(Boolean).sort((a,b) => b.length - a.length);
+  let pos = 0; const marks = [];
+  for (const a of adds) { const i = text.indexOf(a, pos); if (i >= 0) { marks.push([i, i + a.length]); } }
+  marks.sort((x,y) => x[0]-y[0]);
+  let cur = 0; for (const [s,e] of marks) { if (s < cur) continue; frag.append(text.slice(cur, s), el("mark", {}, text.slice(s, e))); cur = e; }
+  frag.append(text.slice(cur)); return frag;
+}
+function renderResult(r){
+  const box = $("result"); box.classList.remove("hidden"); box.textContent = "";
+  const dismiss=el('button',{type:'button',class:'button help-dismiss'},'Close help');
+  dismiss.onclick=()=>{S.requestId++;clearResult();$('reader').focus();};
+  box.append(dismiss);
+  const iv = r.intervention, cat = r.category;
+  const why = cat.source === "learner_choice" ? "You chose: " + TYPE_LABEL[cat.category]
+    : "Suggested: " + TYPE_LABEL[cat.category] + (r.research_mode==='learner_evidence'||cat.is_trained_model_output ? "" : " (a simple rule, not a trained model)");
+  box.append(el("h3", {}, why));
+  if(r.input?.span)box.append(el('p',{class:'help-context'},'Selected: '+r.input.span));
+  if(r.routing){
+    const sources={learner_choice:'You chose this help type.',learner_history:'Suggested from your repeated requests for similar text.',starting_survey:'Suggested from the support you chose in profile setup.',human_routing_model:'Suggested by an evaluated routing model; you can choose another type.',public_lexical_model:'Suggested by an English word-complexity model.',clarification:'There is not enough evidence to choose for you.'};
+    box.append(el('p',{class:'support-source'},sources[r.routing.source]||'You can change the help type at any time.'));
+  }
+  const details=el('details',{class:'support-details'},el('summary',{},'About this help and its sources'));
+  if(r.research_mode!=='research')details.append(el('p',{},cat.source==='learner_choice'?'You chose this support type. The explanation is separate from that choice.':r.research_mode==='learner_evidence'?'Your request and saved learner evidence guide this support. This is not a validated research model.':r.research_mode==='prototype'?'A practice model suggested this support. It is not validated learner support.':'A simple rule suggested this support. It is not a trained model.'));
+  if(r.routing)details.append(el('p',{},r.routing.reasons.join(' ')));
+  if(cat.needs_choice){
+    box.append(el('p',{class:'note'},'I’m unsure which support fits. Choose the kind of help you want:'));
+    const choices=el('div',{class:'row'});
+    for(const [id,label] of [['m-v','Explain a word'],['m-s','Untangle a sentence'],['m-c','Explore an idea']]){
+      const button=el('button',{type:'button',class:'button'},label);
+      button.onclick=()=>{$(id).checked=true;S.variant=0;requestSupport();};
+      choices.append(button);
+    }
+    box.append(choices);
+  }
+  if(!r.explanation?.available&&r.explanation?.summary)box.append(el('p',{class:'note',role:'status'},r.explanation.summary),el('p',{class:'small muted'},r.explanation.note||''));
+  if(r.explanation?.available){
+    const x=r.explanation,section=el('section',{class:'support-explanation'},el('h3',{},cat.category==='PRONUNCIATION'?'Listen to this part':cat.category==='VISUAL'?'Reading presentation':cat.category==='SYNTACTIC'?'Sentence in smaller pieces':'Understanding this part'),el('p',{class:'support-text'},x.summary));
+    if(x.quick_help)section.insertBefore(el('p',{class:'small muted'},cat.category==='SYNTACTIC'?'Quick help from the sentence’s own words. No AI model was used.':x.source==='context_only_no_definition'?'No reliable glossary match was found. No AI model was used.':'Quick help from the passage or glossary. No AI model was used.'),section.lastElementChild);
+    if((x.source==='context_only_no_definition'||x.source==='source_sentence_no_split')&&x.ai_available){const fuller=el('button',{id:'deeper-help',type:'button',class:'button primary'},'Explain with local AI (may take a minute)');fuller.onclick=()=>requestSupport('local_ai');section.append(fuller);}
+    if(cat.category==='SYNTACTIC'&&x.chunks?.length>1)section.append(el('ol',{},x.chunks.map(part=>el('li',{},part))));
+    if(x.style==='steps'&&!(cat.category==='SYNTACTIC'&&x.chunks?.length>1)){
+      const parts=x.steps?.length ? x.steps : x.relationship?.parts || [x.source_statement];
+      if(x.steps?.length)section.lastElementChild.remove();
+      if(parts.filter(Boolean).length)section.append(el('ol',{},parts.filter(Boolean).map(part=>el('li',{},part))));
+    }
+    if(x.style==='example'&&x.source!=='native_local_qwen')section.append(el('p',{},x.generated_example ? 'Illustrative example (not from your passage): '+x.generated_example : x.example_from_passage ? 'Example in your passage: '+x.example_from_passage : 'There is no concrete example in this passage. I’ll keep to its stated information.'));
+    const related=x.terms?.filter(term=>term.meaning!==x.summary)||[];
+    if(related.length)details.append(el('h4',{},'Related word meanings'),el('dl',{},related.flatMap(term=>[el('dt',{},term.term),el('dd',{},term.meaning)])));
+    if(x.pronunciation_text){const listen=el('button',{type:'button',class:'button'},'Listen to selected text');listen.onclick=()=>window.LEARNER.speak(x.pronunciation_text,r.document_language).catch(e=>say(e.message));section.append(listen);}
+    section.append(el('p',{class:'support-caution'},cat.category==='PRONUNCIATION'?'Listening is support, not a pronunciation test. Your text is unchanged.':cat.category==='VISUAL'?'Change the reading look if you want. Your text is unchanged.':cat.category==='SYNTACTIC'&&!x.is_generated_model_output?'These are source-based reading cues. Your text is unchanged.':x.is_generated_model_output?'AI help can be wrong. Check the passage. Your text is unchanged.':'This help may be incomplete. Your text is unchanged.'));
+    if(x.source==='groq_opt_in')section.append(el('p',{class:'small'},'Online AI response. Check this against your original sentence.'));
+    if(x.note)details.append(el('p',{},x.note));
+    if(x.is_generated_model_output&&x.quality?.status==='screened'){
+      details.append(el('h4',{},'Compare with the source'),el('p',{},'Quoted words were found in the passage. This does not prove the explanation is correct.'));
+      for(const claim of x.quality.claims||[])details.append(el('blockquote',{},claim.evidence));
+    }
+    if(x.provider_status)details.append(el('p',{},x.provider_status));
+    if(r.personalization?.enabled)details.append(el('p',{},'Your support style: '+r.personalization.style+'. Your survey and consented reading choices guide later suggestions.'));
+    box.append(section);
+  }
+  if (!r.presentable) {
+    if(!r.explanation?.available)box.append(el("p", {class:"note"}, "I could not make an easier version I trust for this part. Your original text is unchanged."));
+  } else if (iv.status === "no_change") {
+    box.append(el("p", {class:"note"}, iv.reason || "No change was made."));
+  } else if (iv.status === "scaffold_only" || iv.status === "layout_only") {
+    box.append(el("p", {}, iv.status === "layout_only" ? "Here is the sentence in smaller pieces:" : r.explanation?.available ? "Optional questions to explore the idea:" : "These questions can help you think it through:"));
+  }
+  if (r.presentable && iv.status === "applied") {
+    const o = r.comparison.original_sentence || r.comparison.original, a = r.comparison.adapted_sentence || r.comparison.adapted;
+    const cmp = el("div", {class:"cmp"},
+      el("div", {}, el("h3", {}, "Original"), o),
+      el("div", {id:"adapted-box"}, el("h3", {}, "Easier version"), highlighted(a, iv.word_diff)));
+    box.append(cmp);
+  }
+  if (r.presentable && iv.chunks && iv.chunks.length > 1 && (iv.status !== "applied")) box.append(el("ol", {}, iv.chunks.map(c => el("li", {}, c))));
+  if (r.presentable && iv.scaffold) { box.append(el("ul", {}, iv.scaffold.questions.map(q => el("li", {}, q))));
+    if (iv.scaffold.key_terms_in_text.length) box.append(el("p", {}, "Key words in this part: " + iv.scaffold.key_terms_in_text.join(", ")));
+    box.append(el("p", {class:"sub"}, iv.scaffold.tip)); }
+  const v = r.verification;
+  if (r.presentable && v.status === "review") box.append(el("p", {class:"note"}, "Please read carefully: " + v.flags.map(f => FLAG_TEXT[f.check] || f.check).join("; ") + "."));
+  if (r.presentable && v.status === "pass") box.append(el("p", {class:"sub"}, "My automatic checks found nothing unusual. They cannot guarantee the meaning is the same, so use your own judgement."));
+  const acts = el("div", {class:"row"});
+  const canUse = r.presentable && iv.status === "applied" && r.comparison.adapted_sentence && r.comparison.adapted_sentence !== r.comparison.original_sentence;
+  if (canUse) acts.append(el("button", {id:"accept", type:"button", class:"primary"}, "Use this"));
+  const back=el('button',{type:'button'},'Back to selected text');
+  back.onclick=()=>{let offset=0;for(const paragraph of $('reader').querySelectorAll('.para')){if(S.sel&&S.sel.start<offset+paragraph.textContent.length){if(typeof paragraph.scrollIntoView==="function")paragraph.scrollIntoView({block:'center'});paragraph.focus({preventScroll:true});return;}offset+=paragraph.textContent.length;}$('reader').focus();};
+  const close=el('button',{type:'button'},'Close help');
+  close.onclick=()=>{S.requestId++;clearResult();$('reader').focus();};
+  if(r.explanation?.quick_help&&r.explanation?.ai_available&&r.explanation?.source!=='context_only_no_definition'){const deeper=el('button',{id:'deeper-help',type:'button'},'Get deeper AI help (slower)');deeper.onclick=()=>requestSupport('local_ai');acts.append(deeper);}
+  if(r.explanation?.quick_help&&window.DA_CLOUD){const online=el('button',{id:'online-help',type:'button'},'Try online AI for this sentence');online.onclick=()=>requestSupport('online_ai');acts.append(online);}
+  if(!['PRONUNCIATION','VISUAL'].includes(cat.category)&&!r.explanation?.quick_help)acts.append(el('button',{id:'regen',type:'button'},'Try another way'));
+  acts.append(back,close);box.append(acts);
+  if(details.childElementCount>1)box.append(details);
+  const optional=el('div',{class:'row'});if(r.explanation?.available)optional.append(el('button',{id:'helpful',type:'button'},'This explanation helped'));optional.append(el('button',{id:'reject',type:'button'},'Not helpful'));
+  if(r.explanation?.available)box.append(el('p',{class:'small'},'Did this help you?'),optional);
+  box.append(el("details", {class:"note"}, el("summary", {}, "How comfortable was this? (optional)"),
+    el("div", {class:"row"}, [1,2,3,4,5].map(n => el("label", {style:"display:inline;margin-right:8px"}, el("input", {type:"radio", name:"comfort", value:String(n)}), " " + n))),
+    el("p", {class:"sub"}, "1 = hard to read, 5 = very comfortable")));
+  if (canUse) $("accept").onclick = () => decide("accept");
+  if($('helpful'))$('helpful').onclick=async()=>{try{await window.LEARNER?.signal('optional_feedback',{route_id:r.routing?.route_id,decision:'accept'});say('Optional feedback recorded if profile learning is enabled.');$('helpful').disabled=true;}catch(e){say(e.message);}};
+  $("reject").onclick = () => decide("reject"); if($("regen"))$("regen").onclick = () => decide("regenerate");
+  if(typeof box.scrollIntoView==="function")box.scrollIntoView({block:'start'});box.focus({preventScroll:true});say("Help is ready.");
+}
+async function decide(decision){
+  const r = S.result; if (!r) return;
+  const c = document.querySelector("input[name=comfort]:checked");
+  window.LEARNER?.signal(decision==='regenerate'?'regenerate':'optional_feedback',{route_id:r.routing?.route_id,decision:decision==='accept'?'accept':'reject'}).catch(e=>say(e.message));
+  if (decision === "accept") {
+    const o = r.comparison.original_sentence, a = r.comparison.adapted_sentence;
+    const offset = Number.isInteger(r.comparison.original_sentence_start) ? r.comparison.original_sentence_start + (r._windowStart || 0) : null;
+    const i = Number.isInteger(offset) ? offset : S.text.indexOf(o);
+    if (i < 0 || S.text.slice(i, i + o.length) !== o) { showMessage("I couldn't place it in your text. You can copy it from the comparison."); return; }
+    S.undo.push(S.text); $("undo").disabled = false;
+    S.revision++; S.text = S.text.slice(0, i) + a + S.text.slice(i + o.length); renderReader(); setSelection(null); say("Changed in your text. You can undo it.");
+  } else if (decision === "regenerate") { S.variant = 1 - S.variant; await requestSupport(); }
+  else { clearResult(); say("Okay, nothing was changed."); }
+}
+
+/* ---------- Wiring ---------- */
+function init(){
+  syncLookControls(); applyLook();
+  const bind = (id, key, conv = v => v) => $(id).addEventListener("input", e => { look[key] = conv(e.target.value); saveLook(); applyLook(); });
+  bind("s-bg","bg"); bind("s-contrast","contrast"); bind("s-size","size",Number); bind("s-lh","lh",Number); bind("s-ls","ls",Number); bind("s-font","font");
+  $("s-focus").addEventListener("change", e => { look.focus = e.target.checked; saveLook(); applyLook(); });
+  $("s-reset").onclick = () => { look = {...DEFAULT_LOOK}; saveLook(); syncLookControls(); applyLook(); say("Look reset."); };
+  $("start").onclick = () => startReading($("src").value);
+  $("sample").onclick = () => { $("src").value = SAMPLE; $("src").focus(); };
+  $("edit").onclick = () => { $("src").value = S.text; $("reader-area").classList.add("hidden"); $("input-area").classList.remove("hidden"); clearResult(); setSelection(null); };
+  $("undo").onclick = () => { if (S.undo.length) { S.revision++; S.text = S.undo.pop(); renderReader(); setSelection(null); $("undo").disabled = !S.undo.length; say("Undone."); } };
+  $("go").onclick = () => requestSupport(); $("typed-go").onclick = useTyped;
+  const rd = $("reader");
+  ["mouseup","keyup","touchend"].forEach(ev => rd.addEventListener(ev, () => setTimeout(onSelect, 0)));
+  rd.addEventListener("contextmenu",openSelectionMenu);
+  $("selection-menu").querySelectorAll("[data-selection-mode]").forEach(button=>button.onclick=()=>chooseSelectionHelp(button.dataset.selectionMode));
+  document.addEventListener("pointerdown",event=>{if(!$("selection-menu").contains(event.target))closeSelectionMenu();});
+  document.addEventListener("keydown",event=>{if(event.key!=="Escape")return;if(!$("selection-menu").classList.contains("hidden")){closeSelectionMenu();rd.focus({preventScroll:true});}else if(!$("result").classList.contains("hidden")){S.requestId++;clearResult();rd.focus({preventScroll:true});}});
+  window.addEventListener("resize",closeSelectionMenu);
+  window.addEventListener("scroll",event=>{if(!$("selection-menu").contains(event.target))closeSelectionMenu();},true);
+  rd.addEventListener("mouseover", e => { if (look.focus) setActivePara(e.target); });
+  rd.addEventListener("click", e => setActivePara(e.target));
+  rd.addEventListener("focusin", e => { if (e.target.closest(".para")) setActivePara(e.target); const p = rd.querySelector(".para"); if (p && !rd.querySelector(".para.active")) p.classList.add("active"); });
+  document.querySelectorAll("input[name=mode]").forEach(r => r.addEventListener("change", () => { S.variant = 0; clearResult(); }));
+  api("/api/model-status").then(s => {
+    const missing=missingModels(s);
+    $("banner").textContent = missing.length ? 'Local models need setup ('+missing.join(', ')+'). Close the helper and run START_WINDOWS.bat.' : s.research_model_available ? "" : s.prototype?.available ? 'A trained practice model suggests support. If it is unsure, choose the help you want. This is a prototype, not validated student support.' : "Choose the help you need. With your consent, repeated choices personalise later readings.";
+    $("banner").classList.toggle("hidden", !missing.length && !!s.research_model_available);
+  }).catch(() => { $("banner").textContent = "The helper isn't reachable right now. You can still change how the page looks."; });
+  api("/api/disclaimer").then(d => { $("disclaimer").textContent = d.disclaimer; }).catch(() => {});
+}
+window.DA = {S, look: () => look, PRESETS, colours, ratio, startReading, setSelection, requestSupport, decide, applyLook, selectionOffsets, DEFAULT_LOOK};
+let started = false;
+const boot = () => { if (!started) { started = true; init(); } };
+document.addEventListener("DOMContentLoaded", boot);
+if (document.readyState !== "loading") boot();
+</script>
+<script>/* Workspace features: account/guest passages and notes, speech, navigation and comfort. */
+(function(){
+ let PASSAGES='da_passages_v2', NOTES='da_notes_v2', accountProfile='';
+ const samples=[
+  {title:'Small wonders of science',tag:'SCIENCE',symbol:'✳',text:'Although the reaction was slow, the catalyst eventually accelerated it. A catalyst helps a chemical reaction happen faster without being used up in the process.\n\nPlants use photosynthesis to turn sunlight into food, which allows them to grow and release oxygen into the air. The energy from sunlight helps plants turn water and carbon dioxide into sugars.\n\nLearning a new idea can take time. Start with one sentence, pause when you need to, and ask for help with the part you want to understand.'},
+  {title:'The story of a small seed',tag:'NATURE',symbol:'♧',text:'A seed contains a young plant and a supply of stored food. When it gets enough water and warmth, it can begin to grow. This process is called germination.\n\nThe root usually grows first, reaching down into the soil. A shoot grows upwards towards the light. As leaves develop, the young plant begins to make its own food.\n\nDifferent seeds need different conditions. Some need light, while others grow better in darkness.'},
+  {title:'How an idea becomes a habit',tag:'EVERYDAY LEARNING',symbol:'☼',text:'A habit is something we do regularly, often without thinking carefully about each step. A small action can become easier to repeat when we practise it in a familiar situation.\n\nFor example, placing a book beside your favourite chair can remind you to read a little when you sit down. You do not need to finish a chapter. A paragraph can be a useful beginning.\n\nIf the routine does not suit you, change it. Learning is personal, and a comfortable pace can help you keep going.'}
+ ];
+ const safeRead=(key)=>{try{const x=JSON.parse(localStorage.getItem(key)||'[]');return Array.isArray(x)?x.filter(v=>v&&typeof v.id==='string'&&typeof v.title==='string'&&typeof v.text==='string').slice(0,200):[];}catch{return[];}};
+ let passages=[],notes=[],currentTitle=samples[0].title,toastTimer;
+ function toast(text){$('toast').textContent=text;$('toast').classList.remove('hidden');say(text);clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('toast').classList.add('hidden'),3500);}
+ async function persist(key,value){
+  if(accountProfile){
+   try{const kind=key===PASSAGES?'passages':'notes';const response=await fetch('/api/account/library/'+kind,{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify({items:value})});if(!response.ok)throw Error('Could not save to this account. Please try again.');return true;}
+   catch(error){toast(error.message);return false;}
+  }
+  try{localStorage.setItem(key,JSON.stringify(value));return true;}catch{toast('Browser storage is full or unavailable. Export your notes or copy your text.');return false;}
+ }
+ async function loadAccountItems(kind,key){
+  const response=await fetch('/api/account/library/'+kind);
+  if(!response.ok)throw Error('Could not load your saved '+kind+'.');
+  const remote=(await response.json()).items;
+  const old=safeRead(key);
+  if(!old.length)return remote;
+  const seen=new Set(remote.map(item=>item.id));
+  const merged=[...remote,...old.filter(item=>!seen.has(item.id))].slice(0,200);
+  if(await persist(key,merged)){localStorage.removeItem(key);return merged;}
+  return remote;
+ }
+ function makeId(){return globalThis.crypto?.randomUUID?.() || Date.now().toString(36)+'-'+Math.random().toString(36).slice(2);}
+ function navigate(id,update=true){if(!document.getElementById(id)?.classList.contains('view'))id='reader-view';document.querySelectorAll('.view').forEach(v=>v.classList.toggle('hidden',v.id!==id));document.querySelectorAll('.nav[data-view]').forEach(n=>{n.classList.toggle('active',n.dataset.view===id);if(n.dataset.view===id)n.setAttribute('aria-current','page');else n.removeAttribute('aria-current');});$('page-title').textContent={'reader-view':'Reading room','library-view':'My library','notes-view':'My notebook','comfort-view':'Reading comfort','guide-view':'How it works'}[id];if(update&&location.hash!=='#'+id)location.hash=id; say($("page-title").textContent+" opened."); if(id==='library-view')renderLibrary();if(id==='notes-view')renderNotes();}
+ function newText(){navigate('reader-view');stopSpeech();$('src').value='';$('passage-title').value='';$('reader-area').classList.add('hidden');$('input-area').classList.remove('hidden');clearResult();setSelection(null);$('src').focus();}
+ function openText(text,title,tag='YOUR PASSAGE'){stopSpeech();currentTitle=title||'Untitled passage';$('h-read').textContent=currentTitle;$('document-tag').textContent=tag;$('passage-title').value=currentTitle;navigate('reader-view');startReading(text);$('finish-reading').textContent='✓ Mark as read';$('finish-reading').setAttribute('aria-pressed','false');}
+ window.refreshWorkspace=function(){const words=S.text.trim()?S.text.trim().split(/\s+/).length:0;$('word-count').textContent=words+' words';$('read-time').textContent=Math.max(1,Math.ceil(words/150))+' min estimated read';$('finish-reading').textContent='✓ Mark as read';$('finish-reading').setAttribute('aria-pressed','false');stopSpeech();};
+ window.refreshComfort=function(){document.body.classList.toggle('dark-theme',look.bg==='dark');$('quick-size').textContent=look.size+' px';$('focus-toggle').setAttribute('aria-pressed',String(!!look.focus));document.querySelectorAll('[data-theme]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.theme===look.bg)));};
+ function renderSamples(id){const box=$(id);box.textContent='';samples.forEach(s=>{const b=el('button',{class:'sample-card',type:'button'},el('span',{class:'sample-symbol','aria-hidden':'true'},s.symbol),el('span',{},el('strong',{},s.title),el('small',{},s.tag+' · Original practice text')),el('span',{class:'arrow','aria-hidden':'true'},'↗'));b.onclick=()=>openText(s.text,s.title,'PRACTICE PASSAGE');box.append(b);});}
+ function empty(title,text,icon='▤'){return el('div',{class:'empty'},el('div',{class:'empty-icon','aria-hidden':'true'},icon),el('h2',{},title),el('p',{},text));}
+ function renderLibrary(){const box=$('library-list');box.textContent='';$('library-count').textContent=passages.length;const query=$('library-search').value.toLowerCase();const filtered=passages.filter(p=>(p.title+' '+p.text).toLowerCase().includes(query));if(!filtered.length)box.append(empty(passages.length?'No matching passages':'Your shelf is ready','Save a passage from the reading room to find it here.'));filtered.forEach(p=>{const open=el('button',{class:'button primary'},'Open passage →');open.onclick=()=>openText(p.text,p.title);const del=el('button',{class:'button','aria-label':'Delete '+p.title},'Delete');del.onclick=async()=>{const next=passages.filter(x=>x.id!==p.id);if(await persist(PASSAGES,next)){passages=next;renderLibrary();toast('Passage deleted.');}};box.append(el('article',{class:'saved-card'},el('span',{class:'subject'},'SAVED PASSAGE'),el('h2',{},p.title),el('p',{},p.text.slice(0,150)+(p.text.length>150?'…':'')),el('div',{class:'row'},open,del)));});}
+ async function savePassage(){if(!S.text.trim())return toast('Add a passage first.');if(passages.length>=200)return toast('Your shelf is full. Delete a passage before saving another.');const next=[{id:makeId(),title:currentTitle,text:S.text,created_at:new Date().toISOString()},...passages];if(await persist(PASSAGES,next)){passages=next;renderLibrary();toast('Saved to your reading shelf.');}}
+ function renderNotes(){const box=$('notes-list');box.textContent='';$('note-count').textContent=notes.length;if(!notes.length)box.append(empty('A place for your discoveries','Write a thought, or save a helpful suggestion after getting support.','✎'));notes.forEach(n=>{const del=el('button',{class:'button','aria-label':'Delete note '+n.title},'Delete');del.onclick=async()=>{const next=notes.filter(x=>x.id!==n.id);if(await persist(NOTES,next)){notes=next;renderNotes();toast('Note deleted.');}};box.append(el('article',{class:'note-card'},del,el('h2',{},n.title),el('p',{},n.text),el('time',{},n.created_at?new Date(n.created_at).toLocaleDateString():'Saved note')));});}
+ async function saveNote(title,text){if(!text.trim())return toast('Write a note first.');if(notes.length>=200)return toast('Your notebook is full. Export it before deleting old notes.');const next=[{id:makeId(),title:title.trim()||'A thought worth keeping',text,created_at:new Date().toISOString()},...notes];if(await persist(NOTES,next)){notes=next;renderNotes();toast('Saved in your notebook.');return true;}}
+ function download(name,text,type='text/plain'){const url=URL.createObjectURL(new Blob([text],{type}));const a=el('a',{href:url,download:name});document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),500);}
+ function stopSpeech(){window.LEARNER?.stopSpeech();if('speechSynthesis' in window)window.speechSynthesis.cancel();if($('speak')){$('speak').textContent='▷ Read aloud';$('speech-stop').classList.add('hidden');}}
+ function speak(){if(!('speechSynthesis'in window)||!('SpeechSynthesisUtterance'in window))return toast('Read aloud is not available in this browser. Try a browser with text-to-speech support.');if(window.speechSynthesis.speaking){if(window.speechSynthesis.paused){window.speechSynthesis.resume();$('speak').textContent='Ⅱ Pause';}else{window.speechSynthesis.pause();$('speak').textContent='▷ Resume';}return;}if(!S.text)return toast('Open a passage first.');const u=new SpeechSynthesisUtterance(S.text);u.lang='en';u.rate=Number($('speech-rate').value);u.onend=stopSpeech;u.onerror=()=>{stopSpeech();toast('Read aloud could not start. Check your browser voice settings.');};window.speechSynthesis.speak(u);$('speak').textContent='Ⅱ Pause';$('speech-stop').classList.remove('hidden');}
+ async function bootWorkspace(){
+  let signedIn=false,profileId='';try{const response=await fetch('/api/account');const account=await response.json();signedIn=!!account.signed_in;if(signedIn&&account.setup_complete===false){location.replace('profile-setup.html');return;}if(signedIn){profileId=account.profile_id;accountProfile=profileId;PASSAGES+=':'+profileId;NOTES+=':'+profileId;}}catch{toast('Could not check your account. Try refreshing the page.');return;}
+  const guestChosen=new URLSearchParams(location.search).has('guest')||sessionStorage.getItem('da_guest_mode')==='1';
+  if(!signedIn&&!guestChosen&&sessionStorage.getItem('da_legacy_active')!=='1'){location.replace('account.html');return;}
+  $('logout-now').classList.toggle('hidden',!signedIn);
+  $('logout-now').onclick=async()=>{const response=await fetch('/api/account/logout',{method:'POST'});if(!response.ok)return toast('Could not sign out. Please try again.');location.replace('account.html');};
+  const isolatedGuest=!signedIn&&!window.daReaderKey();
+  if(isolatedGuest){PASSAGES='da_guest_passages_v1';NOTES='da_guest_notes_v1';}
+  LOOK_KEY=signedIn?'da_look_v1:'+profileId:isolatedGuest?'da_guest_look_v1':'da_look_v1';
+  loadLook();syncLookControls();applyLook();
+  $('account-entry').classList.toggle('hidden',signedIn);
+  if(signedIn){try{[passages,notes]=await Promise.all([loadAccountItems('passages',PASSAGES),loadAccountItems('notes',NOTES)]);}catch(error){toast(error.message+' Refresh before saving anything.');return;}}
+  else{passages=safeRead(PASSAGES);notes=safeRead(NOTES);}
+  document.querySelectorAll('[data-view]').forEach(b=>b.addEventListener('click',()=>navigate(b.dataset.view)));document.querySelectorAll('[data-open]').forEach(b=>b.addEventListener('click',()=>navigate(b.dataset.open)));window.addEventListener('hashchange',()=>navigate(location.hash.slice(1),false));
+  $('new-text').onclick=newText;document.querySelectorAll('[data-new]').forEach(b=>b.onclick=newText);
+  $('start').onclick=()=>{if(!$('src').value.trim())return toast('Paste a little text first.');openText($('src').value,$('passage-title').value);};
+  $('sample').onclick=()=>{$('src').value=samples[0].text;$('passage-title').value=samples[0].title;$('src').focus();};
+  $('edit').onclick=()=>{stopSpeech();$('src').value=S.text;$('passage-title').value=currentTitle;$('reader-area').classList.add('hidden');$('input-area').classList.remove('hidden');clearResult();setSelection(null);$('src').focus();};
+  $('export-passage').onclick=()=>{if(!S.text.trim())return toast('Open a passage first.');download('DyslexiAdapt-passage.txt',currentTitle+'\n\n'+S.text);};$('save-passage').onclick=savePassage;$('library-search').oninput=renderLibrary;
+  $('import-text').onchange=async e=>{const f=e.target.files?.[0];if(!f)return;if(f.size>1024*1024){toast('Choose a plain text file smaller than 1 MB.');e.target.value='';return;}try{$('src').value=await f.text();$('passage-title').value=f.name.replace(/\.txt$/i,'');toast('Text imported. Choose Start reading when ready.');}catch{toast('This file could not be read. Try pasting the text.');}e.target.value='';};
+  $('add-note').onclick=async()=>{if(await saveNote($('note-title').value,$('note-body').value)){$('note-title').value='';$('note-body').value='';}};
+  $('export-notes').onclick=()=>{if(!notes.length)return toast('Save a note before exporting.');download('DyslexiAdapt-notes.txt',notes.map(n=>n.title+'\n'+n.text+'\n').join('\n---\n\n'));};
+  if(!window.LEARNER)$('speak').onclick=speak;$('speech-stop').onclick=stopSpeech;$('speech-rate').onchange=stopSpeech;window.addEventListener('pagehide',stopSpeech);
+  $('focus-toggle').onclick=()=>{look.focus=!look.focus;saveLook();syncLookControls();applyLook();};
+  document.querySelectorAll('[data-theme]').forEach(b=>b.onclick=()=>{look.bg=b.dataset.theme;saveLook();syncLookControls();applyLook();});
+  $('size-down').onclick=()=>{look.size=Math.max(16,look.size-2);saveLook();syncLookControls();applyLook();};$('size-up').onclick=()=>{look.size=Math.min(34,look.size+2);saveLook();syncLookControls();applyLook();};
+  $('reading-ruler').onchange=e=>{$('ruler').classList.toggle('hidden',!e.target.checked);$('ruler').style.top='50%';};
+  $('reader').addEventListener('pointermove',e=>{if($('reading-ruler').checked)$('ruler').style.top=(e.clientY-23)+'px';});$('reader').addEventListener('pointerleave',()=>{$('ruler').classList.add('hidden');});$('reader').addEventListener('pointerenter',()=>{if($('reading-ruler').checked)$('ruler').classList.remove('hidden');});
+  const widths={comfortable:'64ch',narrow:'45ch',wide:'80ch'},widthKey=signedIn?'da_width_v1:'+profileId:isolatedGuest?'da_guest_width_v1':'da_width_v1';try{$('s-width').value=localStorage.getItem(widthKey)||'comfortable';}catch{}if(!widths[$('s-width').value])$('s-width').value='comfortable';function setWidth(){document.documentElement.style.setProperty('--column',widths[$('s-width').value]);try{localStorage.setItem(widthKey,$('s-width').value);}catch{}}$('s-width').onchange=setWidth;setWidth();
+  const reset=$('s-reset').onclick;$('s-reset').onclick=()=>{reset();$('reading-ruler').checked=false;$('ruler').classList.add('hidden');$('s-width').value='comfortable';setWidth();};
+  $('finish-reading').onclick=()=>{const done=$('finish-reading').getAttribute('aria-pressed')!=='true';$('finish-reading').setAttribute('aria-pressed',String(done));$('finish-reading').textContent=done?'✓ Read at your own pace':'✓ Mark as read';toast(done?'A little progress. Take a break if you need one.':'Passage marked unread.');};
+  $('typed-go').onclick=()=>{const v=$('typed').value.trim();if(!v)return toast('Type a word or sentence first.');const i=$('typed-occurrence').value==='last'?S.text.lastIndexOf(v):S.text.indexOf(v);if(i<0)return toast('That exact text was not found. Copy it exactly as written.');S.variant=0;setSelection({span:v,start:i});};
+  $('clear-local').onclick=async()=>{if(!window.confirm(accountProfile?'Delete every saved passage and note in this account? This cannot be undone.':'Delete every saved passage and note in this browser? This cannot be undone.'))return;if(await persist(PASSAGES,[])&&await persist(NOTES,[])){passages=[];notes=[];renderLibrary();renderNotes();toast('Saved passages and notes deleted.');}};
+  // Add a notebook action when real support results become available; never inject untrusted HTML.
+  const resultObserver=new MutationObserver(()=>{const r=S.result;if(!r||$('save-support-note'))return;const b=el('button',{id:'save-support-note',type:'button'},'＋ Save to notebook');b.onclick=()=>{const iv=r.intervention;const usable=r.presentable&&(iv.status==='applied'||iv.status==='layout_only'||iv.status==='scaffold_only');const help=r.explanation?.available?r.explanation.summary:!usable?(iv.reason||'No usable suggestion was provided.'):(iv.scaffold?iv.scaffold.questions.join('\n'):iv.chunks?.join('\n')||r.comparison.adapted_sentence||iv.adapted);saveNote('Help with “'+r.comparison.original.slice(0,60)+'”','Original: '+r.comparison.original+'\n\nSupport: '+help+'\n\nMode: '+r.research_mode);};$('result').append(b);});resultObserver.observe($('result'),{childList:true});
+  renderSamples('sample-grid');renderSamples('library-samples');renderLibrary();renderNotes();openText(samples[0].text,samples[0].title,'PRACTICE PASSAGE');navigate(location.hash.slice(1)||'reader-view',false);refreshComfort();
+  api('/api/model-status').then(s=>{window.DA_CLOUD=!!s.online_ai?.available;$('connection').textContent=missingModels(s).length?'Models need setup':s.human_routing?.available?'Local models ready':'Reader ready · routing needs human labels';}).catch(()=>{$('connection').textContent='Helper offline';});
+ }
+ window.WORKSPACE={navigate,saveNote,savePassage,openText,samples,renderLibrary,renderNotes,toast};
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',bootWorkspace);else bootWorkspace();
+})();
+</script><script src="adaptive-controls.js"></script><script src="documents.js"></script><script src="learner-controls.js"></script><script src="paragraph-support.js"></script></body></html>

@@ -1,0 +1,17 @@
+{
+  "fixture": "Authored browser checks, not human review or student results",
+  "checks": [
+    "Browser support: chemical reaction / CONCEPTUAL",
+    "Browser support: bank / VOCABULARY",
+    "Browser support: word / PRONUNCIATION",
+    "Consented survey, session, actual support route and optional feedback",
+    "Browser \u2192 API \u2192 database \u2192 evidence lab",
+    "Forget removes saved evidence and browser capability",
+    "Independent blank sessions, save/restore and separate JSON exports",
+    "Admin merge/download retains disagreement; no training or activation",
+    "All three Indic public-material APIs work in normal Windows encoding",
+    "Kannada source display and mobile review layout"
+  ],
+  "errors": [],
+  "status": "passed"
+}

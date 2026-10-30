@@ -1,0 +1,58 @@
+{
+  "generation": {
+    "ready": true,
+    "missing_files": [],
+    "missing_packages": [],
+    "dependency_issues": []
+  },
+  "routing_backbone": {
+    "ready": true,
+    "missing_files": [],
+    "missing_packages": [],
+    "dependency_issues": []
+  },
+  "vision": {
+    "ready": true,
+    "missing_files": [],
+    "missing_packages": [],
+    "dependency_issues": []
+  },
+  "semantic_checks": {
+    "ready": true,
+    "missing_files": [],
+    "missing_packages": [],
+    "dependency_issues": []
+  },
+  "speech": {
+    "en": {
+      "ready": true,
+      "missing_files": [],
+      "missing_packages": [],
+      "dependency_issues": []
+    },
+    "hi": {
+      "ready": true,
+      "missing_files": [],
+      "missing_packages": [],
+      "dependency_issues": []
+    },
+    "kn": {
+      "ready": true,
+      "missing_files": [],
+      "missing_packages": [],
+      "dependency_issues": []
+    },
+    "ta": {
+      "ready": true,
+      "missing_files": [],
+      "missing_packages": [],
+      "dependency_issues": []
+    }
+  },
+  "native_ocr": {
+    "ready": true
+  },
+  "python": "3.12.10",
+  "supported_research_python": true,
+  "setup": "Run SETUP_RESEARCH_WINDOWS.bat with Python 3.12; downloads are explicit and may take several GB. The pinned RapidOCR package does not support Python 3.13."
+}

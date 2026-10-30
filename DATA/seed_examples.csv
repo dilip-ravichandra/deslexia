@@ -1,0 +1,4 @@
+source_id,document_id,span_id,text,context_before,context_after,category,annotator_id,guideline_version,confidence,rationale
+seed,seed01,seed01_s1,catalyst,The reaction began slowly.,The catalyst accelerated the reaction.,VOCABULARY,seed,guideline_v1,3,Technical word may need lexical support.
+seed,seed02,seed02_s1,"Although the reaction was slow, the catalyst eventually accelerated it.",,The result was recorded.,SYNTACTIC,seed,guideline_v1,3,Multi-clause structure.
+seed,seed03,seed03_s1,This process allows plants to produce glucose.,Photosynthesis occurs in chloroplasts.,Oxygen is released as a by-product.,CONCEPTUAL,seed,guideline_v1,3,Process relation may need explanation.

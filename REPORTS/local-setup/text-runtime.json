@@ -1,0 +1,37 @@
+{
+  "fixture": "Authored English engineering smoke case, not research accuracy",
+  "elapsed_seconds": 47.48,
+  "result": {
+    "explanation": "Evaporation turns liquid water into vapor",
+    "example": "",
+    "rewritten_text": "",
+    "model": "Qwen/Qwen3-4B-GGUF",
+    "quantization": "Q4_K_M",
+    "is_real_pretrained_inference": true,
+    "quality": {
+      "protocol": "source-claims-v1",
+      "status": "screened",
+      "flags": [],
+      "meaning_guaranteed": false,
+      "claims": [
+        {
+          "text": "Evaporation turns liquid water into vapor",
+          "evidence": "Evaporation changes liquid water into water vapour.",
+          "source": "passage"
+        }
+      ],
+      "draft_sha256": "95c66f198b149cce8c753122f9924267c035b9d5e2fcdf8b4adefa5769a47491",
+      "note": "Exact quotations and finite pattern checks do not prove entailment, naturalness or educational quality.",
+      "attempts": [
+        {
+          "protocol": "source-claims-v1",
+          "status": "screened",
+          "flags": [],
+          "meaning_guaranteed": false,
+          "draft_sha256": "95c66f198b149cce8c753122f9924267c035b9d5e2fcdf8b4adefa5769a47491",
+          "note": "Exact quotations and finite pattern checks do not prove entailment, naturalness or educational quality."
+        }
+      ]
+    }
+  }
+}

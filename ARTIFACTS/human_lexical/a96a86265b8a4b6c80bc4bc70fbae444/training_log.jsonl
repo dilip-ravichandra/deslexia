@@ -1,0 +1,17 @@
+{"arm": "tfidf", "stage": "completed", "validation_mae": 0.1112749520704015, "elapsed_seconds": 1.18}
+{"arm": "distilbert", "stage": "training", "epoch": 1, "processed": 8, "training_rows": 512, "loss": 0.030350100249052048, "elapsed_seconds": 7.79}
+{"arm": "distilbert", "stage": "training", "epoch": 1, "processed": 72, "training_rows": 512, "loss": 0.03248398657888174, "elapsed_seconds": 50.28}
+{"arm": "distilbert", "stage": "training", "epoch": 1, "processed": 136, "training_rows": 512, "loss": 0.026135999901110634, "elapsed_seconds": 90.96}
+{"arm": "distilbert", "stage": "training", "epoch": 1, "processed": 200, "training_rows": 512, "loss": 0.023937112670391798, "elapsed_seconds": 139.39}
+{"arm": "distilbert", "stage": "training", "epoch": 1, "processed": 264, "training_rows": 512, "loss": 0.022522827709150133, "elapsed_seconds": 242.0}
+{"arm": "distilbert", "stage": "training", "epoch": 1, "processed": 328, "training_rows": 512, "loss": 0.020605573271651093, "elapsed_seconds": 269.32}
+{"arm": "distilbert", "stage": "training", "epoch": 1, "processed": 392, "training_rows": 512, "loss": 0.020126193039575403, "elapsed_seconds": 396.87}
+{"arm": "distilbert", "stage": "training", "epoch": 1, "processed": 456, "training_rows": 512, "loss": 0.019180715394516785, "elapsed_seconds": 495.08}
+{"arm": "distilbert", "stage": "validation", "epoch": 1, "loss": 0.01950807914545294, "validation_mae": 0.10632984328425776, "elapsed_seconds": 792.02}
+{"arm": "distilbert", "stage": "training", "epoch": 2, "processed": 8, "training_rows": 512, "loss": 0.013505769893527031, "elapsed_seconds": 803.65}
+{"arm": "distilbert", "stage": "training", "epoch": 2, "processed": 72, "training_rows": 512, "loss": 0.014339401024497218, "elapsed_seconds": 844.61}
+{"arm": "distilbert", "stage": "training", "epoch": 2, "processed": 136, "training_rows": 512, "loss": 0.014480154235463808, "elapsed_seconds": 934.28}
+{"arm": "distilbert", "stage": "training", "epoch": 2, "processed": 200, "training_rows": 512, "loss": 0.013921521073207259, "elapsed_seconds": 1086.6}
+{"arm": "distilbert", "stage": "training", "epoch": 2, "processed": 264, "training_rows": 512, "loss": 0.014699327018619939, "elapsed_seconds": 1343.25}
+{"arm": "distilbert", "stage": "training", "epoch": 2, "processed": 328, "training_rows": 512, "loss": 0.015053128658952872, "elapsed_seconds": 1506.55}
+{"arm": "distilbert", "stage": "training", "epoch": 2, "processed": 392, "training_rows": 512, "loss": 0.01470343957236987, "elapsed_seconds": 1601.25}

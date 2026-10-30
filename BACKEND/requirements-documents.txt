@@ -1,0 +1,4 @@
+Pillow==12.3.0
+pypdfium2==5.14.0
+rapidocr-onnxruntime==1.4.4
+python-multipart==0.0.32

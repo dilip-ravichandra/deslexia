@@ -1,0 +1,20 @@
+# Versions this project was tested with (informational lock, not an installer constraint file).
+# Generated from the development environment; regenerate with `pip freeze` for your own platform.
+fastapi==0.142.2
+uvicorn==0.54.0
+pydantic==2.13.5
+httpx==0.28.1
+pandas==3.0.2
+numpy==2.4.4
+scikit-learn==1.8.0
+joblib==1.5.3
+scipy==1.17.1
+matplotlib==3.10.8
+pyyaml==6.0.3
+torch==2.14.1
+transformers==5.19.0
+tokenizers==0.23.2
+safetensors==0.8.0
+accelerate==1.15.0
+pytest==9.1.1
+starlette==1.7.0

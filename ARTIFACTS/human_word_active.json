@@ -1,0 +1,7 @@
+{
+  "run_id": "e8c83d66789541ff965aa5344daf6e01",
+  "selected_arm": "distilbert",
+  "task": "English lexical complexity regression (not 3-category routing)",
+  "validation_mae": 0.10442265476255656,
+  "previous": null
+}

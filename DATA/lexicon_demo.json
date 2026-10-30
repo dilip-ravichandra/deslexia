@@ -1,0 +1,196 @@
+{
+ "_meta": {
+  "name": "demo_lexicon_v1",
+  "status": "DEMO resource: written by the project assistant, NOT reviewed by a linguist or educator, small and general-purpose. Glosses are plain-language approximations. Replace with a reviewed lexicon before any study.",
+  "license": "project-original (CC0 intent; confirm with owner)"
+ },
+ "entries": {
+  "catalyst": {
+   "gloss": "a substance that makes a reaction go faster"
+  },
+  "accelerate": {
+   "gloss": "make something go faster",
+   "replace": {
+    "accelerate": "speed up",
+    "accelerates": "speeds up",
+    "accelerated": "sped up",
+    "accelerating": "speeding up"
+   }
+  },
+  "eventually": {
+   "gloss": "after some time",
+   "replace": {
+    "eventually": "in the end"
+   }
+  },
+  "photosynthesis": {
+   "gloss": "how plants use sunlight to make their food"
+  },
+  "hypothesis": {
+   "gloss": "an idea that can be tested"
+  },
+  "phenomenon": {
+   "gloss": "something that happens and can be observed",
+   "replace": {
+    "phenomenon": "event",
+    "phenomena": "events"
+   }
+  },
+  "ubiquitous": {
+   "gloss": "found everywhere",
+   "replace": {
+    "ubiquitous": "found everywhere"
+   }
+  },
+  "ambiguous": {
+   "gloss": "having more than one possible meaning",
+   "replace": {
+    "ambiguous": "unclear"
+   }
+  },
+  "consequently": {
+   "gloss": "as a result",
+   "replace": {
+    "consequently": "as a result"
+   }
+  },
+  "nevertheless": {
+   "gloss": "even so",
+   "replace": {
+    "nevertheless": "even so"
+   }
+  },
+  "furthermore": {
+   "gloss": "also",
+   "replace": {
+    "furthermore": "also"
+   }
+  },
+  "subsequently": {
+   "gloss": "after that",
+   "replace": {
+    "subsequently": "after that"
+   }
+  },
+  "demonstrate": {
+   "gloss": "show",
+   "replace": {
+    "demonstrate": "show",
+    "demonstrates": "shows",
+    "demonstrated": "showed",
+    "demonstrating": "showing"
+   }
+  },
+  "approximately": {
+   "gloss": "about",
+   "replace": {
+    "approximately": "about"
+   }
+  },
+  "sufficient": {
+   "gloss": "enough",
+   "replace": {
+    "sufficient": "enough"
+   }
+  },
+  "utilize": {
+   "gloss": "use",
+   "replace": {
+    "utilize": "use",
+    "utilizes": "uses",
+    "utilized": "used",
+    "utilizing": "using"
+   }
+  },
+  "commence": {
+   "gloss": "start",
+   "replace": {
+    "commence": "start",
+    "commences": "starts",
+    "commenced": "started",
+    "commencing": "starting"
+   }
+  },
+  "terminate": {
+   "gloss": "end",
+   "replace": {
+    "terminate": "end",
+    "terminates": "ends",
+    "terminated": "ended",
+    "terminating": "ending"
+   }
+  },
+  "inhibit": {
+   "gloss": "slow down or stop"
+  },
+  "osmosis": {
+   "gloss": "the movement of water through a thin barrier"
+  },
+  "mitochondria": {
+   "gloss": "the parts of a cell that release energy"
+  },
+  "enzyme": {
+   "gloss": "a protein that speeds up reactions in living things"
+  },
+  "ecosystem": {
+   "gloss": "a community of living things and their surroundings"
+  },
+  "metabolism": {
+   "gloss": "the chemical reactions that keep a living thing alive"
+  },
+  "correlation": {
+   "gloss": "a link between two things that change together"
+  },
+  "democracy": {
+   "gloss": "a system where people choose their leaders by voting"
+  },
+  "legislation": {
+   "gloss": "laws",
+   "replace": {
+    "legislation": "laws"
+   }
+  },
+  "algorithm": {
+   "gloss": "a set of steps for solving a problem"
+  },
+  "equilibrium": {
+   "gloss": "a steady state where things are balanced"
+  },
+  "hereditary": {
+   "gloss": "passed on from parents to children"
+  },
+  "organism": {
+   "gloss": "a living thing"
+  },
+  "substrate": {
+   "gloss": "the material an enzyme works on"
+  },
+  "evaporation": {
+   "gloss": "when a liquid slowly turns into a gas"
+  },
+  "condensation": {
+   "gloss": "when a gas cools and turns into liquid"
+  },
+  "friction": {
+   "gloss": "the force that slows things that rub together"
+  },
+  "ratio": {
+   "gloss": "a comparison of two amounts"
+  },
+  "inevitable": {
+   "gloss": "certain to happen",
+   "replace": {
+    "inevitable": "certain to happen"
+   }
+  },
+  "fundamental": {
+   "gloss": "basic and very important",
+   "replace": {
+    "fundamental": "basic"
+   }
+  },
+  "implement": {
+   "gloss": "put into action"
+  }
+ }
+}

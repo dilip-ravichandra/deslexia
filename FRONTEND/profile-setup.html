@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Set up your reading profile · DyslexiAdapt</title>
+<link rel="stylesheet" href="my-progress.css">
+<link rel="stylesheet" href="profile-setup.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to profile setup</a>
+<header class="top"><a href="account.html">← Account</a><span>DyslexiAdapt · Your reading profile</span><button id="logout" type="button" class="secondary">Log out</button></header>
+<main id="main">
+<p class="eyebrow">STEP 2 OF 2 · YOUR STARTING POINT</p>
+<h1>What helps you read?</h1>
+<p class="intro">These choices give the reader a starting point. Your own help requests and optional feedback can change later suggestions. Nothing here is a test or a diagnosis.</p>
+<p id="status" role="status">Checking your account…</p>
+<section id="setup-panel" class="card" hidden>
+<p>Signed in as <strong id="username"></strong></p>
+<form id="setup-form">
+<label for="alias">Name shown in your reading report (optional)</label>
+<input id="alias" type="text" maxlength="60" autocomplete="nickname" placeholder="Your name or a nickname">
+<label for="language">Language for explanations</label>
+<select id="language"><option value="en">English</option><option value="hi">हिन्दी</option><option value="kn">ಕನ್ನಡ</option><option value="ta">தமிழ்</option></select>
+<fieldset><legend>Languages you read or study in</legend><div class="checks"><label><input type="checkbox" name="study-language" value="en" checked> English</label><label><input type="checkbox" name="study-language" value="hi"> हिन्दी</label><label><input type="checkbox" name="study-language" value="kn"> ಕನ್ನಡ</label><label><input type="checkbox" name="study-language" value="ta"> தமிழ்</label></div></fieldset>
+<fieldset><legend>Which support may help you? Choose any, or leave blank.</legend><p class="hint">This is what you tell us, not a mistake the app detected.</p><div class="needs"><label><input type="checkbox" name="need" value="VOCABULARY"><span><strong>Unfamiliar words</strong><small>Short meanings in context</small></span></label><label><input type="checkbox" name="need" value="SYNTACTIC"><span><strong>Long or tangled sentences</strong><small>Break them into smaller parts</small></span></label><label><input type="checkbox" name="need" value="CONCEPTUAL"><span><strong>New ideas</strong><small>Explain the concept with an example</small></span></label><label><input type="checkbox" name="need" value="PRONUNCIATION"><span><strong>Saying a word aloud</strong><small>Listen to a word or phrase</small></span></label><label><input type="checkbox" name="need" value="VISUAL"><span><strong>Page appearance</strong><small>Choose spacing, colour and reading width</small></span></label></div></fieldset>
+<label for="style">How should explanations begin?</label>
+<select id="style"><option value="short">Short and clear</option><option value="steps">Step by step</option><option value="example">With an example</option></select>
+<div class="privacy"><strong>Your choice, your data.</strong><p>With your permission, this local helper saves this setup and later selected text, support choices, and optional feedback for your account. Uploaded files and audio are not retained. You can delete your profile in My progress.</p><label><input id="consent" type="checkbox" required> I agree to save my reading profile and support history on this helper</label></div>
+<button id="save" type="submit">Save profile and start reading →</button>
+</form>
+</section>
+<section id="already-done" class="card" hidden><h2>Your profile is ready</h2><p>Continue with your saved starting point and later support choices.</p><a class="button" href="/">Open reading room</a> <a class="button secondary" href="my-progress.html">See my progress</a></section>
+</main>
+<script src="profile-setup.js"></script>
+</body>
+</html>

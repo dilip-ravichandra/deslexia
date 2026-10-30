@@ -1,0 +1,101 @@
+{
+  "project": "DyslexiAdapt",
+  "version": "2.0-multilingual-learner-research",
+  "status": "technical-implementation-with-explicit-research-gaps",
+  "current_task": "Project audit completed; next unblocked task awaits real research prerequisites",
+  "completed_tasks": [
+    "00",
+    "01",
+    "02",
+    "03",
+    "04",
+    "05",
+    "06",
+    "07",
+    "08",
+    "09",
+    "10",
+    "11",
+    "12",
+    "13",
+    "14",
+    "17",
+    "18"
+  ],
+  "blocked_tasks": [
+    {
+      "task": "15",
+      "reason": "HG-02 ethics approval and consent required before participant evaluation; also needs real model outputs"
+    },
+    {
+      "task": "16",
+      "reason": "paper tables need real experimental results (HG-01 gold data, real pretrained-weight runs)"
+    }
+  ],
+  "human_gates": [
+    "HG-01",
+    "HG-02",
+    "HG-03"
+  ],
+  "research_model_available": false,
+  "gold_dataset_available": false,
+  "last_verified": "2026-10-12",
+  "known_failing_tests": [],
+  "resource_policy": "free-only datasets/models/services",
+  "pending_decisions": [
+    "ADR-009 source corpus licence (owner has not confirmed; PENDING)"
+  ],
+  "task_notes": {
+    "06": "Pipeline implemented and smoke-tested on a tiny random-init model only. No pretrained DistilBERT run has completed.",
+    "07": "Fusion model + matched ablation implemented; tested on synthetic fixtures only; no results.",
+    "09": "Rule-based interventions with demo lexicon (39 unreviewed entries); conceptual = scaffold only.",
+    "10": "Hard/soft meaning checks implemented; embedding/NLI scorers coded but untested with real weights; thresholds uncalibrated.",
+    "11": "FastAPI backend: demo/research gating, text-only inputs, minimal logging, admin-gated research API.",
+    "12": "Redesigned learner workspace with library/notebook/comfort/guide views, browser speech, text import/export, focus tools, local persistence, exact-selection and stale-response safeguards. 22 jsdom/API checks passed. Real browser layout, speech and assistive technology not verified.",
+    "13": "Private Research Lab upgraded with actual readiness, evidence/training/improvement views, guarded local command preparation and Markdown research-note export. No automatic training, participant collection or model promotion. Dark reference-driven navigation/dashboard, separate theme storage, real comparison/curve panels, admin-gated artifact inspector and standalone actual-state preview added.",
+    "08": "Error analysis computed from real prediction files only; tested on synthetic fixtures; no results.",
+    "14": "Experiment runner with hashes/manifests/idempotence; smoke-tested; no research-valid experiment run.",
+    "17": "Automated QA audit (not a pen test / WCAG audit); defects found and fixed are listed in REPORTS/TASK_17_FINAL_QA.md.",
+    "18": "Cards generated from artifacts; model card says NO VALIDATED MODEL; dataset card says DO NOT REDISTRIBUTE while ADR-009 pending.",
+    "15": "Offline four-condition evaluation implemented; human study workflow prepared; no participants or real outcomes.",
+    "16": "Guarded classification table exporter implemented; no real tables generated."
+  },
+  "remaining_tasks": [
+    "15",
+    "16"
+  ],
+  "tests": {
+    "python_suite": "152 passed in 120.13s",
+    "qa_audit": {
+      "pass": 43,
+      "warn": 0,
+      "fail": 0
+    },
+    "ui_suite": "28 jsdom/API checks passed; targeted audit/interface Python run 11 passed in 70.75s.",
+    "note": "Previous full suite: 152 passed. This frontend-only update: targeted backend, audit and 26 UI checks passed. No new scientific results."
+  },
+  "prepared_tasks": [
+    "15",
+    "16"
+  ],
+  "continuation_changes": [
+    "annotation CLI and provenance",
+    "offline adaptation comparison",
+    "verified paper table exporter",
+    "validation/context/feature/path/frozen-split fixes",
+    "immutable recorded experiments and verified reuse",
+    "portable Node UI test reporter",
+    "complete learner frontend redesign with preview and Windows launcher",
+    "research training-command workspace and evidence-based Markdown export"
+  ],
+  "current_build_status": "CURRENT_RESEARCH_STATUS.md",
+  "supported_languages": [
+    "en",
+    "hi",
+    "kn",
+    "ta"
+  ],
+  "synthetic_routing_model_active": false,
+  "human_routing_comparison_completed": false,
+  "student_study_completed": false
+}

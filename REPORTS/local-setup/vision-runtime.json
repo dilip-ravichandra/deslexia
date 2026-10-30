@@ -1,0 +1,13 @@
+{
+  "fixture": "Authored red triangle; engineering smoke case only",
+  "elapsed_seconds": 126.42,
+  "response": {
+    "explanation": "The visible shape is a triangle. The triangle is colored red. The triangle has three sides and three angles. The sides are straight lines. The angles are where the sides meet. The triangle is a basic geometric shape.",
+    "model": "Qwen2.5-VL-3B-Instruct Q4_K_M + Q8_0 vision projector",
+    "is_real_pretrained_inference": true,
+    "verification": "UNVERIFIED_VISUAL_EXPLANATION",
+    "language": "en",
+    "warning": "Compare this explanation with the original image. Visual answers can misread labels or values.",
+    "license": "Qwen RESEARCH LICENSE: non-commercial research/evaluation use"
+  }
+}

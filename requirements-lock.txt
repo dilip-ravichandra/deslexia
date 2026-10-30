@@ -1,0 +1,21 @@
+# Historical package snapshot from the 2026-10-12 continuation, not the current research environment.
+# Current installation uses BACKEND/requirements-research.txt and its included files.
+# Informational record, not an installer constraint file.
+# Prior package versions retained in REPORTS/SUPPLIED_DEPENDENCY_VERSIONS.txt.
+fastapi==0.143.0
+uvicorn==0.54.0
+pydantic==2.13.5
+httpx==0.28.1
+pandas==2.2.3
+numpy==2.3.5
+scikit-learn==1.8.0
+joblib==1.5.3
+scipy==1.17.0
+matplotlib==3.10.8
+pyyaml==6.0.3
+torch==2.14.1+cpu
+transformers==5.19.0
+tokenizers==0.23.3
+safetensors==0.8.0
+pytest==9.1.1
+starlette==1.7.0

@@ -1,0 +1,220 @@
+{
+  "models": [
+    {
+      "folder": "distilmbert",
+      "repo": "distilbert/distilbert-base-multilingual-cased",
+      "revision": "45c032ab32cc946ad88a166f7cb282f58c753c2e",
+      "license": "Apache-2.0",
+      "files": [
+        {
+          "path": "README.md",
+          "size": 7316,
+          "sha256": "5e6b3a60b4ee7b458dd5a0beda20f66988c6a3d4d993dab3d2fcb90a2c52f558"
+        },
+        {
+          "path": "config.json",
+          "size": 466,
+          "sha256": "67ab80c9a476e7c2d189cd03f95d297b04bd1d90e99765323af155ab6308960e"
+        },
+        {
+          "path": "model.safetensors",
+          "size": 541795680,
+          "sha256": "fcf002be901b9ad708e0df430b8d18deaa4b3fe3519e24e9017a5ee17ca2c228"
+        },
+        {
+          "path": "tokenizer.json",
+          "size": 1961828,
+          "sha256": "f4a4d5bf7301717e261fafbe26e1eb967f6ba4cb3ae0ab7a29f4642ec229f386"
+        },
+        {
+          "path": "tokenizer_config.json",
+          "size": 49,
+          "sha256": "0f6d13e6f4da6f9e24f22ada6bc3be571123d858d7c0c05a8a7cd55a9c23c2e8"
+        },
+        {
+          "path": "vocab.txt",
+          "size": 995526,
+          "sha256": "fe0fda7c425b48c516fc8f160d594c8022a0808447475c1a7c6d6479763f310c"
+        }
+      ]
+    },
+    {
+      "folder": "tts-en",
+      "repo": "facebook/mms-tts-eng",
+      "revision": "c71de0fe7204c83f1c10820a7d696d0b450048ba",
+      "license": "CC-BY-NC-4.0",
+      "files": [
+        {
+          "path": "README.md",
+          "size": 4002,
+          "sha256": "8fee1e3884f8b7493d5c7ec8138d5af5c0b78fd11f0f142a2f08dc58de5e3d5f"
+        },
+        {
+          "path": "config.json",
+          "size": 1641,
+          "sha256": "c2a93c1dfbf33b640163f2ade16345b9a5194fa54de9a04a04272b76a97fe171"
+        },
+        {
+          "path": "model.safetensors",
+          "size": 145227512,
+          "sha256": "69cf8b651c1493f1801dfd2311c298d694a38357bc9a1e41f410491ea6f0e1be"
+        },
+        {
+          "path": "special_tokens_map.json",
+          "size": 47,
+          "sha256": "87c02ba90dba0e0765358bd3aa2265714b2405429b069a89af51e292db9b8c3d"
+        },
+        {
+          "path": "tokenizer_config.json",
+          "size": 287,
+          "sha256": "77c74b93b1d36f29248926dbd7714bda59990159cd14cd7ba45fd0115bff905b"
+        },
+        {
+          "path": "vocab.json",
+          "size": 413,
+          "sha256": "304f7e71c40d601f9b89d81904609512eebe96b2a941f0a251fc0c9f397bcc45"
+        }
+      ]
+    },
+    {
+      "folder": "tts-hi",
+      "repo": "facebook/mms-tts-hin",
+      "revision": "1d83b223ec78e30b944f7d96bd117eb3d7023303",
+      "license": "CC-BY-NC-4.0",
+      "files": [
+        {
+          "path": "README.md",
+          "size": 3996,
+          "sha256": "676246024484c7fa3ab45ae369c18d017dc2c871053a59e081dd45bec86e7946"
+        },
+        {
+          "path": "config.json",
+          "size": 1641,
+          "sha256": "30eebf11d14ec17cbfe000ba5a8a9e97717e5c25079a400f33f98115c5be9bf3"
+        },
+        {
+          "path": "model.safetensors",
+          "size": 145253624,
+          "sha256": "675b45f0c34c5f7f8c78baf0403a6afb16a3e5fac0c2740601dad877d1f5cb0c"
+        },
+        {
+          "path": "special_tokens_map.json",
+          "size": 49,
+          "sha256": "92a7a7e498bdc4376efc3cc2ed711a8980fa8cd48472bde07c2f5282c1af6524"
+        },
+        {
+          "path": "tokenizer_config.json",
+          "size": 289,
+          "sha256": "e0253ba9c7c4e2a99ef03f80832470ed91a9600103ec5f01dbee6b9f9791187d"
+        },
+        {
+          "path": "vocab.json",
+          "size": 907,
+          "sha256": "94e86533fb47d1c5a90d8d7f39d630d7cc7ce687521c9e826f536c2c6d25463e"
+        }
+      ]
+    },
+    {
+      "folder": "tts-kn",
+      "repo": "facebook/mms-tts-kan",
+      "revision": "30e3c5d533e8c559c10bf0d25637fea51b95bd7c",
+      "license": "CC-BY-NC-4.0",
+      "files": [
+        {
+          "path": "README.md",
+          "size": 3978,
+          "sha256": "edf1c71711b448ce4dc23d1d7803e1e3be2d0a79a2163a960d4bf0fcbf726c1e"
+        },
+        {
+          "path": "config.json",
+          "size": 1641,
+          "sha256": "69c993ad6d7f34a8ce10834fb7d70cb300a83c0f7fae63a9ad8de9eb8243cdd3"
+        },
+        {
+          "path": "model.safetensors",
+          "size": 145255928,
+          "sha256": "12a68748b7aeab553c8b145ab2de198617644eb89e5f0b7008a2f3a7cf91a9bd"
+        },
+        {
+          "path": "special_tokens_map.json",
+          "size": 47,
+          "sha256": "7537103960690fa7b742bbdc31b7df3fdf9ab7dfd0e150690b7883abd039161d"
+        },
+        {
+          "path": "tokenizer_config.json",
+          "size": 287,
+          "sha256": "0a4c6ab042637ec5a955cba6f9422046648cc48607a6a366f3d7be1f9008c091"
+        },
+        {
+          "path": "vocab.json",
+          "size": 940,
+          "sha256": "56e00b687cf6c32bc603e055fe142351c16a136584bae988f333b9dc54c0c3ce"
+        }
+      ]
+    },
+    {
+      "folder": "tts-ta",
+      "repo": "facebook/mms-tts-tam",
+      "revision": "e9cf59dae34f0f51e3b1842876a658e4516f9fe4",
+      "license": "CC-BY-NC-4.0",
+      "files": [
+        {
+          "path": "README.md",
+          "size": 3988,
+          "sha256": "772c039ffa9aaddda5025ccddaa2db3ff69b86feb5b4337505166553bd4dd355"
+        },
+        {
+          "path": "config.json",
+          "size": 1641,
+          "sha256": "67fc1825dd729d7c90de1a56eff72eaa0c51cae0d3f5d7b7fa0d8bb250d81a66"
+        },
+        {
+          "path": "model.safetensors",
+          "size": 145242872,
+          "sha256": "29357e85c7f86f7725b6ff7bab78d1963899c16c2874da1db3a7d6b90f36b050"
+        },
+        {
+          "path": "special_tokens_map.json",
+          "size": 47,
+          "sha256": "ae25357f8a9ea0f44f8ad7c849b67056fd02b3c83cb27b5233813e036582f721"
+        },
+        {
+          "path": "tokenizer_config.json",
+          "size": 287,
+          "sha256": "889af724d5b422f85fe68182ee2dd5be63f467035c08ee3516673c24a4949d6f"
+        },
+        {
+          "path": "vocab.json",
+          "size": 721,
+          "sha256": "48ed668a0057168f1ddcdeb056fa202075c7bf86292cde92d67318c71c1a9651"
+        }
+      ]
+    }
+  ],
+  "ocr": [
+    {
+      "language": "hi",
+      "path": "devanagari_PP-OCRv4_rec_mobile.onnx",
+      "url": "https://www.modelscope.cn/models/RapidAI/RapidOCR/resolve/v3.10.0/onnx/PP-OCRv4/rec/devanagari_PP-OCRv4_rec_mobile.onnx",
+      "size": 7688213,
+      "sha256": "a62b6148303187907aa0b0d3a0125bdc62557d07966468cab9056949e36035e8",
+      "license": "Apache-2.0 (RapidOCR/PaddleOCR)"
+    },
+    {
+      "language": "kn",
+      "path": "ka_PP-OCRv4_rec_mobile.onnx",
+      "url": "https://www.modelscope.cn/models/RapidAI/RapidOCR/resolve/v3.10.0/onnx/PP-OCRv4/rec/ka_PP-OCRv4_rec_mobile.onnx",
+      "size": 7681381,
+      "sha256": "9c1e186ea1d13cf6c853e57b42d382c3961fdd6acc2409e0d0dc44defc9f152b",
+      "license": "Apache-2.0 (RapidOCR/PaddleOCR)"
+    },
+    {
+      "language": "ta",
+      "path": "ta_PP-OCRv4_rec_mobile.onnx",
+      "url": "https://www.modelscope.cn/models/RapidAI/RapidOCR/resolve/v3.10.0/onnx/PP-OCRv4/rec/ta_PP-OCRv4_rec_mobile.onnx",
+      "size": 22330612,
+      "sha256": "f78d752148873c5fa6e4294002bfd162dbba54236e406a39665ebbda766161b5",
+      "license": "Apache-2.0 (RapidOCR/PaddleOCR)"
+    }
+  ]
+}

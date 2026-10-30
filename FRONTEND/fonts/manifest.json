@@ -1,0 +1,41 @@
+{
+  "source": "https://github.com/google/fonts",
+  "license": "SIL-OFL-1.1; original notices included",
+  "files": [
+    {
+      "file": "NOTICE.md",
+      "sha256": "286275a6cf6320f6662dd216d6728bd261d848b4357e5daf0005dad161513930",
+      "size": 428
+    },
+    {
+      "file": "hi-OFL.txt",
+      "sha256": "a216f6f8d85c7228093e0ee5e258d9d377e6671f68acb4db1930b29583d0f331",
+      "size": 4386
+    },
+    {
+      "file": "hi.ttf",
+      "sha256": "14ec4af41f27482216d1c2229f417ff9b1425e1babb014e57d1d40d03229853e",
+      "size": 641944
+    },
+    {
+      "file": "kn-OFL.txt",
+      "sha256": "9d49a4e56df9b36403b139f48bf07fd87cc5e716cb3203c54b04b674adb16238",
+      "size": 4383
+    },
+    {
+      "file": "kn.ttf",
+      "sha256": "cca4f3b3a8cb12fb261f1b43baf5d2f7f59d90fe123d41f0065ed3a183997ec9",
+      "size": 641372
+    },
+    {
+      "file": "ta-OFL.txt",
+      "sha256": "f8ff8ce7d0a81bf8d5e121c635ef027250c531f2fd37d5988b8dd6e45f19d7f1",
+      "size": 4381
+    },
+    {
+      "file": "ta.ttf",
+      "sha256": "aa3a9b321f4b0bb2c40203ffbde9af89713227866e0e13f76e5b9eeea727cf88",
+      "size": 340668
+    }
+  ]
+}

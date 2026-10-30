@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>My learner profile · DyslexiAdapt</title>
+<link rel="stylesheet" href="my-progress.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to my report</a>
+<header class="top"><a href="/">← Reading room</a><span>DyslexiAdapt · My profile</span><a href="account.html">Sign in / switch user</a></header>
+<main id="main">
+<div class="heading"><div><p class="eyebrow">YOUR OWN RECORD</p><h1>My reading support</h1><p>What you chose, what was saved, and how later suggestions may change.</p></div><button id="refresh" type="button">Refresh report</button></div>
+<p id="status" role="status">Checking this browser for your saved profile…</p>
+<section id="missing" class="card" hidden>
+<h2>No profile selected</h2>
+<p>Sign in to your local account, create a separate account, or explicitly reconnect an older profile with its private recovery key.</p>
+<p><a class="button" href="account.html?create=1">Create a separate account</a></p>
+</section>
+<section id="report" hidden>
+<div class="card profile-card"><div><p class="eyebrow">YOUR SAVED PROFILE</p><h2 id="alias"></h2><p id="account-name"></p><p id="created"></p><p id="last-activity"></p><p id="profile-id"></p></div><p id="survey" class="soft"></p></div>
+<div id="metrics" class="metrics" aria-label="Recorded interaction counts"></div>
+<div class="two">
+<section class="card"><h2>Help you explicitly asked for</h2><p>Counts of your choices—not detected mistakes or a diagnosis.</p><div id="choices"></div></section>
+<section class="card"><h2>Current support preference</h2><label for="language">Study language</label><select id="language"><option value="en">English</option><option value="hi">Hindi</option><option value="kn">Kannada</option><option value="ta">Tamil</option></select><div id="preferences"></div></section>
+</div>
+<div class="two">
+<section class="card"><h2>Support choices</h2><p>See what you asked for and what changed. Pauses and rereads are not proof of difficulty.</p><label class="activity-toggle"><input id="show-activity" type="checkbox"> Show reading activity too</label><div id="events" class="events"></div></section>
+<section class="card"><h2>Before and after this event</h2><div id="comparison"></div><h2>Latest support decision</h2><div id="decision"></div></section>
+</div>
+<details class="card"><summary>Keep or remove this profile</summary><p>The local helper stores this consented profile in <code>ARTIFACTS/learner_state.sqlite3</code>. A recovery key can also open or delete it; keep any copy private. Deleting the profile also removes its linked local account.</p><div id="recovery-controls"><button id="show-key" type="button">Show recovery key</button><output id="recovery-key" hidden></output><button id="copy-key" type="button" hidden>Copy recovery key</button></div><p><button id="delete-profile" type="button">Delete this profile and its history</button></p></details>
+</section>
+<section id="reconnect-section" class="card"><h2>Reconnect an existing profile</h2><p>Paste the private recovery key from the original browser, or <a href="account.html">sign in</a> to a linked local account.</p><label for="reconnect-key">Recovery key</label><input id="reconnect-key" type="password" autocomplete="off" spellcheck="false" maxlength="64"><button id="reconnect" type="button">Reconnect profile</button><p id="reconnect-status" role="status"></p></section>
+<p class="foot">This report shows recorded interactions and uncalibrated preferences. It is not an assessment of reading ability or model accuracy. For evaluated model metrics, see the <a href="learner-lab.html#experiments">advanced research tools</a>.</p>
+</main>
+<script src="my-progress.js"></script>
+</body>
+</html>

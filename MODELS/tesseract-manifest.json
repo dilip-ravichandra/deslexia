@@ -1,0 +1,35 @@
+{
+  "repo": "tesseract-ocr/tessdata_best",
+  "revision": "e12c65a915945e4c28e237a9b52bc4a8f39a0cec",
+  "license": "Apache-2.0",
+  "files": [
+    {
+      "language": "en",
+      "path": "eng.traineddata",
+      "url": "https://raw.githubusercontent.com/tesseract-ocr/tessdata_best/e12c65a915945e4c28e237a9b52bc4a8f39a0cec/eng.traineddata",
+      "size": 15400601,
+      "sha256": "8280aed0782fe27257a68ea10fe7ef324ca0f8d85bd2fd145d1c2b560bcb66ba"
+    },
+    {
+      "language": "hi",
+      "path": "hin.traineddata",
+      "url": "https://raw.githubusercontent.com/tesseract-ocr/tessdata_best/e12c65a915945e4c28e237a9b52bc4a8f39a0cec/hin.traineddata",
+      "size": 11895564,
+      "sha256": "bd2e65a2184af08a167b0be2439e91fa5edbc4394399ca2f692b843ae26e78d6"
+    },
+    {
+      "language": "kn",
+      "path": "kan.traineddata",
+      "url": "https://raw.githubusercontent.com/tesseract-ocr/tessdata_best/e12c65a915945e4c28e237a9b52bc4a8f39a0cec/kan.traineddata",
+      "size": 10233763,
+      "sha256": "6f195e0f33f0ec5118c97eff777ed70ac453d67c32bf06a43f79dab875f8ebfe"
+    },
+    {
+      "language": "ta",
+      "path": "tam.traineddata",
+      "url": "https://raw.githubusercontent.com/tesseract-ocr/tessdata_best/e12c65a915945e4c28e237a9b52bc4a8f39a0cec/tam.traineddata",
+      "size": 6023201,
+      "sha256": "4b9ce85987f629dd31eaf87443a1646452a43cdf91fcf05e017382ad595dcb9e"
+    }
+  ]
+}

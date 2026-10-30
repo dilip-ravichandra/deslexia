@@ -1,0 +1,26 @@
+{
+  "repo": "ggml-org/Qwen2.5-VL-3B-Instruct-GGUF",
+  "revision": "5037fcf163dd95d1e41d1974465f0898ed108ca2",
+  "license": "qwen-research",
+  "license_note": "Original model license controls use; quantizer card says Apache-2.0 but original Qwen RESEARCH LICENSE permits non-commercial research/evaluation only.",
+  "original_repo": "Qwen/Qwen2.5-VL-3B-Instruct",
+  "original_revision": "66285546d2b821cf421d4f5eb2576359d3770cd3",
+  "files": [
+    {
+      "path": "Qwen2.5-VL-3B-Instruct-Q4_K_M.gguf",
+      "size": 1929901056,
+      "sha256": "d02fe9b69ad8cadbbd228e387667af66612c44bed29ffc8eb1e7caf9ac486c12"
+    },
+    {
+      "path": "mmproj-Qwen2.5-VL-3B-Instruct-Q8_0.gguf",
+      "size": 844757728,
+      "sha256": "980c9b2f78c04e6cff93d277ada09e768394f112d75db3b4e9dea8a69f9fb904"
+    },
+    {
+      "path": "README.md",
+      "size": 163,
+      "sha256": "cef55b28477dacf0e17f42fa73be4a7ba1955115d337c7776ae5d6db29dfe549"
+    }
+  ],
+  "original_license_sha256": "b5c0e5cf74cf51af1ecbc4af597cfcd13fd9925611838884a681070838a14a50"
+}

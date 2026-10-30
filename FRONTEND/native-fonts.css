@@ -1,0 +1,7 @@
+@font-face{font-family:DANotoHi;src:url('fonts/hi.ttf') format('truetype');font-weight:100 900;font-style:normal;font-display:swap}
+@font-face{font-family:DANotoKn;src:url('fonts/kn.ttf') format('truetype');font-weight:100 900;font-style:normal;font-display:swap}
+@font-face{font-family:DANotoTa;src:url('fonts/ta.ttf') format('truetype');font-weight:100 900;font-style:normal;font-display:swap}
+body{font-family:Arial,Helvetica,DANotoHi,DANotoKn,DANotoTa,sans-serif}
+#reader,.preview-text{font-family:var(--font),DANotoHi,DANotoKn,DANotoTa,sans-serif}
+textarea,select,input,button{font-family:inherit}
+#reader[lang=hi],#reader[lang=kn],#reader[lang=ta]{letter-spacing:normal}

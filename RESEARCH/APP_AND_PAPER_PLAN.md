@@ -1,0 +1,43 @@
+# DyslexiAdapt: application flow and research plan
+
+This plan translates the supplied `NLP_overleaf (7).pdf` literature review into an implementable and testable study. That PDF is a starting paper, **not** a report of this app's learner-study results. DyslexiAdapt is for readers who want dyslexia-accessible support; it does not diagnose dyslexia or infer a medical cause from clicks.
+
+## What the app does now
+
+1. **Account:** A new person signs up with a username and password. The local, free SQLite database creates a separate account; it never copies the last browser profile. The one-time recovery key is needed for password recovery. Login and logout switch the active account. A guest can read without a saved learner report.
+2. **Starting profile:** After signup, the reader separately chooses languages, possible support needs, explanation style, and whether to save history. These are self-reports, not assessed reading deficits. Existing accounts retain their previous setup.
+3. **Reading:** The reader pastes text or uploads a document, checks extraction against the source, selects a word or sentence, and requests one of the available supports. The original passage remains unchanged. English quick help can be source-based; deeper local AI is optional and slower. Other-language help depends on installed models and still needs native-speaker validation.
+4. **Memory and suggestion:** Consented sessions, explicit requests, optional feedback, and preference evidence persist per account in `ARTIFACTS/learner_state.sqlite3`. A current explicit choice always wins. Without one, repeated requests relevant to the selected text can inform the next support type; a single self-reported starting need may guide an otherwise uncertain first suggestion. Feedback about a support type can change its explanation style. Passive dwell/reread alone never gets labeled a deficit. Global model weights do **not** retrain live after each user action.
+5. **Progress and lab:** My Progress shows the reader's own saved survey and actions. The admin research demo shows each consented reader's starting profile, recorded before/after preference state, support choice, recommendation source, and de-identified *aggregate counts* across consented readers. These counts are choices, not measured mistakes, accuracy, or educational improvement. The lab's model-evaluation panel stays empty until real held-out human-reviewed data are evaluated.
+
+SQLite is free, persistent on **this helper's computer**, and privacy-preserving for a local demo. This is not cloud sync: copying a browser or opening the app on a different machine will not transfer the database. The local account/admin design must not be exposed as an internet service without HTTPS, durable sessions, stronger access control, and a separate security/privacy review. Browser passages and notebook entries are also stored per account in that browser, not in SQLite.
+
+## Research question and novelty
+
+The supplied review argues for **localized, learner-requested intervention**: identify the difficult span, choose the smallest useful kind of support, keep the source intact, and learn from explicit feedback. It correctly avoids claiming that AI personalization or text simplification alone is new. Our testable question is whether that local, user-overridable routing helps readers more than the same content with no support or uniform support, without losing educational meaning.
+
+The current recommendation logic is an interpretable online **preference model**, not a validated dyslexia classifier. The lexical model can suggest word complexity in English; it cannot determine a person's reading condition. A genuine routing classifier requires independent human-labeled examples of *what help was appropriate for a given span and context*, then held-out evaluation. It should abstain when uncertain rather than assign a cause.
+
+## Free data: appropriate roles
+
+| Source | Useful for | Not evidence of |
+| --- | --- | --- |
+| [CompLex, original repository](https://github.com/MMU-TDMLab/CompLex) | English lexical-complexity regression with published human ratings | Dyslexia-specific needs or full support routing |
+| [ASSET, original paper](https://aclanthology.org/2020.acl-main.424/) | Human simplification references for separate evaluation and meaning review | A training set for per-reader need labels |
+| [BEA 2024 lexical simplification shared task](https://aclanthology.org/2024.bea-1.51/) | Multilingual lexical complexity/simplification benchmark design | The project's five support categories or learner outcomes |
+| OneStopEnglish, CWID-hi, IndicQA (see `DATA/public_sources.json`) | Reading-level, complex-word, and question-answering *supplementary* tasks | Four-language dyslexia routing gold labels |
+
+The locally pinned files, revisions, hashes, and licenses are in `DATA/public_sources.json`; check `/api/admin/dataset-status` before experiments. Some datasets may require their own access/license review. The [Zingoni et al. personalization study](https://www.nature.com/articles/s41598-023-50879-7) is relevant literature, but its participant dataset is not publicly reusable simply because the paper is free to read. **No public source above supplies the missing human learner-specific routing dataset.** Never turn auto-generated labels, survey checkboxes, or usage events into purported clinical or human gold labels.
+
+## Minimum defensible evaluation
+
+1. **Routing task:** Collect opt-in span/context examples and independent annotations from language-competent reviewers for vocabulary, syntax, concept, pronunciation, visual presentation, or unresolved. Freeze the annotation protocol; preserve disagreement and unresolved cases. Split by document and participant before training to avoid leakage. Compare TF-IDF, multilingual DistilBERT, and DistilBERT + fixed features on the same held-out split. Report per-category precision/recall/F1, macro-F1, confusion matrix, abstention coverage, and annotator agreement. Keep public lexical results separate.
+2. **Meaning and safety:** Ask independent subject reviewers whether each explanation is supported by the original and whether any question becomes unanswerable. Human review matters because [Agrawal and Carpuat](https://aclanthology.org/2024.tacl-1.24/) found meaning loss in automatic simplification even when outputs read fluently. Automated semantic checks are screening, not proof.
+3. **Learner study:** With ethics approval and consent, compare original text, uniform simplification, uniform accessibility support, and localized personalized support, using counterbalanced passages and condition order. Recruit and report participants appropriately; do not infer dyslexia from app behavior. Pre-register a primary independently scored comprehension outcome, plus reading time, perceived effort, acceptance/override, and meaning-preservation rates. Report confidence intervals, participant-level variation, exclusions, and adverse/incorrect explanations. Analyze each supported language separately unless sample sizes and measurement quality justify pooling.
+4. **Adaptation ablation:** Hold the routing/explanation components constant and compare no memory, starting profile only, and profile plus explicit feedback. Evaluate whether the later recommendation is appropriate **and** whether it helps the reader; more clicks or rising preference estimates alone are not improvement.
+
+The pilot by [Gala and Ziegler](https://aclanthology.org/W16-4107/) supports studying text accessibility with dyslexic readers, but a small pilot does not establish this app's benefit. See `RESEARCH/PROTOCOL_CURRENT.md` and `CURRENT_RESEARCH_STATUS.md` for existing protocol and actual completed evidence. The paper's results section must remain a proposal or report only completed, reproducible outcomes; do not fill missing study results with demo charts.
+
+## Reproducible demonstration
+
+Start `START_WINDOWS.bat`; create Reader A, save the recovery key, finish setup with one selected support type, and request help on a chosen word. Add optional feedback. Log out, create Reader B with different choices, and verify My Progress shows only B. Sign back in as A and inspect A's saved events. Open `/research-demo.html` alongside the reader to show the selected span, recommendation source, before/after preference evidence, and across-reader request counts. Explain out loud that a preference update is **not** a learning gain. Open the independent-evaluation panel and state whether a human-reviewed routing run exists. Do not present demo-generated interactions as study participants or model-validation scores.

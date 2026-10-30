@@ -1,0 +1,11 @@
+-r requirements-adaptive.txt
+-r requirements-documents.txt
+-r requirements-neural.txt
+transformers==4.57.6
+accelerate==1.15.0
+peft==0.17.1
+uroman==1.3.1.1
+sentencepiece==0.2.2
+scipy
+safetensors
+filelock

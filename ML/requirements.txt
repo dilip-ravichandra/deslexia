@@ -1,0 +1,14 @@
+torch
+transformers
+datasets
+accelerate
+scikit-learn
+pandas
+numpy
+joblib
+sentence-transformers
+spacy
+textstat
+scipy
+matplotlib
+pytest

@@ -1,0 +1,369 @@
+{
+  "scope": "HONEST SCOPE: automated static and dynamic checks of this repository. It is NOT a penetration test, a\nformal accessibility conformance audit (WCAG/VPAT), or a legal review. `pass` means \"this check found no\nproblem\", not \"the system is secure/accessible/valid\".",
+  "tests": null,
+  "items": [
+    {
+      "id": "RI-01",
+      "category": "research-integrity",
+      "severity": "high",
+      "status": "pass",
+      "message": "PROJECT_STATE claims a research model/gold dataset only if research-grade artifacts exist",
+      "evidence": {
+        "state_claims": false,
+        "research_artifacts": []
+      }
+    },
+    {
+      "id": "RI-02",
+      "category": "research-integrity",
+      "severity": "high",
+      "status": "pass",
+      "message": "paper results template contains no numbers (all NOT_AVAILABLE)",
+      "evidence": null
+    },
+    {
+      "id": "RI-03",
+      "category": "research-integrity",
+      "severity": "medium",
+      "status": "pass",
+      "message": "no research-grade artifacts are bundled (any that exist need provenance verification: the gate is structural)",
+      "evidence": []
+    },
+    {
+      "id": "RI-04",
+      "category": "research-integrity",
+      "severity": "high",
+      "status": "pass",
+      "message": "no unqualified metric claims in documentation",
+      "evidence": []
+    },
+    {
+      "id": "RI-05",
+      "category": "research-integrity",
+      "severity": "high",
+      "status": "pass",
+      "message": "every result writer stamps data_status",
+      "evidence": []
+    },
+    {
+      "id": "RI-06",
+      "category": "research-integrity",
+      "severity": "high",
+      "status": "pass",
+      "message": "research validation rejects seed/AI/synthetic annotators and licences",
+      "evidence": null
+    },
+    {
+      "id": "RI-07",
+      "category": "research-integrity",
+      "severity": "high",
+      "status": "pass",
+      "message": "no source corpus or unreviewed data files are bundled (licence decision pending)",
+      "evidence": []
+    },
+    {
+      "id": "RI-08",
+      "category": "research-integrity",
+      "severity": "high",
+      "status": "pass",
+      "message": "ADR-009 (source licence) is recorded as PENDING in DECISIONS.md and PROJECT_STATE.json",
+      "evidence": null
+    },
+    {
+      "id": "RI-09",
+      "category": "research-integrity",
+      "severity": "high",
+      "status": "pass",
+      "message": "Tasks 15/16 have preparation tooling; participant evaluation and real paper results remain blocked",
+      "evidence": null
+    },
+    {
+      "id": "RI-10",
+      "category": "research-integrity",
+      "severity": "high",
+      "status": "pass",
+      "message": "demo suggestions carry no probability/confidence and are not labelled as a trained prediction",
+      "evidence": null
+    },
+    {
+      "id": "RI-11",
+      "category": "research-integrity",
+      "severity": "high",
+      "status": "pass",
+      "message": "trainer records pretrained-weights use and fails hard on missing weights",
+      "evidence": null
+    },
+    {
+      "id": "SP-01",
+      "category": "security-privacy",
+      "severity": "high",
+      "status": "pass",
+      "message": "no secrets/tokens committed",
+      "evidence": []
+    },
+    {
+      "id": "SP-02",
+      "category": "security-privacy",
+      "severity": "high",
+      "status": "pass",
+      "message": "logging and text logging are OFF by default",
+      "evidence": null
+    },
+    {
+      "id": "SP-03",
+      "category": "security-privacy",
+      "severity": "high",
+      "status": "pass",
+      "message": "enabled logging stores no learner text by default",
+      "evidence": null
+    },
+    {
+      "id": "SP-04",
+      "category": "security-privacy",
+      "severity": "high",
+      "status": "pass",
+      "message": "learner API rejects unknown fields (visual settings cannot reach classification)",
+      "evidence": null
+    },
+    {
+      "id": "SP-05",
+      "category": "security-privacy",
+      "severity": "medium",
+      "status": "pass",
+      "message": "input size limits enforced",
+      "evidence": null
+    },
+    {
+      "id": "SP-06",
+      "category": "security-privacy",
+      "severity": "high",
+      "status": "pass",
+      "message": "research endpoints: token required when set, local-only otherwise",
+      "evidence": null
+    },
+    {
+      "id": "SP-07",
+      "category": "security-privacy",
+      "severity": "high",
+      "status": "pass",
+      "message": "artifact reader blocks traversal and non-artifact paths",
+      "evidence": [
+        403,
+        403,
+        403
+      ]
+    },
+    {
+      "id": "SP-08",
+      "category": "security-privacy",
+      "severity": "medium",
+      "status": "pass",
+      "message": "front-end loads nothing from external hosts",
+      "evidence": []
+    },
+    {
+      "id": "SP-09",
+      "category": "security-privacy",
+      "severity": "medium",
+      "status": "pass",
+      "message": "no innerHTML/eval/document.write in front-end code",
+      "evidence": []
+    },
+    {
+      "id": "SP-10",
+      "category": "security-privacy",
+      "severity": "info",
+      "status": "pass",
+      "message": "browser storage keys in use (visual preferences and admin token only)",
+      "evidence": [
+        "\"da_admin\"",
+        "\"da_lab_theme_v",
+        "'da_width_v",
+        "LOOK_KEY",
+        "key"
+      ]
+    },
+    {
+      "id": "SP-11",
+      "category": "security-privacy",
+      "severity": "medium",
+      "status": "pass",
+      "message": "no wildcard CORS",
+      "evidence": null
+    },
+    {
+      "id": "SP-12",
+      "category": "security-privacy",
+      "severity": "low",
+      "status": "pass",
+      "message": "dependency versions are recorded (requirements-lock.txt)",
+      "evidence": null
+    },
+    {
+      "id": "UI-01",
+      "category": "ui",
+      "severity": "medium",
+      "status": "pass",
+      "message": "every page declares a language",
+      "evidence": []
+    },
+    {
+      "id": "UI-02",
+      "category": "ui",
+      "severity": "medium",
+      "status": "pass",
+      "message": "every page has a viewport meta tag and title",
+      "evidence": []
+    },
+    {
+      "id": "UI-03",
+      "category": "ui",
+      "severity": "high",
+      "status": "pass",
+      "message": "every statically declared form control has a label",
+      "evidence": []
+    },
+    {
+      "id": "UI-04",
+      "category": "ui",
+      "severity": "medium",
+      "status": "pass",
+      "message": "every statically declared button has an accessible name",
+      "evidence": []
+    },
+    {
+      "id": "UI-05",
+      "category": "ui",
+      "severity": "medium",
+      "status": "pass",
+      "message": "focus outlines are not removed without a replacement",
+      "evidence": []
+    },
+    {
+      "id": "UI-06",
+      "category": "ui",
+      "severity": "medium",
+      "status": "pass",
+      "message": "no animation/transition without a prefers-reduced-motion rule",
+      "evidence": []
+    },
+    {
+      "id": "UI-07",
+      "category": "ui",
+      "severity": "high",
+      "status": "pass",
+      "message": "request code for /api/adapt does not reference visual settings",
+      "evidence": null
+    },
+    {
+      "id": "UI-08",
+      "category": "ui",
+      "severity": "medium",
+      "status": "pass",
+      "message": "learner page has an aria-live status region",
+      "evidence": null
+    },
+    {
+      "id": "UI-09",
+      "category": "ui",
+      "severity": "info",
+      "status": "pass",
+      "message": "NOT COVERED: real-browser, mobile, screen-reader and user testing (only jsdom checks exist)",
+      "evidence": null
+    },
+    {
+      "id": "RP-01",
+      "category": "reproducibility",
+      "severity": "high",
+      "status": "pass",
+      "message": "randomness is seeded in every stochastic module",
+      "evidence": []
+    },
+    {
+      "id": "RP-02",
+      "category": "reproducibility",
+      "severity": "high",
+      "status": "pass",
+      "message": "all ML modules import cleanly",
+      "evidence": []
+    },
+    {
+      "id": "RP-03",
+      "category": "reproducibility",
+      "severity": "high",
+      "status": "pass",
+      "message": "baseline predictions are identical across two runs with the same seed",
+      "evidence": null
+    },
+    {
+      "id": "RP-04",
+      "category": "reproducibility",
+      "severity": "medium",
+      "status": "pass",
+      "message": "runs record library versions",
+      "evidence": null
+    },
+    {
+      "id": "RP-05",
+      "category": "reproducibility",
+      "severity": "medium",
+      "status": "pass",
+      "message": "experiment runner hashes and can verify artifacts",
+      "evidence": null
+    },
+    {
+      "id": "RP-06",
+      "category": "reproducibility",
+      "severity": "low",
+      "status": "pass",
+      "message": "tested dependency versions recorded",
+      "evidence": null
+    },
+    {
+      "id": "RP-07",
+      "category": "reproducibility",
+      "severity": "medium",
+      "status": "pass",
+      "message": "run guides for Windows/Colab/product exist",
+      "evidence": null
+    },
+    {
+      "id": "GV-01",
+      "category": "governance",
+      "severity": "medium",
+      "status": "pass",
+      "message": "every completed task has a report",
+      "evidence": []
+    },
+    {
+      "id": "GV-02",
+      "category": "governance",
+      "severity": "medium",
+      "status": "pass",
+      "message": "required governance/documentation files exist",
+      "evidence": []
+    },
+    {
+      "id": "GV-03",
+      "category": "governance",
+      "severity": "high",
+      "status": "pass",
+      "message": "model card states plainly when no validated model exists",
+      "evidence": null
+    },
+    {
+      "id": "GV-04",
+      "category": "governance",
+      "severity": "high",
+      "status": "pass",
+      "message": "dataset card shows the licence as pending and forbids redistribution",
+      "evidence": null
+    }
+  ],
+  "counts": {
+    "pass": 43,
+    "warn": 0,
+    "fail": 0
+  },
+  "high_severity_failures": []
+}

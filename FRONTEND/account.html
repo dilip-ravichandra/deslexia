@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Choose your account · DyslexiAdapt</title>
+<link rel="stylesheet" href="my-progress.css">
+<link rel="stylesheet" href="account.css?v=3">
+</head>
+<body>
+<a class="skip" href="#main">Skip to account choices</a>
+<header class="top"><a href="/">← Reading room</a><span>DyslexiAdapt · Local accounts</span><a href="my-progress.html">My progress</a></header>
+<main id="main">
+<p class="eyebrow">YOUR OWN READING SPACE</p>
+<h1>Who is reading today?</h1>
+<p>Each account has its own profile and progress. Your previous profile is never used to create a new account.</p>
+<p class="flow">1. Sign in or sign up <span>→</span> 2. Set up your reading profile <span>→</span> 3. Read with support</p>
+<p id="status" role="status">Checking local account…</p>
+
+<section id="signed-in" class="card" hidden>
+<h2>Signed in as <span id="current-username"></span></h2>
+<div id="signed-ready"><p>This account's progress is ready.</p><div class="actions"><a class="button" href="/">Continue reading</a><a class="button secondary" href="my-progress.html">View my progress</a></div></div>
+<div id="signed-pending" hidden><p>One step left: choose how reading support should start for you.</p><a class="button" href="profile-setup.html">Finish profile setup</a></div>
+<div class="actions separate"><button id="switch-account" type="button" class="secondary">Switch account</button><button id="new-user" type="button" class="secondary">Create a separate account</button><button id="guest-signed-in" type="button" class="secondary">Read as guest</button></div>
+<div id="old-library" hidden><p>Older passages or notes are still saved only in this browser. Move them here only if they belong to this account.</p><button id="import-old" type="button" class="secondary">Move my old library to this account</button></div>
+</section>
+
+<section id="entry" hidden>
+<div id="entry-tabs" class="entry-tabs" role="group" aria-label="Choose how to start"><button id="choose-login" type="button" aria-pressed="true">Sign in</button><button id="choose-create" type="button" class="secondary" aria-pressed="false">Create account</button><button id="guest" type="button" class="secondary">Read as guest</button></div>
+
+<section id="login-panel" class="card form-card" aria-labelledby="login-title">
+<h2 id="login-title">Welcome back</h2>
+<p>Use the username and password for your own local account.</p>
+<form id="login-form">
+<label for="login-username">Username</label><input id="login-username" autocomplete="username" required minlength="3" maxlength="32">
+<label for="login-password">Password</label><input id="login-password" type="password" autocomplete="current-password" required minlength="12" maxlength="128">
+<button type="submit">Sign in to my account</button>
+</form>
+<p><a href="#reset-panel" id="show-reset">Forgot password? Use your recovery key</a></p>
+</section>
+
+<section id="create-panel" class="card form-card" aria-labelledby="create-title" hidden>
+<h2 id="create-title">Create a separate account</h2>
+<p>Step 1 of 2. Make your sign-in first. Your reading preferences come next.</p>
+<form id="create-form" autocomplete="off">
+<label for="create-username">New username</label><input id="create-username" autocomplete="off" required minlength="3" maxlength="32">
+<label for="create-password">New password (at least 12 characters)</label><input id="create-password" type="password" autocomplete="new-password" required minlength="12" maxlength="128">
+<p class="privacy">This account stays on your local helper. The next step asks for consent before saving a reading profile or learning history.</p>
+<button type="submit">Create account, then set up profile</button>
+</form>
+</section>
+
+<section id="created-panel" class="card form-card" aria-labelledby="created-title" hidden>
+<h2 id="created-title" tabindex="-1">Account created. Save your recovery key</h2>
+<p>Save this recovery key privately. You need it if you forget your password. The key is shown only now.</p>
+<code id="created-key"></code>
+<button id="copy-created-key" type="button" class="secondary">Copy recovery key</button>
+<label class="checkbox"><input id="created-confirmed" type="checkbox"> I saved my recovery key</label>
+<a id="created-continue" class="button" href="profile-setup.html" aria-disabled="true">Continue to profile setup</a>
+</section>
+
+<details id="older-profile" class="card"><summary>Have an older profile or recovery key?</summary>
+<p>Connect it only if it is yours. This is separate from creating a new account.</p>
+<label for="older-key">Recovery key</label><input id="older-key" type="password" autocomplete="off" spellcheck="false" maxlength="64" placeholder="Paste your saved key, or use the one in this browser">
+<button id="check-older" type="button" class="secondary">Check this profile</button>
+<p id="older-status" role="status"></p>
+<code id="older-key-visible" hidden></code>
+<button id="continue-older" type="button" class="secondary" hidden>Continue reading with this older profile</button>
+<form id="link-form" hidden>
+<label for="link-username">Username for this older profile</label><input id="link-username" autocomplete="off" required minlength="3" maxlength="32">
+<label for="link-password">New password</label><input id="link-password" type="password" autocomplete="new-password" required minlength="12" maxlength="128">
+<label class="checkbox"><input id="link-backup" type="checkbox" required> I saved this recovery key privately</label>
+<button type="submit">Link my older profile</button>
+</form>
+</details>
+
+<details id="reset-panel" class="card"><summary>Reset an account password</summary><p>Use the original recovery key for that account. Other sessions will be signed out.</p>
+<form id="reset-form">
+<label for="reset-username">Username</label><input id="reset-username" autocomplete="username" required minlength="3" maxlength="32">
+<label for="reset-key">Recovery key</label><input id="reset-key" type="password" autocomplete="off" spellcheck="false" required minlength="64" maxlength="64">
+<label for="reset-password">New password</label><input id="reset-password" type="password" autocomplete="new-password" required minlength="12" maxlength="128">
+<button type="submit">Reset password</button>
+</form>
+</details>
+</section>
+<p class="foot">Accounts stay on this local helper, not the internet. Signing out does not delete a profile. Browser-only passages from older versions remain until you explicitly move or delete them.</p>
+</main>
+<script src="account.js?v=3"></script>
+</body>
+</html>

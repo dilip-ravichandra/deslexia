@@ -1,0 +1,1 @@
+These are original synthetic engineering fixtures created for testing uploads, OCR, page navigation and visual inference. They are not learner-study data or a new classification dataset. Expected chart: A=2, B=4, C=6; C tallest. Expected diagram: Sun → Plant → Food. The PDF has embedded text on page 1 and a chart image on page 2.

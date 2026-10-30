@@ -1,0 +1,23 @@
+{
+  "schema_version": "1.0",
+  "modes": {
+    "smoke": "base columns only; seed/test fixtures",
+    "research": "base + provenance; rejects seed/AI/unknown-license rows"
+  },
+  "columns": {
+    "source_id": "string, required",
+    "document_id": "string, required; split group key",
+    "span_id": "string, required, globally unique",
+    "text": "string, required, non-blank",
+    "context_before": "string",
+    "context_after": "string",
+    "category": "VOCABULARY|SYNTACTIC|CONCEPTUAL|OTHER_UNCERTAIN (exact uppercase)",
+    "annotator_id": "string; research: must be a human id",
+    "guideline_version": "string; research required",
+    "confidence": "1-5; research required",
+    "rationale": "string",
+    "source_license": "SPDX or explicit license; research: not unknown/synthetic",
+    "created_at": "ISO-8601; research required"
+  },
+  "enforced_by": "ML/data_validation.py"
+}

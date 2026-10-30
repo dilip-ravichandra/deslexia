@@ -1,0 +1,18 @@
+{
+  "folder": "qwen3-small",
+  "repo": "Qwen/Qwen3-1.7B-GGUF",
+  "revision": "90862c4b9d2787eaed51d12237eafdfe7c5f6077",
+  "license": "Apache-2.0",
+  "files": [
+    {
+      "path": "Qwen3-1.7B-Q8_0.gguf",
+      "size": 1834426016,
+      "sha256": "061b54daade076b5d3362dac252678d17da8c68f07560be70818cace6590cb1a"
+    },
+    {
+      "path": "README.md",
+      "size": 6235,
+      "sha256": "60706b0c6aa38e0d1e73a7b21f98e50cad82ee1eaea636fd1f3a49617bccdb0d"
+    }
+  ]
+}

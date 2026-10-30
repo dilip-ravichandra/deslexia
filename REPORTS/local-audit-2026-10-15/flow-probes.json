@@ -1,0 +1,12 @@
+{
+  "survey": 200,
+  "route_selected": "PRONUNCIATION",
+  "feedback_status": 200,
+  "new_learner_events": 2,
+  "legacy_review_queue_length": 0,
+  "forget_status": 200,
+  "enrolled_after_forget": false,
+  "visual_rows_recreated_after_forget": 1,
+  "astral_offset": 422,
+  "python_offset": 200
+}

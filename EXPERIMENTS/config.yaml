@@ -1,0 +1,27 @@
+# Experiment configuration (validated by ML/experiment_runner.py). No results live here.
+seed: 42
+seeds: [42, 43, 44, 45, 46]        # used for transformer / ablation runs (>=5 recommended for any comparison)
+labels:
+  - VOCABULARY
+  - SYNTACTIC
+  - CONCEPTUAL
+split:
+  strategy: grouped_by_document    # grouped_by_document | grouped_by_source
+  train: 0.70
+  validation: 0.15
+  test: 0.15
+models:
+  baselines:
+    - tfidf_logreg
+    - tfidf_svm
+  transformer: distilbert-base-uncased
+  fusion: true
+hyperparameters:
+  epochs: 4
+  lr: 0.00005
+  batch_size: 16
+  max_len: 128
+  patience: 2
+analysis:
+  bootstrap_resamples: 1000
+  top_k_examples: 5

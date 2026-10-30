@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Live research demo · DyslexiAdapt</title>
+<link rel="stylesheet" href="research-demo.css">
+<link rel="stylesheet" href="research-demo-layout.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to live evidence</a>
+<header class="top"><a href="/">← Reading room</a><strong>DyslexiAdapt · Research demo</strong><a href="learner-lab.html">Advanced research tools ↗</a></header>
+<main id="main">
+<div class="heading"><div><p class="eyebrow">LIVE LEARNER EVIDENCE</p><h1>How reading support adapts</h1><p>Recorded choices and visible changes. Held-out model results appear only after a real evaluation.</p></div><span id="live-badge" class="badge">Connecting…</span></div>
+<section class="card controls"><label for="token">Admin token, if configured<input id="token" type="password" autocomplete="off"></label><label for="learner">Learner profile<select id="learner"><option value="">Checking saved profiles…</option></select></label><label for="language">Language<select id="language"><option value="en">English</option><option value="hi">Hindi</option><option value="kn">Kannada</option><option value="ta">Tamil</option></select></label><button id="refresh" type="button">Refresh now</button><label class="inline"><input id="live" type="checkbox" checked> Live updates</label></section>
+<p id="message" role="status">Connecting to the local helper…</p>
+<section id="empty" class="card" hidden><h2>No learner activity yet</h2><ol><li>Open the <a href="/">reading room</a> and create a consented profile.</li><li>Select text and choose a help type, such as Pronunciation or Explain a word.</li><li>Return here; this page updates every few seconds. Open the reader and lab in separate tabs for a live demonstration.</li></ol><p>No practice learner records are invented for this view.</p></section>
+<section class="card" aria-labelledby="overall-title"><p class="eyebrow">ALL CONSENTED READERS ON THIS HELPER</p><h2 id="overall-title">What readers asked for</h2><div id="overall-metrics" class="metrics"></div><div id="overall-requests" class="chart" aria-label="Help requests by support type"></div><p id="overall-note" class="caution">Loading recorded choices...</p></section>
+<div id="live-content" hidden>
+<section class="card profile-card"><div class="section-title"><div><p class="eyebrow">SELECTED LEARNER</p><h2 id="name">Learner</h2></div><span id="updated">Saved locally</span></div><p id="starting"></p></section>
+<section class="metrics" id="metrics" aria-label="Observed learner activity"></section>
+<div class="columns evidence-panels"><section class="card"><p class="eyebrow">WHAT WAS ASKED FOR</p><h2>Help choices</h2><div id="requests" class="chart"></div><p class="caution">These are choices, not detected mistakes.</p></section><section class="card"><p class="eyebrow">HOW THE HELPER CHOOSES</p><h2>Internal routing weights <span id="evidence-language"></span></h2><div id="estimates" class="chart"></div><p class="caution">Weights share 100% across support types. They are not a learner's probability of difficulty, ability, or diagnosis.</p></section></div>
+<section class="card change-card"><div class="section-title"><div><p class="eyebrow">LIVE ADAPTATION</p><h2>What changed after a choice?</h2></div><span class="chart-key"><i></i> Before <i></i> After</span></div><div class="columns"><div><h3>Choose a recorded action</h3><div id="timeline" class="timeline"></div></div><div><p id="event-reason" class="event-summary"></p><div id="before-after" class="change-chart"></div></div></div><p class="caution">The percentages are internal routing weights, not comprehension scores. A pause alone never labels a difficulty.</p></section>
+<section class="card"><p class="eyebrow">LATEST RESPONSE</p><h2>What the learner received</h2><div id="route"></div><div id="shown" class="before-after"></div><p class="caution">An explicit choice overrides the profile. Shared model weights do not update live.</p></section>
+</div>
+<section class="card"><p class="eyebrow">INDEPENDENT EVALUATION</p><h2>Is the routing model accurate?</h2><div id="evaluations">Checking completed human-data evaluations…</div><p class="caution">Only held-out, human-reviewed labels count here. Usage above is not model accuracy or learning benefit.</p></section>
+<details id="methods" class="card more"><summary>Methods, installation status and advanced tools</summary><p>Only consented local records appear here. Names identify profiles, not diagnoses. Separate browsers need the same recovery key or a local account. Scores and evidence estimates do not establish educational effectiveness.</p><h3>Installed services and data</h3><div id="installation">Open this section to check the installed files.</div><p><a href="learner-lab.html#experiments">Training, datasets and human-review tools ↗</a></p></details>
+</main>
+<script src="research-demo.js"></script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+DYSLEXIADAPT — CURRENT MULTILINGUAL RESEARCH BUILD
+
+1. Extract this folder first.
+2. Install Python 3.12.
+3. Windows: run SETUP_RESEARCH_WINDOWS.bat once. Downloads several GB.
+4. Install native Tesseract as explained in RUN_RESEARCH.md.
+5. Run START_DYSLEXIADAPT.bat.
+6. Reader: http://127.0.0.1:8000 ; lab: /learner-lab.html
+
+Current scope and honest limitations: CURRENT_RESEARCH_STATUS.md
+Research protocol: RESEARCH/PROTOCOL_CURRENT.md
+100 real-source examples needing human labels: DATA/human_routing/public_100_REVIEW_REQUIRED.csv
+
+Public lexical model experiment completed. Genuine human support-routing labels and multilingual teaching-quality validation remain pending. QA screenshots are engineering test interactions, not student-study findings. Giant pretrained weights are downloaded on setup, not embedded in this ZIP.

@@ -1,0 +1,1 @@
+{"name":"dyslexiadapt-ui-tests","private":true,"version":"0.0.1","description":"jsdom end-to-end checks of the learner UI and Research Lab against a live backend","dependencies":{"jsdom":"^24.0.0"}}

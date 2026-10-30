@@ -1,0 +1,116 @@
+{
+  "python_files_parsed": 74,
+  "services": {
+    "generation": {
+      "ready": false,
+      "missing_files": [
+        "qwen3\\Qwen3-4B-Q4_K_M.gguf"
+      ],
+      "missing_packages": [
+        "llama_cpp"
+      ],
+      "dependency_issues": []
+    },
+    "routing_backbone": {
+      "ready": false,
+      "missing_files": [
+        "distilmbert\\model.safetensors",
+        "distilmbert\\config.json",
+        "distilmbert\\tokenizer.json"
+      ],
+      "missing_packages": [],
+      "dependency_issues": []
+    },
+    "vision": {
+      "ready": false,
+      "missing_files": [
+        "vision-qwen\\Qwen2.5-VL-3B-Instruct-Q4_K_M.gguf",
+        "vision-qwen\\mmproj-Qwen2.5-VL-3B-Instruct-Q8_0.gguf"
+      ],
+      "missing_packages": [
+        "llama_cpp"
+      ],
+      "dependency_issues": []
+    },
+    "semantic_checks": {
+      "ready": false,
+      "missing_files": [
+        "nli\\onnx\\model.onnx",
+        "nli\\tokenizer.json",
+        "nli\\config.json"
+      ],
+      "missing_packages": [
+        "onnxruntime"
+      ],
+      "dependency_issues": []
+    },
+    "speech": {
+      "en": {
+        "ready": false,
+        "missing_files": [
+          "tts-en\\README.md",
+          "tts-en\\config.json",
+          "tts-en\\model.safetensors",
+          "tts-en\\special_tokens_map.json",
+          "tts-en\\tokenizer_config.json",
+          "tts-en\\vocab.json"
+        ],
+        "missing_packages": [
+          "uroman"
+        ],
+        "dependency_issues": []
+      },
+      "hi": {
+        "ready": false,
+        "missing_files": [
+          "tts-hi\\README.md",
+          "tts-hi\\config.json",
+          "tts-hi\\model.safetensors",
+          "tts-hi\\special_tokens_map.json",
+          "tts-hi\\tokenizer_config.json",
+          "tts-hi\\vocab.json"
+        ],
+        "missing_packages": [
+          "uroman"
+        ],
+        "dependency_issues": []
+      },
+      "kn": {
+        "ready": false,
+        "missing_files": [
+          "tts-kn\\README.md",
+          "tts-kn\\config.json",
+          "tts-kn\\model.safetensors",
+          "tts-kn\\special_tokens_map.json",
+          "tts-kn\\tokenizer_config.json",
+          "tts-kn\\vocab.json"
+        ],
+        "missing_packages": [
+          "uroman"
+        ],
+        "dependency_issues": []
+      },
+      "ta": {
+        "ready": false,
+        "missing_files": [
+          "tts-ta\\README.md",
+          "tts-ta\\config.json",
+          "tts-ta\\model.safetensors",
+          "tts-ta\\special_tokens_map.json",
+          "tts-ta\\tokenizer_config.json",
+          "tts-ta\\vocab.json"
+        ],
+        "missing_packages": [
+          "uroman"
+        ],
+        "dependency_issues": []
+      }
+    },
+    "native_ocr": {
+      "ready": false
+    },
+    "python": "3.13.3",
+    "supported_research_python": false,
+    "setup": "Run SETUP_RESEARCH_WINDOWS.bat with Python 3.12; downloads are explicit and may take several GB. The pinned RapidOCR package does not support Python 3.13."
+  }
+}

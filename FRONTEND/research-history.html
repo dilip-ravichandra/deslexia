@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DyslexiAdapt · Research Lab (private)</title>
+<style>
+:root{--bg:#F6F7F4;--fg:#1B2420;--card:#fff;--line:#D5DBD3;--accent:#2F5D50;--warn:#8A3B12;--warnbg:#FCEBDD;--ok:#E4F1E7}
+@media(prefers-color-scheme:dark){:root{--bg:#14181A;--fg:#E6ECE8;--card:#1C2225;--line:#33403A;--accent:#7FC4AE;--warn:#F3B58A;--warnbg:#3A2418;--ok:#1F3326}}
+body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.5 system-ui,sans-serif}
+header,main{max-width:1150px;margin:0 auto;padding:14px 18px}
+h1{margin:.2em 0;font-size:1.5rem}h2{font-size:1.15rem;margin:1.2em 0 .4em}h3{font-size:1rem;margin:.8em 0 .3em}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 16px;margin:10px 0}
+.empty{border-style:dashed;opacity:.85}
+.badge{display:inline-block;border-radius:999px;padding:1px 10px;font-size:.8rem;font-weight:600;margin-left:6px}
+.b-research{background:var(--ok)}.b-non{background:var(--warnbg);color:var(--warn)}
+.warn{background:var(--warnbg);color:var(--warn);border-radius:10px;padding:8px 12px;margin:8px 0}
+table{border-collapse:collapse;width:100%;font-size:.92rem}th,td{border:1px solid var(--line);padding:4px 8px;text-align:left}
+td.num{text-align:right;font-variant-numeric:tabular-nums}
+button,input{font:inherit}button{border:2px solid var(--accent);background:transparent;color:var(--fg);border-radius:8px;padding:5px 12px;cursor:pointer;margin:2px 4px 2px 0}
+button:focus-visible,input:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.mono{font-family:ui-monospace,Consolas,monospace;font-size:.85rem;word-break:break-all}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+svg{max-width:100%}
+</style><link rel="stylesheet" href="research-shell.css"><link rel="stylesheet" href="research-dashboard.css"><link rel="stylesheet" href="native-fonts.css"></head>
+<body id="research-workspace" data-lab-theme="dark"><aside class="lab-sidebar"><a class="lab-brand" href="research.html"><span>da</span><div>DyslexiAdapt<small>RESEARCH WORKSPACE</small></div></a><p class="lab-nav-label">WORKSPACE</p><button class="lab-side-button selected" data-section="overview">▦ Overview</button><button class="lab-side-button" data-section="dataset">▤ Dataset & labels</button><button class="lab-side-button" data-section="runs">⌁ Model comparison</button><button class="lab-side-button" data-section="experiments">◷ Experiments</button><button class="lab-side-button" data-section="errors">◎ Error analysis</button><button class="lab-side-button" data-section="feedback">◇ Learner feedback</button><p class="lab-nav-label">OPERATIONS</p><button class="lab-side-button" data-section="training">▷ Prepare training</button><button class="lab-side-button" data-section="learning">↻ Improvement guide</button><a class="lab-side-button" href="learning.html">↻ Train & adapt</a><button class="lab-side-button" data-section="report">↓ Research reports</button><div class="lab-side-status"><span class="lab-status-dot"></span> Private workspace<small>Local / admin access gate</small></div><a class="lab-back" href="/">← Learner reading room</a></aside><div class="lab-content"><nav class="research-nav"><span>Workspace <span class="lab-slash">/</span> <strong id="lab-current-section">Overview</strong></span><div class="lab-theme-controls"><label for="lab-palette" class="lab-sr">Accent palette</label><select id="lab-palette"><option value="teal">Teal + Violet</option><option value="violet">Violet + Teal</option><option value="ocean">Ocean + Pink</option></select><button id="lab-theme-toggle" aria-pressed="true">Light theme</button></div></nav>
+<header>
+  <p class="lab-eyebrow">FROM EVIDENCE TO UNDERSTANDING</p><h1>Your research workspace <span class="badge b-non">private</span></h1>
+  <p class="lab-intro">Compare models. Understand errors. Document evidence. Build the next version with care.</p>
+  <p class="card">This is the historical research-artifact registry, not the live learner lab. Empty research-grade sections mean no qualifying human-reviewed support-routing run has been recorded; they are not a loading error. See <a href="learner-lab.html#experiments">public lexical experiments and live learner evidence</a>, or <a href="human-review.html">start independent routing-label review</a>.</p>
+  <div class="row"><label>Admin token (if configured) <input id="tok" type="password" autocomplete="off"></label>
+    <button id="load">Refresh evidence</button><button id="dl" disabled>Export JSON</button><button id="dl-report" disabled>Export research notes</button></div>
+  <div id="err" class="warn" hidden></div>
+</header>
+<main>
+<section id="readiness" class="lab-readiness" aria-label="Research readiness"></section>
+<nav class="lab-tabs" aria-label="Research workspace views"><button data-lab-tab="evidence" class="selected" aria-pressed="true">Evaluation & evidence</button><button data-lab-tab="training" aria-pressed="false">Prepare a training run</button><button data-lab-tab="learning" aria-pressed="false">How the model improves</button></nav>
+<section id="evidence" class="lab-panel"><section id="overview-panels" class="lab-overview-panels"></section><div id="out" aria-live="polite"></div></section>
+<section id="training" class="lab-panel" hidden><div class="lab-two-column"><section class="card"><span class="lab-eyebrow">LOCAL TRAINING WORKSPACE</span><h2>Advanced: human-data research training</h2><p>For the active prototype, use <a href="learning.html">Train &amp; adapt</a> to review feedback, train and activate an evaluated candidate. This advanced form prepares terminal commands for a separate human-reviewed research dataset.</p><label for="cmd-platform">Your terminal</label><select id="cmd-platform"><option value="windows">Windows PowerShell · virtual environment</option><option value="python">Python terminal · active environment</option></select><label for="cmd-csv">Reviewed dataset CSV</label><input id="cmd-csv" value="DATA/gold_v1.csv" type="text"><label for="cmd-manifest">Frozen split manifest</label><input id="cmd-manifest" value="DATA/split_manifest.json" type="text"><label for="cmd-version">New run version</label><input id="cmd-version" value="v1" type="text"><label for="cmd-model">Model family</label><select id="cmd-model"><option value="baselines">TF-IDF baselines · start here</option><option value="distilbert">DistilBERT · more compute needed</option></select><div id="cmd-error" class="warn" role="alert" hidden></div><button id="build-command">Build commands</button></section><section class="card lab-command-panel"><h2>Your run checklist</h2><ol class="lab-checklist"><li>Use approved source material and independently reviewed labels.</li><li>Validate the CSV. A filename alone does not make it gold data.</li><li>Freeze document-based train, validation and test partitions once.</li><li>Run training locally. Existing data/model validation guards stay active.</li><li>Compare validation performance before selecting a candidate.</li><li>Refresh this page to inspect the saved run. Final test data must stay separate.</li></ol><label for="commands">Prepared terminal commands</label><textarea id="commands" readonly rows="12"></textarea><button id="copy-commands">Copy commands</button><p class="lab-small">If a frozen manifest already exists, skip its creation command and use the existing matching manifest. For a genuinely new dataset version, use a new manifest path and new output version.</p></section></div></section>
+<section id="learning" class="lab-panel" hidden><section class="card"><span class="lab-eyebrow">CONTROLLED IMPROVEMENT</span><h2>Learn from feedback, with a review step</h2><div class="learning-steps"><div><b>1</b><strong>Feedback</strong><p>A learner says which support was useful. Collection needs informed permission; persistent logs are off by default.</p></div><div><b>2</b><strong>Human review</strong><p>Check the selected text, context, licence and support label. Acceptance is not proof that the answer or label is correct.</p></div><div><b>3</b><strong>New training version</strong><p>Train a candidate on approved data. Keep provenance, document groups and versions. User activity never directly changes the active weights.</p></div><div><b>4</b><strong>Evaluate & release</strong><p>Compare the candidate on validation data. Use separate final evaluation, then deliberately register the chosen model. Keep the previous version for rollback.</p></div></div><div class="warn">Evaluated prototype retraining is available in Train &amp; adapt. A perfect answer is not guaranteed. The category classifier chooses a kind of help; improving definitions or explanations is a separate intervention task.</div></section><section class="card"><h2>What can adapt immediately?</h2><p>Reading colours, font, spacing and saved notes already follow the learner's choices. Opt-in profiles also use helpfulness feedback to recommend a support style next time. This changes routing preferences, not classifier weights.</p><h3>What must wait for reviewed data?</h3><p>Classifier fine-tuning, model promotion and claims that support improves understanding. A validated learner study also needs the appropriate approval and consent.</p><h3>Keep the final test set protected</h3><p>Use validation data for model selection. Repeatedly choosing improvements based on final test scores contaminates the evaluation. Feedback samples overlapping held-out documents need exclusion or a new independent evaluation design.</p></section></section>
+<aside id="lab-inspector" hidden aria-label="Artifact details"><div class="inspector-head"><strong>Evidence inspector</strong><button id="inspect-close">Close</button></div><label for="artifact-path">Artifact path</label><input id="artifact-path" value="REPORTS/DOCUMENT_RELEASE_QA.md"><button id="inspect-load">Open artifact</button><p id="inspect-meta"></p><pre id="inspect-text"></pre></aside></main>
+<script>
+"use strict";
+const $ = id => document.getElementById(id);
+const el = (t, a = {}, ...k) => { const n = document.createElement(t);
+  for (const [x, v] of Object.entries(a)) x === "class" ? n.className = v : n.setAttribute(x, v);
+  k.flat().forEach(c => n.append(c instanceof Node ? c : document.createTextNode(c ?? ""))); return n; };
+const f3 = v => (v === null || v === undefined) ? "n/a" : Number(v).toFixed(3);
+let SUMMARY = null;
+const headers = () => { const t = $("tok").value || sessionStorage.getItem("da_admin") || ""; return t ? {"x-admin-token": t} : {}; };
+async function get(path){ const r = await fetch(path, {headers: headers()}); const d = await r.json().catch(() => ({}));
+  if (!r.ok) throw new Error(d.detail || ("HTTP " + r.status)); return d; }
+function table(head, rows){ return el("table", {}, el("thead", {}, el("tr", {}, head.map(h => el("th", {}, h)))),
+  el("tbody", {}, rows.map(r => el("tr", {}, r.map(c => c instanceof Node ? c : el("td", {class: typeof c === "number" ? "num" : ""}, c)))))); }
+const empty = (title, why) => el("div", {class: "card empty"}, el("h3", {}, title), el("p", {}, why));
+
+function confusion(cm){
+  const rowSum = cm.matrix.map(r => r.reduce((a, b) => a + b, 0));
+  const t = el("table", {}, el("thead", {}, el("tr", {}, el("th", {}, "true \\ predicted"), cm.labels.map(l => el("th", {}, l)))));
+  const body = el("tbody");
+  cm.matrix.forEach((r, i) => body.append(el("tr", {}, el("th", {}, cm.labels[i]),
+    r.map((v, j) => { const td = el("td", {class: "num"}, String(v)); const a = rowSum[i] ? v / rowSum[i] : 0;
+      td.style.background = `color-mix(in srgb, var(--accent) ${Math.round(a * 55)}%, transparent)`; return td; }))));
+  t.append(body); return t;
+}
+function perClass(m){
+  const rows = Object.entries(m.per_class).filter(([k]) => ["VOCABULARY","SYNTACTIC","CONCEPTUAL"].includes(k))
+    .map(([k, v]) => [k, f3(v.precision), f3(v.recall), f3(v["f1-score"]), v.support]);
+  return table(["class", "precision", "recall", "F1", "support"], rows);
+}
+function curve(log){
+  if (!log || !log.length) return null;
+  const W = 360, H = 120, xs = log.map(l => l.epoch), ys = log.map(l => l.val_macro_f1);
+  const x = e => 30 + (xs.length > 1 ? (e - xs[0]) / (xs[xs.length-1] - xs[0]) : 0.5) * (W - 45), y = v => H - 18 - v * (H - 30);
+  const NS = "http://www.w3.org/2000/svg", s = document.createElementNS(NS, "svg");
+  s.setAttribute("viewBox", `0 0 ${W} ${H}`); s.setAttribute("role", "img"); s.setAttribute("aria-label", "Validation macro-F1 per epoch");
+  const mk = (n, at) => { const e = document.createElementNS(NS, n); for (const k in at) e.setAttribute(k, at[k]); return e; };
+  s.append(mk("line", {x1: 30, y1: y(0), x2: W - 10, y2: y(0), stroke: "currentColor", opacity: .3}),
+           mk("line", {x1: 30, y1: y(1), x2: W - 10, y2: y(1), stroke: "currentColor", opacity: .3}),
+           mk("polyline", {fill: "none", stroke: "var(--accent)", "stroke-width": 2.5, points: log.map(l => `${x(l.epoch)},${y(l.val_macro_f1)}`).join(" ")}));
+  log.forEach(l => { const c = mk("circle", {cx: x(l.epoch), cy: y(l.val_macro_f1), r: 3.5, fill: "var(--accent)"}); s.append(c);
+    const t = mk("text", {x: x(l.epoch), y: H - 4, "text-anchor": "middle", "font-size": 9, fill: "currentColor"}); t.textContent = "e" + l.epoch; s.append(t); });
+  const a = mk("text", {x: 2, y: 12, "font-size": 9, fill: "currentColor"}); a.textContent = "val macro-F1 (0–1)"; s.append(a);
+  return s;
+}
+function runCard(r, research){
+  const badge = el("span", {class: "badge " + (research ? "b-research" : "b-non")}, research ? "research-grade" : "NOT RESEARCH");
+  const c = el("div", {class: "card"}, el("h3", {}, r.experiment_id, badge));
+  c.append(el("p", {}, `kind: ${r.kind}${r.arch ? " · arch: " + r.arch : ""} · weights: ${r.weights || "n/a"} · data_status: ${r.data_status}`));
+  if (!research) c.append(el("p", {class: "warn"}, "Smoke/fixture output. Scores below only show that the pipeline runs; they are not evidence about the task."));
+  c.append(el("p", {class: "mono"}, `dataset sha256: ${r.dataset_sha256 || "n/a"} · seed: ${r.seed ?? "n/a"} · created: ${r.created_at || "n/a"}`));
+  if (r.versions) c.append(el("p", {class: "mono"}, "versions: " + Object.entries(r.versions).map(([k, v]) => k + " " + v).join(", ")));
+  if (r.split_sizes) c.append(el("p", {}, "split sizes: " + Object.entries(r.split_sizes).map(([k, v]) => k + " " + v).join(", ")));
+  (r.warnings || []).forEach(w => c.append(el("p", {class: "warn"}, w)));
+  const blocks = r.kind === "baselines" ? Object.entries(r.models) : [["model", r]];
+  blocks.forEach(([name, m]) => {
+    if(!m.test || !m.validation){c.append(el("p",{},name+": no complete validation/test report available."));return;}
+    const d = el("details", {}, el("summary", {}, `${name}: test macro-F1 ${f3(m.test.macro_f1)} · accuracy ${f3(m.test.accuracy)} · n=${m.test.n}`));
+    d.append(el("h3", {}, "Test per-class"), perClass(m.test), el("h3", {}, "Test confusion matrix"), confusion(m.test.confusion_matrix),
+      el("h3", {}, "Validation"), el("p", {}, `macro-F1 ${f3(m.validation.macro_f1)} · accuracy ${f3(m.validation.accuracy)} · n=${m.validation.n}`));
+    if (m.selected_C) d.append(el("p", {}, `selected C (validation): ${m.selected_C}`));
+    c.append(d);
+  });
+  const cv = curve(r.training_log); if (cv) c.append(el("h3", {}, "Training curve"), cv);
+  return c;
+}
+function expCard(e, research){
+  const badge = el("span", {class: "badge " + (research ? "b-research" : "b-non")}, research ? "research-grade" : "NOT RESEARCH");
+  const c = el("div", {class: "card"}, el("h3", {}, e.experiment_id, badge, el("span", {class: "badge b-non"}, e.status)));
+  c.append(el("p", {}, `data_status: ${e.data_status} · smoke: ${e.smoke} · seeds: ${JSON.stringify(e.seeds)}`),
+    table(["step", "status"], Object.entries(e.steps || {}).map(([k, v]) => [k, v])));
+  if ((e.unavailable_steps || []).length) c.append(el("p", {class: "warn"}, "Unavailable steps (not run): " + e.unavailable_steps.join(", ")));
+  if ((e.failed_steps || []).length) c.append(el("p", {class: "warn"}, "Failed steps: " + e.failed_steps.join(", ")));
+  c.append(el("p", {class: "mono"}, `dataset ${e.dataset && e.dataset.sha256} · code ${e.code_sha256} · config ${e.config_sha256}`),
+    el("p", {class: "mono"}, "reproduce: " + e.reproduce));
+  return c;
+}
+function eaCard(a, research){
+  const c = el("div", {class: "card"}, el("h3", {}, `${a.path} (${a.split_analysed})`,
+    el("span", {class: "badge " + (research ? "b-research" : "b-non")}, research ? "research-grade" : "NOT RESEARCH")));
+  if (a.caveat) c.append(el("p", {class: "warn"}, a.caveat));
+  Object.entries(a.models).forEach(([name, r]) => {
+    const ci = r.macro_f1_ci95;
+    const d = el("details", {}, el("summary", {}, `${name}: n=${r.n} · macro-F1 ${f3(r.macro_f1)} (95% CI ${f3(ci.low)}–${f3(ci.high)}, ${ci.kind}, ${ci.n_clusters} clusters)`));
+    (r.warnings || []).forEach(w => d.append(el("p", {class: "warn"}, w)));
+    d.append(el("h3", {}, "Top confusions"), table(["true", "predicted", "count", "rate of true class"], r.top_confusions.slice(0, 6).map(x => [x.true, x.pred, x.count, f3(x.rate_of_true_class)])));
+    d.append(el("p", {}, r.confidence.available ? `Calibration: ECE ${f3(r.confidence.ece)} · mean confidence correct ${f3(r.confidence.mean_conf_correct)} vs incorrect ${f3(r.confidence.mean_conf_incorrect)}` : `Confidence not available: ${r.confidence.reason}`));
+    d.append(el("p", {class: "mono"}, "example selection: " + r.examples.selection_rule));
+    Object.entries(r.examples.by_confusion_pair).slice(0, 3).forEach(([pair, list]) => d.append(el("details", {}, el("summary", {}, `examples ${pair} (${list.length})`),
+      table(["span", "context", "conf"], list.map(x => [x.text || x.span_id, `${x.context_before || ""} [${x.text || ""}] ${x.context_after || ""}`, f3(x.confidence)])))));
+    Object.entries(r.slices || {}).forEach(([k, v]) => d.append(el("h3", {}, "Slice: " + k), table(["slice", "n", "accuracy", "macro-F1", "note"], v.map(x => [x.slice, x.n, f3(x.accuracy), f3(x.macro_f1), x.unreliable ? "n<20: unreliable" : ""]))));
+    c.append(d);
+  });
+  return c;
+}
+function render(s){
+  SUMMARY = s; renderReadiness(s); renderOverview(s); $("dl-report").disabled = false;
+  const out = $("out"); out.textContent = "";
+  renderPrototype(s,out);
+  const ms = s.model_status;
+  out.append(el("h2", {}, "Legacy research registry (separate from the active prototype)"), el("div", {class: "card " + (ms.research_model_available ? "" : "empty")},
+    el("p", {}, `mode: ${ms.mode} · research model available: ${ms.research_model_available}`),
+    ms.warning ? el("p", {class: "warn"}, ms.warning) : "",
+    el("p", {class: "mono"}, "registry: " + JSON.stringify(ms.research_model))));
+  out.append(el("h2", {}, "Human-data research split (separate from the frozen prototype split)"));
+  const d = s.dataset_split;
+  out.append(d ? el("div", {class: "card"}, el("p", {class: "mono"}, `file ${d.dataset_file} · sha256 ${d.dataset_sha256} · seed ${d.seed} · group ${d.group}`),
+      el("p", {}, "documents per split: " + JSON.stringify(d.n_groups)),
+      el("p", {}, "leakage found: " + (d.leakage && d.leakage.leaks_found)), ...(d.leakage.warnings || []).map(w => el("p", {class: "warn"}, w)))
+    : empty("No frozen split manifest", "Needs real human-labelled data (HG-01), then ML/group_split.py freeze."));
+  out.append(el("h2", {}, "Annotation agreement"));
+  if (!s.agreement.length) out.append(empty("No agreement report", "Needs at least two human annotators' completed batches."));
+  s.agreement.forEach(a => out.append(el("div", {class: "card"}, el("h3", {}, a.path),
+    el("p", {}, `Krippendorff α (nominal): ${f3(a.krippendorff_alpha_nominal)} · raw agreement ${f3(a.raw_percent_agreement)} · multi-annotated spans ${a.n_spans_multi_annotated}`),
+    (a.warnings || []).map(w => el("p", {class: "warn"}, w)),
+    table(["pair", "n", "Cohen κ", "% agree"], Object.entries(a.pairwise || {}).map(([k, v]) => [k, v.n, f3(v.cohen_kappa), f3(v.percent_agreement)])),
+    el("p", {}, "conflicts: " + JSON.stringify(a.conflict_pair_counts || {})))));
+  out.append(el("h2", {}, "Research-grade runs"));
+  if (!s.runs.length) out.append(empty("No research-grade runs", "The routing-label pool is not yet independently reviewed. A run needs human-reviewed routing labels, a frozen document split and (for transformers) real pretrained weights. Public lexical results are shown in the learner evidence lab, not here."));
+  s.runs.forEach(r => out.append(runCard(r, true)));
+  out.append(el("h2", {}, "Ablations"));
+  if (!s.ablations.length) out.append(empty("No ablation results", "Run ML/ablation.py on research data."));
+  s.ablations.forEach(a => out.append(el("div", {class: "card"}, el("h3", {}, a.path,
+      el("span", {class: "badge " + (a.valid_for_scientific_claims ? "b-research" : "b-non")}, a.valid_for_scientific_claims ? "research-grade" : "NOT RESEARCH")),
+    el("p", {}, `seeds ${JSON.stringify(a.seeds)} · n_test ${a.n_test}`),
+    table(["arm", "test macro-F1 mean", "std", "test accuracy mean"], Object.entries(a.summary || {}).map(([k, v]) => [k, f3(v.test_macro_f1.mean), f3(v.test_macro_f1.std), f3(v.test_accuracy.mean)])),
+    el("p", {class: "warn"}, a.interpretation))));
+  out.append(el("h2", {}, "Experiments (run manifests)"));
+  if (!s.experiments.length) out.append(empty("No research-grade experiments", "An experiment is research-grade only if every required step completed on research-valid data with real pretrained weights."));
+  s.experiments.forEach(e => out.append(expCard(e, true)));
+  out.append(el("h2", {}, "Error analysis"));
+  if (!s.error_analyses.length) out.append(empty("No research-grade error analysis", "Produced by ML/error_analysis.py from real predictions of a research-grade run."));
+  s.error_analyses.forEach(a => out.append(eaCard(a, true)));
+  if (s.non_research_experiments.length || s.non_research_error_analyses.length) {
+    const d3 = el("details", {}, el("summary", {}, `${s.non_research_experiments.length} non-research experiment(s) and ${s.non_research_error_analyses.length} non-research error analysis file(s) — click to show`));
+    s.non_research_experiments.forEach(e => d3.append(expCard(e, false))); s.non_research_error_analyses.forEach(a => d3.append(eaCard(a, false))); out.append(d3);
+  }
+  out.append(el("h2", {}, "Smoke / fixture runs (not research)"));
+  if (!s.non_research_runs.length) out.append(empty("None found", ""));
+  else { const d2 = el("details", {}, el("summary", {}, `${s.non_research_runs.length} non-research run(s) — click to show`)); s.non_research_runs.forEach(r => d2.append(runCard(r, false))); out.append(d2); }
+  out.append(el("h2", {}, "Learner trace log"), el("div", {class: "card"}, el("p", {}, s.traces.present ? "Trace file present." : "No trace file (logging is off by default; set DYSLEXIADAPT_LOG=1)."),
+    el("button", {id: "tr-load", type: "button"}, "Load traces"), el("div", {id: "tr"})));
+  $("tr-load").onclick = loadTraces;
+  (s.notes || []).forEach(n => out.append(el("p", {class: "mono"}, n)));
+  [...out.querySelectorAll("h2")].forEach(h=>h.id="lab-"+h.textContent.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/-$/,""));
+}
+async function loadTraces(){
+  const box = $("tr"); box.textContent = "";
+  try {
+    const t = await get("/api/research/traces?limit=500");
+    if (!t.present) { box.append(el("p", {}, t.note)); return; }
+    const adapts = t.records.filter(r => r.event === "adapt"), fb = t.records.filter(r => r.event === "feedback");
+    const count = (arr, k) => arr.reduce((m, r) => (m[r[k]] = (m[r[k]] || 0) + 1, m), {});
+    box.append(el("p", {}, `${adapts.length} adaptations · ${fb.length} feedback events (descriptive counts only, not outcomes of a study)`),
+      table(["category", "count"], Object.entries(count(adapts, "category")).map(([k, v]) => [k, v])),
+      table(["verification", "count"], Object.entries(count(adapts, "verification_status")).map(([k, v]) => [k, v])),
+      table(["decision", "count"], Object.entries(count(fb, "decision")).map(([k, v]) => [k, v])),
+      el("p", {class: "warn"}, "Demo-mode traces are not research data."));
+  } catch (e) { box.append(el("p", {class: "warn"}, e.message)); }
+}
+async function load(){
+  $("err").hidden = true;
+  if ($("tok").value) sessionStorage.setItem("da_admin", $("tok").value);
+  try { SUMMARY = await get("/api/research/summary"); render(SUMMARY); $("dl").disabled = false; }
+  catch (e) { $("err").textContent = e.message; $("err").hidden = false; }
+}
+$("load").onclick = load;
+$("dl").onclick = () => { const a = el("a", {href: URL.createObjectURL(new Blob([JSON.stringify(SUMMARY, null, 2)], {type: "application/json"})), download: "research_summary.json"}); a.click(); };
+
+function renderReadiness(s){
+ const ms=s.model_status||{}, box=$("readiness"); box.textContent="";
+ const rows=[
+  ["Active reader",s.prototype?.active?"Trained prototype loaded":ms.research_model_available?"Research model loaded":"No trained prototype"],
+  ["Prototype data",s.prototype_data?String(s.prototype_data.total)+" examples · "+s.prototype_data.unresolved+" unresolved":"Unavailable"],
+  ["Prototype validation",s.prototype?.active?f3(s.prototype.runs.find(r=>r.run_id===s.prototype.active.run_id)?.validation?.macro_f1)+" macro-F1 · weak labels":"No evaluated prototype"],
+  ["Local models",s.runtime_status?.local_generation?.available?"Text model installed; vision "+(s.document_status?.vision_available?"installed":"missing"):"Check model downloads"]
+ ];
+ rows.forEach(([title,value])=>box.append(el("div",{class:"lab-readiness-item"},el("span",{},title),el("strong",{},value))));
+}
+function safePath(v){
+ v=v.trim();
+ if(!v||!/^[-a-zA-Z0-9_./]+$/.test(v)||v.startsWith("/")||v.split("/").some(x=>x===".."||x==="."||x===""))throw new Error("Use a relative project path with letters, numbers, underscores, hyphens and forward slashes. Do not use spaces, parent directories or shell commands.");
+ return v;
+}
+function commands(){
+ const csv=safePath($("cmd-csv").value), manifest=safePath($("cmd-manifest").value), v=$("cmd-version").value.trim();
+ if(!/^[a-zA-Z0-9][a-zA-Z0-9_-]{0,39}$/.test(v))throw new Error("Use a new version name with letters, numbers, underscores or hyphens.");
+ if(!csv.endsWith(".csv")||!manifest.endsWith(".json"))throw new Error("The dataset must be a .csv and the manifest a .json file.");
+ const target="ARTIFACTS/"+($("cmd-model").value==="baselines"?"baselines_":"distilbert_")+v;
+ if([...(SUMMARY?.runs||[]),...(SUMMARY?.non_research_runs||[])].some(r=>r.path===target))throw new Error("That run version is already recorded. Choose a new version; preserve existing evidence.");
+ const py=$("cmd-platform").value==="windows"?".\\.venv\\Scripts\\python.exe":"python";
+ const prefix=py+" -m ";
+ const lines=[prefix+"ML.data_validation --csv "+csv+" --mode research",prefix+"ML.group_split --csv "+csv+" --out "+manifest];
+ if($("cmd-model").value==="baselines")lines.push(prefix+"ML.train_baselines --csv "+csv+" --manifest "+manifest+" --out ARTIFACTS/baselines_"+v);
+ else lines.push(prefix+"ML.train_distilbert --csv "+csv+" --manifest "+manifest+" --model distilbert/distilbert-base-uncased --batch-size 4 --epochs 4 --out ARTIFACTS/distilbert_"+v);
+ return lines.join("\n\n");
+}
+function buildCommands(){try{$("commands").value=commands();$("cmd-error").hidden=true;}catch(e){$("commands").value="";$("cmd-error").textContent=e.message;$("cmd-error").hidden=false;}}
+function markdownValue(value){return String(value??"unavailable").replace(/\|/g,"\\|").replace(/[\r\n]/g," ");}
+function report(s){
+ if(!s)throw new Error("Load real evidence first.");
+ const ms=s.model_status||{};
+ const lines=["# DyslexiAdapt research workspace notes","","Generated: "+new Date().toISOString(),"","## Implementation status","","- Active mode: "+markdownValue(ms.mode),"- Validated research model loaded: "+Boolean(ms.research_model_available),"- Frozen default split present: "+Boolean(s.dataset_split),"- Automatic retraining enabled: false","","This document describes the artifacts currently available. It does not establish model validity, annotation authenticity, comprehension benefit, or dyslexia-specific effectiveness.","","## Recorded research runs","","| Run | Model | Held-out accuracy | Held-out macro F1 |","|---|---|---:|---:|"];
+ for(const r of s.runs||[]){const models=r.kind==="baselines"?Object.entries(r.models||{}):[[r.kind,{test:r.test}]];for(const [name,m] of models)lines.push("| "+markdownValue(r.experiment_id)+" | "+markdownValue(name)+" | "+f3(m.test?.accuracy)+" | "+f3(m.test?.macro_f1)+" |");}
+ if(s.prototype){lines.push('','## Active prototype','', '- Active version: '+(s.prototype.active?.run_id||'none'),'- Provenance: '+s.prototype_data.provenance,'','| Version | Validation macro-F1 | Training rows |','|---|---:|---:|');for(const r of s.prototype.runs)lines.push('| '+r.run_id+' | '+f3(r.validation.macro_f1)+' | '+r.training_rows+' |');}
+ if(!(s.runs||[]).length)lines.push("","No research-grade model results are available. No human-data research scores are available. Prototype results, if present, are listed separately in the JSON export.");
+ lines.push("","## Provenance","", "Default split: "+(s.dataset_split?JSON.stringify(s.dataset_split):"unavailable"));
+ for(const r of s.runs||[])lines.push("- "+markdownValue(r.experiment_id)+": dataset SHA256 "+markdownValue(r.dataset_sha256)+", artifact path "+markdownValue(r.path));
+ lines.push("","## Annotation review","",(s.agreement||[]).length+" agreement artifact(s) available. Presence is not proof of independent human annotation.","","## Improvement workflow","","Feedback → approved human review → new candidate training version → validation comparison → deliberate registration/release. Feedback must not be silently treated as gold labels. Keep final test documents outside training and candidate selection.","","## Limitations","","- Smoke/fixture runs are excluded from the table.","- Acceptance/rejection events do not establish correctness or study outcomes.","- A support-category classifier is separate from the intervention/explanation generator.","- Meaning checks can miss errors; no perfect-answer claim is made.");
+ return lines.join("\n");
+}
+function downloadText(name,text,type){const url=URL.createObjectURL(new Blob([text],{type}));const a=el("a",{href:url,download:name});a.click();setTimeout(()=>URL.revokeObjectURL(url),500);}
+document.querySelectorAll("[data-lab-tab]").forEach(b=>b.onclick=()=>{document.querySelectorAll(".lab-panel").forEach(p=>p.hidden=p.id!==b.dataset.labTab);document.querySelectorAll("[data-lab-tab]").forEach(x=>{x.classList.toggle("selected",x===b);x.setAttribute("aria-pressed",String(x===b));});});
+$("build-command").onclick=buildCommands;
+["cmd-platform","cmd-csv","cmd-manifest","cmd-version","cmd-model"].forEach(id=>$(id).addEventListener("change",buildCommands));
+$("copy-commands").onclick=async()=>{buildCommands();if(!$("commands").value)return;try{await navigator.clipboard.writeText($("commands").value);$("copy-commands").textContent="Copied";}catch{$("commands").focus();$("commands").select();$("copy-commands").textContent="Selected — press Ctrl+C";}};
+$("dl-report").onclick=()=>downloadText("DyslexiAdapt-research-notes.md",report(SUMMARY),"text/markdown");
+buildCommands();
+
+
+function evidenceBars(title,rows,max=1){
+ const section=el('section',{class:'card'},el('h2',{},title));const format=v=>max===1?f3(v):Number(v).toLocaleString();
+ if(!rows.length){section.append(el('p',{},'No recorded values yet.'));return section;}
+ const list=el('div',{class:'evidence-bars',role:'img','aria-label':title+': '+rows.map(r=>r[0]+' '+format(r[1])).join('; ')});
+ for(const [name,value] of rows){const track=el('div',{class:'evidence-track'},el('span',{class:'evidence-fill'}));track.firstChild.style.width=(100*Math.max(0,Math.min(max,value))/max)+'%';list.append(el('div',{class:'evidence-row'},el('span',{},name),track,el('strong',{},format(value))));}
+ section.append(list,table(['Recorded item','Value'],rows.map(r=>[r[0],format(r[1])])));return section;
+}
+function renderOverview(s){
+ if(!s.prototype){renderLegacyOverview(s);return;}
+ const box=$('overview-panels');box.replaceChildren();const p=s.prototype;
+ const versions=p.runs.map(r=>[r.run_id.slice(0,8)+(r.run_id===p.active?.run_id?' · active':''),r.validation.macro_f1]);
+ box.append(evidenceBars('Validation macro-F1 by saved model version',versions),evidenceBars('Agreed labels by support type',Object.entries(s.prototype_data.categories).map(([k,v])=>[k==='OTHER_UNCERTAIN'?'Uncertain / other':k,v]),Math.max(1,...Object.values(s.prototype_data.categories))));
+ box.append(el('p',{class:'warn'},'These are saved model-version results, not an epoch training curve. Labels are two GPT passes on synthetic examples. No student-benefit or human-gold accuracy claim.'));
+}
+function renderPrototype(s,out){
+ if(!s.prototype)return;const p=s.prototype,d=s.prototype_data,rt=s.runtime_status;
+ const card=el('section',{class:'card'},el('h2',{},'Actual reader models and data'),el('p',{},'Active classifier: '+(p.active?.run_id||'none')),
+ el('p',{class:'warn'},d.provenance+' These scores describe provisional label prediction; student benefit has not been evaluated.'),
+ table(['Component','Runtime state'],[['Trained classifier',rt.prototype.available?'loaded':'missing'],['MiniLM embeddings',rt.prototype.pretrained_embeddings_available?'installed':'missing'],['Qwen text explanations',rt.local_generation.available?'installed':'missing'],['NLI text checks',rt.pretrained_semantic_verification.available?'installed':'missing'],['PDF extraction',s.document_status.pdf_available?'ready':'missing'],['OCR',s.document_status.ocr_available?'ready':'missing'],['Vision explanations',s.document_status.vision_available?'installed':'missing']]),
+ table(['Pilot data','Rows'],[['Total',d.total],['Agreed',d.agreed],['Unresolved (both labels preserved)',d.unresolved],...Object.entries(d.splits)]),el('a',{href:'learning.html',class:'button'},'Review feedback, train, activate or roll back →'));
+ const inspect=el('button',{type:'button'},'Inspect all pilot examples and unresolved labels');inspect.onclick=()=>{$('lab-inspector').hidden=false;$('artifact-path').value='DATA/prototype_pilots.json';$('inspect-load').click();};card.append(inspect);out.append(card);
+ const active=p.runs.find(r=>r.run_id===p.active?.run_id);
+ if(active){out.append(el('section',{class:'card'},el('h2',{},'Active model · validation confusion matrix'),el('p',{},'Rows are provisional reference labels; columns are predictions. Validation examples: '+active.validation.rows),confusion(active.validation.confusion_matrix)),evidenceBars('Active model · per-category validation F1',Object.entries(active.validation.per_class).filter(([k])=>['VOCABULARY','SYNTACTIC','CONCEPTUAL','OTHER_UNCERTAIN'].includes(k)).map(([k,v])=>[k,v['f1-score']])));}
+ const feedback=el('section',{class:'card'},el('h2',{},'Actual opt-in learner feedback'));
+ if(p.feedback.length)feedback.append(evidenceBars('Feedback counts',p.feedback.map(r=>[r.category+' · '+r.style+' · '+r.decision,r.count]),Math.max(1,...p.feedback.map(r=>r.count))));else feedback.append(el('p',{},'No saved feedback yet. Enable Remember which support helps me in the reader, request help, and give feedback.'));
+ if(p.visual_feedback?.length)feedback.append(evidenceBars('Visual explanation feedback (style only)',p.visual_feedback.map(r=>[r.style+' · '+r.decision,r.count]),Math.max(1,...p.visual_feedback.map(r=>r.count))));
+ feedback.append(el('p',{},'Reviewed examples: '+p.reviewed_examples+' · awaiting review: '+p.review_queue.length));out.append(feedback);
+}
+function renderLegacyOverview(s){
+ const box=$("overview-panels");box.textContent="";
+ const training=el("section",{class:"card overview-training"},el("div",{class:"lab-panel-title"},el("h2",{},"Validation over training"),el("span",{class:"badge b-research"},"Recorded evidence")));
+ const run=(s.runs||[]).find(r=>r.training_log?.length);
+ if(run){const chart=curve(run.training_log);training.append(el("p",{class:"mono"},run.experiment_id));if(chart)training.append(chart);}
+ else training.append(el("div",{class:"lab-empty-chart"},el("span",{class:"lab-empty-symbol","aria-hidden":"true"},"⌁"),el("strong",{},"No training curve yet"),el("p",{},"Real validation scores will appear after a recorded training run.")));
+ const comparison=el("section",{class:"card overview-comparison"},el("div",{class:"lab-panel-title"},el("h2",{},"Model comparison"),el("span",{class:"badge b-non"},"Held-out results")));
+ const rows=[];
+ for(const r of s.runs||[]){const models=r.kind==="baselines"?Object.entries(r.models||{}):[[r.kind,{test:r.test}]];for(const [name,m] of models)rows.push([name,f3(m.test?.macro_f1),f3(m.test?.accuracy)]);}
+ if(rows.length)comparison.append(table(["Model","Macro F1","Accuracy"],rows));else comparison.append(el("div",{class:"lab-empty-chart"},el("span",{class:"lab-empty-symbol","aria-hidden":"true"},"▤"),el("strong",{},"No research-grade models"),el("p",{},"Baselines, DistilBERT and fusion results stay unavailable until trained.")));
+ box.append(training,comparison);
+}
+function labTheme(mode,palette){
+ document.body.dataset.labTheme=mode;
+ const palettes={teal:["#51d3c6","#b09cfa"],violet:["#b09cfa","#51d3c6"],ocean:["#6bbdf4","#f394c3"]};
+ const light={teal:["#006c61","#6845b4"],violet:["#6845b4","#006c61"],ocean:["#135e97","#a63070"]};
+ const colours=(mode==="dark"?palettes:light)[palette]||(mode==="dark"?palettes:light).teal;
+ document.body.style.setProperty("--lab-accent",colours[0]);document.body.style.setProperty("--lab-secondary",colours[1]);
+ $("lab-theme-toggle").textContent=mode==="dark"?"Light theme":"Dark theme";$("lab-theme-toggle").setAttribute("aria-pressed",String(mode==="dark"));$("lab-palette").value=palette;
+ try{localStorage.setItem("da_lab_theme_v1",JSON.stringify({mode,palette}));}catch{}
+}
+function section(id){
+ const tabs={training:"training",learning:"learning"};
+ document.querySelector('[data-lab-tab="'+(tabs[id]||"evidence")+'"]').click();
+ document.querySelectorAll("[data-section]").forEach(b=>{b.classList.toggle("selected",b.dataset.section===id);b.setAttribute("aria-pressed",String(b.dataset.section===id));});
+ const labels={overview:"Overview",dataset:"Dataset & labels",runs:"Model comparison",experiments:"Experiments",errors:"Error analysis",feedback:"Learner feedback",training:"Prepare training",learning:"Improvement guide",report:"Research reports"};$("lab-current-section").textContent=labels[id]||"Overview";
+ const targets={overview:"readiness",dataset:"lab-actual-reader-models-and-data",runs:"overview-panels",experiments:"lab-experiments-run-manifests",errors:"lab-active-model-validation-confusion-matrix",feedback:"lab-actual-opt-in-learner-feedback"};
+ const target=$(targets[id]);if(target?.scrollIntoView)target.scrollIntoView({block:"start"});
+ if(id==="report"){$("lab-inspector").hidden=false;$("artifact-path").focus();}
+}
+document.querySelectorAll("[data-section]").forEach(b=>b.onclick=()=>section(b.dataset.section));
+$("lab-theme-toggle").onclick=()=>labTheme(document.body.dataset.labTheme==="dark"?"light":"dark",$("lab-palette").value);
+$("lab-palette").onchange=()=>labTheme(document.body.dataset.labTheme,$("lab-palette").value);
+$("inspect-close").onclick=()=>$("lab-inspector").hidden=true;
+$("inspect-load").onclick=async()=>{const button=$("inspect-load");button.disabled=true;$("inspect-text").textContent="Loading…";try{const a=await get("/api/research/artifact?path="+encodeURIComponent($("artifact-path").value.trim()));$("inspect-meta").textContent=a.path+" · SHA256 "+a.sha256;$("inspect-text").textContent=a.content;}catch(e){$("inspect-meta").textContent="Artifact unavailable";$("inspect-text").textContent=e.message;}finally{button.disabled=false;}};
+let theme={mode:"dark",palette:"teal"};try{const saved=JSON.parse(localStorage.getItem("da_lab_theme_v1"));if(saved&&["dark","light"].includes(saved.mode)&&["teal","violet","ocean"].includes(saved.palette))theme=saved;}catch{}labTheme(theme.mode,theme.palette);
+
+window.LAB = {render, load, commands, report, labTheme, section};
+load();
+</script></div></body></html>

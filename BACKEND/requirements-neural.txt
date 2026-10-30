@@ -1,0 +1,5 @@
+onnxruntime==1.31.0
+tokenizers==0.22.2
+huggingface-hub==0.36.2
+socksio
+llama-cpp-python==0.3.36

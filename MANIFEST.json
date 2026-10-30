@@ -1,0 +1,11 @@
+{
+  "project": "DyslexiAdapt",
+  "package": "Autonomous Claude Master",
+  "version": "1.0",
+  "autonomous_start_file": "START_HERE.md",
+  "master_agent_file": "CLAUDE.md",
+  "first_task": "TASKS/00_PROJECT_AUDIT.md",
+  "research_model_bundled": false,
+  "fabricated_results": false,
+  "human_annotation_required": true
+}

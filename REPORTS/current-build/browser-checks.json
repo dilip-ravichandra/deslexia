@@ -1,0 +1,13 @@
+{
+  "passed": [
+    "consented survey",
+    "Hindi OCR upload and reader",
+    "actual pronunciation support route",
+    "live lab rendering",
+    "profile deletion",
+    "mobile overflow",
+    "no JavaScript errors"
+  ],
+  "fixture": "Authored engineering fixtures; no student evaluation",
+  "errors": []
+}

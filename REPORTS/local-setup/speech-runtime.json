@@ -1,0 +1,33 @@
+{
+  "fixture": "Authored speech smoke cases; native pronunciation quality not evaluated",
+  "results": [
+    {
+      "language": "en",
+      "frames": 24832,
+      "sample_rate": 16000,
+      "bytes": 49708,
+      "elapsed_seconds": 38.33
+    },
+    {
+      "language": "hi",
+      "frames": 27136,
+      "sample_rate": 16000,
+      "bytes": 54316,
+      "elapsed_seconds": 2.06
+    },
+    {
+      "language": "kn",
+      "frames": 46592,
+      "sample_rate": 16000,
+      "bytes": 93228,
+      "elapsed_seconds": 3.23
+    },
+    {
+      "language": "ta",
+      "frames": 41984,
+      "sample_rate": 16000,
+      "bytes": 84012,
+      "elapsed_seconds": 2.59
+    }
+  ]
+}

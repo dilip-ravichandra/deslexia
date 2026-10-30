@@ -1,0 +1,24 @@
+{
+  "type": "Publisher source integrity audit; missing offsets are recorded, not invented",
+  "languages": {
+    "hi": {
+      "questions": 1547,
+      "answer_text_mismatch_rows": 0,
+      "missing_offset_rows": 495,
+      "provided_offset_mismatch_rows": 894
+    },
+    "kn": {
+      "questions": 1517,
+      "answer_text_mismatch_rows": 26,
+      "missing_offset_rows": 379,
+      "provided_offset_mismatch_rows": 883
+    },
+    "ta": {
+      "questions": 1804,
+      "answer_text_mismatch_rows": 30,
+      "missing_offset_rows": 527,
+      "provided_offset_mismatch_rows": 1055
+    }
+  },
+  "offset_check_convention": "Python Unicode codepoint indices; publisher offset convention is not verified. Missing/mismatching offsets are not automatically evidence of an incorrect answer."
+}

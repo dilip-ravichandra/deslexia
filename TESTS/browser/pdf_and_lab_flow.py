@@ -1,0 +1,18 @@
+import sys
+import os,subprocess,time,urllib.request,json
+from pathlib import Path
+from playwright.sync_api import sync_playwright
+root=Path(__file__).resolve().parents[2];out=root/'REPORTS'/'browser-captures';out.mkdir(parents=True,exist_ok=True);log=open(str(out/'doc-final-browser-server.log'),'w');server=subprocess.Popen([sys.executable,'-m','uvicorn','BACKEND.app:app','--host','127.0.0.1','--port','8026'],cwd=root,env=dict(os.environ,DYSLEXIADAPT_MODELS_DIR=os.environ.get('DYSLEXIADAPT_MODELS_DIR',str(root/'MODELS'))),stdout=log,stderr=log)
+checks=[]
+try:
+ for i in range(100):
+  try:urllib.request.urlopen('http://127.0.0.1:8026/api/health',timeout=1);break
+  except Exception:time.sleep(.2)
+ with sync_playwright() as p:
+  b=p.chromium.launch(headless=True,args=['--no-sandbox']);page=b.new_page(viewport={'width':1440,'height':1050});errors=[];page.on('pageerror',lambda e:errors.append(str(e)));page.goto('http://127.0.0.1:8026');page.locator('#document-file').set_input_files(str(root/'TESTS/fixtures/documents/Two_Page_Textbook.pdf'));page.wait_for_function("document.querySelector('#document-status').textContent.includes('ready. Check')",timeout=60000);assert 'PDF embedded text' in page.locator('#extraction-method').inner_text();assert page.locator('#document-prev').is_disabled();assert page.locator('#document-count').inner_text()=='of 2';checks.append('Browser PDF embedded-text extraction and page count')
+  page.locator('#document-next').click();page.wait_for_function("document.querySelector('#document-page').value==='2'&&document.querySelector('#document-next').disabled",timeout=60000);assert 'Books' in page.locator('#extracted-text').input_value();checks.append('Next page → actual chart OCR')
+  page.locator('#document-prev').click();page.wait_for_function("document.querySelector('#document-page').value==='1'&&document.querySelector('#document-prev').disabled",timeout=60000);checks.append('Previous page → restored text and preview');page.locator('#read-extracted').click();page.evaluate('window.scrollTo(0,0)');page.screenshot(path=str(out/'DyslexiAdapt_Upload_Preview.png'))
+  page.goto('http://127.0.0.1:8026/research.html');page.wait_for_function("document.querySelector('#out').textContent.includes('Actual reader models')");assert not page.locator('#err').inner_text();page.locator('[data-section="dataset"]').click();assert page.locator('#lab-current-section').inner_text()=='Dataset & labels';page.get_by_role('button',name='Inspect all pilot examples and unresolved labels').click();page.wait_for_function("document.querySelector('#inspect-text').textContent.includes('UNRESOLVED')");checks.append('Dataset navigation → actual example and disagreement inspector');page.locator('#inspect-close').click();page.locator('[data-section="errors"]').click();assert page.locator('#lab-active-model-validation-confusion-matrix').is_visible();checks.append('Error-analysis navigation → recorded validation confusion matrix');page.locator('[data-section="overview"]').click();page.evaluate('window.scrollTo(0,0)');page.screenshot(path=str(out/'DyslexiAdapt_Lab_Preview.png'));page.screenshot(path=str(out/'DyslexiAdapt_Research_Evidence.png'),full_page=True)
+  page.goto('http://127.0.0.1:8026/learning.html');page.wait_for_function("document.querySelector('#message').textContent.includes('Evidence loaded')");checks.append('Train & adapt → successful evidence load status');assert not errors,errors;b.close()
+finally:
+ server.terminate();server.wait(timeout=15);log.close();(out/'final-browser-checks.json').write_text(json.dumps({'checks':checks},indent=2));print(json.dumps(checks),flush=True)

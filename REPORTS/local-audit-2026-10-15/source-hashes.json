@@ -1,0 +1,17 @@
+{
+  "checked": 985,
+  "mismatches": [
+    {
+      "path": "DATA/public/OneStopEnglishCorpus/Texts-SeparatedByReadingLevel/Adv-Txt/.DS_Store",
+      "exists": false
+    },
+    {
+      "path": "DATA/public/OneStopEnglishCorpus/Texts-SeparatedByReadingLevel/Ele-Txt/.DS_Store",
+      "exists": false
+    },
+    {
+      "path": "DATA/public/OneStopEnglishCorpus/Texts-SeparatedByReadingLevel/Int-Txt/.DS_Store",
+      "exists": false
+    }
+  ]
+}

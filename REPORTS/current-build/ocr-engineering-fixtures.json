@@ -1,0 +1,126 @@
+[
+  {
+    "language": "en",
+    "expected": "Plants need water and sunlight.",
+    "extracted": "Plants need water and sunlight.",
+    "lines": [
+      {
+        "text": "Plants need water and sunlight.",
+        "confidence": 0.9640937959999999,
+        "box": [
+          [
+            44,
+            78
+          ],
+          [
+            733,
+            78
+          ],
+          [
+            733,
+            120
+          ],
+          [
+            44,
+            120
+          ]
+        ],
+        "engine": "Tesseract LSTM tessdata_best"
+      }
+    ],
+    "seconds": 2.4
+  },
+  {
+    "language": "hi",
+    "expected": "पौधों को पानी और सूर्य का प्रकाश चाहिए।",
+    "extracted": "पौधों को पानी और सूर्य का प्रकाश चाहिए।",
+    "lines": [
+      {
+        "text": "पौधों को पानी और सूर्य का प्रकाश चाहिए।",
+        "confidence": 0.9537152299999999,
+        "box": [
+          [
+            40,
+            70
+          ],
+          [
+            686,
+            70
+          ],
+          [
+            686,
+            122
+          ],
+          [
+            40,
+            122
+          ]
+        ],
+        "engine": "Tesseract LSTM tessdata_best"
+      }
+    ],
+    "seconds": 2.3
+  },
+  {
+    "language": "kn",
+    "expected": "ಸಸ್ಯಗಳಿಗೆ ನೀರು ಮತ್ತು ಸೂರ್ಯನ ಬೆಳಕು ಬೇಕು.",
+    "extracted": "ಸಸ್ಯಗಳಿಗೆ ನೀರು ಮತ್ತು ಸೂರ್ಯನ ಬೆಳಕು ಬೇಕು.",
+    "lines": [
+      {
+        "text": "ಸಸ್ಯಗಳಿಗೆ ನೀರು ಮತ್ತು ಸೂರ್ಯನ ಬೆಳಕು ಬೇಕು.",
+        "confidence": 0.9635053899999998,
+        "box": [
+          [
+            41,
+            70
+          ],
+          [
+            848,
+            70
+          ],
+          [
+            848,
+            124
+          ],
+          [
+            41,
+            124
+          ]
+        ],
+        "engine": "Tesseract LSTM tessdata_best"
+      }
+    ],
+    "seconds": 7.3
+  },
+  {
+    "language": "ta",
+    "expected": "தாவரங்களுக்கு நீரும் சூரிய ஒளியும் தேவை.",
+    "extracted": "தாவரங்களுக்கு நீரும்‌ சூரிய ஒளியும்‌ தேவை.",
+    "lines": [
+      {
+        "text": "தாவரங்களுக்கு நீரும்‌ சூரிய ஒளியும்‌ தேவை.",
+        "confidence": 0.9627110139999999,
+        "box": [
+          [
+            42,
+            72
+          ],
+          [
+            1062,
+            72
+          ],
+          [
+            1062,
+            123
+          ],
+          [
+            42,
+            123
+          ]
+        ],
+        "engine": "Tesseract LSTM tessdata_best"
+      }
+    ],
+    "seconds": 14.4
+  }
+]

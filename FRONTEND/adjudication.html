@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DyslexiAdapt · Adjudication</title>
+<style>
+body{font-family:system-ui,sans-serif;max-width:820px;margin:24px auto;padding:0 16px;color:#243026;background:#f6f7f3}
+.card{background:#fff;border:1px solid #dde3dc;border-radius:12px;padding:18px;margin:12px 0}
+mark{background:#ffe9a8;padding:0 2px}button{padding:9px 14px;margin:4px;border-radius:8px;border:1px solid #bcc7bd;background:#fff;cursor:pointer}
+button.sel{background:#243026;color:#fff}.muted{color:#5d6b60;font-size:14px}
+</style><link rel="stylesheet" href="research-shell.css"></head><body><nav class="research-nav"><a href="/">✦ DyslexiAdapt</a><a href="/">← Back to your reading room</a></nav>
+<h1>Adjudication queue</h1>
+<p class="muted">Loads an adjudication sheet CSV produced by <code>ML/annotation.py</code>. Everything stays in your browser; nothing is uploaded. Final labels are human decisions only.</p>
+<div class="card"><input type="file" id="f" accept=".csv" aria-label="Adjudication sheet (CSV)"> <label>Adjudicator id <input id="adj" placeholder="your name/id"></label></div>
+<div id="view"></div>
+<script>
+const LABELS=["VOCABULARY","SYNTACTIC","CONCEPTUAL","OTHER_UNCERTAIN"];
+let rows=[],i=0;
+function parseCSV(t){const out=[];let r=[],c="",q=false;
+ for(let k=0;k<t.length;k++){const ch=t[k];
+  if(q){if(ch=='"'){if(t[k+1]=='"'){c+='"';k++}else q=false}else c+=ch}
+  else if(ch=='"')q=true;else if(ch==','){r.push(c);c=""}
+  else if(ch=='\n'||ch=='\r'){if(ch=='\r'&&t[k+1]=='\n')k++;r.push(c);out.push(r);r=[];c=""}
+  else c+=ch}
+ if(c!==""||r.length){r.push(c);out.push(r)}return out}
+function toCSV(a){return a.map(r=>r.map(v=>'"'+String(v??"").replace(/"/g,'""')+'"').join(",")).join("\n")}
+document.getElementById("f").onchange=async e=>{
+ const p=parseCSV(await e.target.files[0].text()),h=p[0];
+ rows=p.slice(1).filter(r=>r.length>1).map(r=>Object.fromEntries(h.map((k,j)=>[k,r[j]??""])));i=0;render()};
+function el(tag,attrs={},...kids){const n=document.createElement(tag);
+ for(const[k,v]of Object.entries(attrs)){if(k==="class")n.className=v;else n.setAttribute(k,v)}
+ kids.flat().forEach(c=>n.append(c instanceof Node?c:document.createTextNode(c)));return n}
+function render(){const v=document.getElementById("view");v.textContent="";
+ if(!rows.length)return;
+ const r=rows[i],done=rows.filter(x=>x.final_category).length;
+ const card=el("div",{class:"card"});
+ card.append(el("div",{class:"muted"},`${i+1}/${rows.length} · decided ${done} · ${r.reason} · annotator labels: ${r.labels}`));
+ card.append(el("p",{},(r.context_before||"")+" ",el("mark",{},r.text||"")," "+(r.context_after||"")));
+ LABELS.forEach(l=>{const b=el("button",{type:"button",class:r.final_category==l?"sel":""},l);b.onclick=()=>pick(l);card.append(b)});
+ const note=el("input",{type:"text","aria-label":"Note (optional)",placeholder:"note (optional)",style:"width:90%"});
+ note.value=r.note||"";note.oninput=()=>{rows[i].note=note.value};card.append(el("p",{},note));
+ const back=el("button",{type:"button"},"Back"),next=el("button",{type:"button"},"Next"),exp=el("button",{type:"button"},"Export adjudications");
+ back.onclick=()=>{i=Math.max(0,i-1);render()};next.onclick=()=>{i=Math.min(rows.length-1,i+1);render()};exp.onclick=save;
+ card.append(back,next,exp);v.append(card)}
+function pick(l){rows[i].final_category=l;if(i<rows.length-1)i++;render()}
+function save(){const a=document.getElementById("adj").value.trim();
+ if(!a){alert("Enter your adjudicator id first.");return}
+ const d=rows.filter(r=>r.final_category),now=new Date().toISOString();
+ const csv=toCSV([["span_id","adjudicator_id","final_category","note","created_at"],...d.map(r=>[r.span_id,a,r.final_category,r.note,now])]);
+ const b=new Blob([csv],{type:"text/csv"}),u=document.createElement("a");u.href=URL.createObjectURL(b);u.download="adjudications_"+a+".csv";u.click()}
+</script></body></html>
