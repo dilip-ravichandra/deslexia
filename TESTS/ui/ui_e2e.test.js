@@ -6,9 +6,10 @@ const BASE = process.env.BASE || "http://127.0.0.1:8000";
 const TEXT = "Although the reaction was slow, the catalyst eventually accelerated it.\n\nPlants use photosynthesis to turn sunlight into food, which allows them to grow.";
 
 async function page(path = "/") {
-  const html = await (await fetch(BASE + path)).text();
+  const browserPath = path === "/" ? "/?guest=1" : path === "/research.html" ? "/research-history.html" : path;
+  const html = await (await fetch(BASE + browserPath)).text();
   const calls = [];
-  const dom = new JSDOM(html, { url: BASE + path, runScripts: "dangerously", pretendToBeVisual: true,
+  const dom = new JSDOM(html, { url: BASE + browserPath, runScripts: "dangerously", pretendToBeVisual: true,
     beforeParse(w) { w.fetch = (u, o) => { calls.push({ url: String(u), body: o && o.body ? JSON.parse(o.body) : null });
       return fetch(new URL(u, BASE), o); }; } });
   const ready = () => {
@@ -42,7 +43,7 @@ async function selectText(w, d, needle, useLast = false) {
 
 test("banner is honest about practice mode and disclaimer is shown", async () => {
   const { d } = await page();
-  assert.match(d.getElementById("banner").textContent, /Practice mode/);
+  assert.match(d.getElementById("banner").textContent, /Choose the help you need|prototype|Local models need setup/);
   assert.match(d.getElementById("disclaimer").textContent.toLowerCase(), /does not diagnose/);
 });
 
@@ -76,7 +77,7 @@ test("visual settings apply to the page and persist, independent of the helper",
   assert.equal(d.documentElement.style.getPropertyValue("--size"), "30px");
   const b = d.getElementById("s-bg"); b.value = "dark"; b.dispatchEvent(new w.Event("input", { bubbles: true }));
   assert.equal(d.documentElement.style.getPropertyValue("--bg").toLowerCase(), "#15181c");
-  assert.equal(JSON.parse(w.localStorage.getItem("da_look_v1")).bg, "dark");
+  assert.equal(JSON.parse(w.localStorage.getItem("da_guest_look_v1")).bg, "dark");
   d.getElementById("s-reset").click();
   assert.equal(d.documentElement.style.getPropertyValue("--size"), "22px");
 });

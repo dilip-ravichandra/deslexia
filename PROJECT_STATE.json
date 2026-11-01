@@ -42,13 +42,13 @@
   "last_verified": "2026-11-01",
   "known_failing_tests": [
     "Optional public CompLex and IndicQA guard tests require separately licensed DATA/public files",
-    "Full jsdom UI harness can exceed its 180-second timeout; direct browser workflows passed",
+    "The current jsdom UI harness has 10 stale assertions for the retired /api/adapt replacement flow and legacy research.html DOM; 21 of 31 checks pass against the current routes, while direct browser workflows passed",
     "QA audit retains documented provenance and static-analysis findings",
     "Full pytest collection now excludes archived UTF-16 report outputs; 278 tests collected"
   ],
   "resource_policy": "free-only datasets/models/services",
   "pending_decisions": [
-    "ADR-009 source corpus licence (owner has not confirmed; PENDING)"
+    "Legal/institutional review of the approved CC BY-SA-compatible source path remains recommended before public redistribution"
   ],
   "task_notes": {
     "06": "Pipeline implemented and smoke-tested on a tiny random-init model only. No pretrained DistilBERT run has completed.",
@@ -56,7 +56,7 @@
     "09": "Rule-based interventions with demo lexicon (39 unreviewed entries); conceptual = scaffold only.",
     "10": "Hard/soft meaning checks implemented; embedding/NLI scorers coded but untested with real weights; thresholds uncalibrated.",
     "11": "FastAPI backend: demo/research gating, text-only inputs, minimal logging, admin-gated research API.",
-    "12": "Redesigned learner workspace with library/notebook/comfort/guide views, browser speech, text import/export, focus tools, local persistence, exact-selection and stale-response safeguards. 22 jsdom/API checks passed. Real browser layout, speech and assistive technology not verified.",
+    "12": "Redesigned learner workspace with library/notebook/comfort/guide views, browser speech, text import/export, focus tools, local persistence, exact-selection and stale-response safeguards. Current jsdom checks cover the guest route, live support, accessibility and persistence surfaces; 10 legacy assertions still target removed replacement-flow APIs. Real browser layout, speech and assistive technology not verified.",
     "13": "Private Research Lab upgraded with actual readiness, evidence/training/improvement views, guarded local command preparation and Markdown research-note export. No automatic training, participant collection or model promotion. Dark reference-driven navigation/dashboard, separate theme storage, real comparison/curve panels, admin-gated artifact inspector and standalone actual-state preview added.",
     "08": "Error analysis computed from real prediction files only; tested on synthetic fixtures; no results.",
     "14": "Experiment runner with hashes/manifests/idempotence; smoke-tested; no research-valid experiment run.",
@@ -76,8 +76,8 @@
       "warn": 0,
       "fail": 0
     },
-    "ui_suite": "28 jsdom/API checks passed; targeted audit/interface Python run 11 passed in 70.75s.",
-    "note": "Windows validation: CUDA PyTorch executed on NVIDIA RTX 5050; model services downloaded and readiness verified; focused backend/document tests 41 passed; expanded backend/multilingual run 83 passed with 4 optional-public-data failures; direct browser workflows and all frontend routes returned successfully. Setup now detects NVIDIA GPUs and pytest ignores archived report doctests. No new scientific results."
+    "ui_suite": "21 of 31 current jsdom checks passed; 10 stale checks target removed /api/adapt and legacy research.html behavior. Targeted audit/interface Python run 11 passed in 70.75s.",
+    "note": "Windows validation: CUDA PyTorch executed on NVIDIA RTX 5050; model services downloaded and readiness verified; focused backend/document tests 41 passed; expanded backend/multilingual run 83 passed with 4 optional-public-data failures; direct browser workflows and all frontend routes returned successfully. Setup now detects NVIDIA GPUs and pytest ignores archived report doctests. The UI test helper now uses explicit guest mode, guest comfort storage, and research-history.html. No new scientific results."
   },
   "prepared_tasks": [
     "15",
