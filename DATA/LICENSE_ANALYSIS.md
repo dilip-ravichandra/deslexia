@@ -1,8 +1,9 @@
-# Source-licence analysis for ADR-009 (decision PENDING — not confirmed by the owner)
+# Source-licence analysis for ADR-009 (owner-approved engineering choice; not legal advice)
 
 **This is an engineering summary, not legal advice or legal certainty.** Before any public release,
 confirm with your institution/supervisor (many universities have a research-data or IP office).
-Nothing in the pipeline depends on this source: the code is source-agnostic and `ML/source_pool.py`
+The owner approved the proposed CC BY-SA-compatible source pool for engineering use on 2026-11-01.
+This does not replace institutional/legal review. Nothing in the pipeline depends on this source: the code is source-agnostic and `ML/source_pool.py`
 is the only place that names it (as a default CLI argument).
 
 ## 1. What was verified, and what was not
@@ -38,7 +39,14 @@ is the only place that names it (as a default CLI argument).
 3. If you need a permissive or closed release: choose C/D/E instead of A/B.
 4. Either way: release labels-only separately from text where possible, get annotator consent in writing, and have your institution confirm before publishing.
 
-## 5. Decisions needed from the owner
-- Open release acceptable (CC BY-SA for combined data)?  yes / no
-- Add CC BY textbook passages to the pool?  yes / no
-- Who confirms the licence (supervisor / institution office)?
+## 5. Attribution to include when sharing a copied passage
+- source title and article/document identifier
+- canonical source URL and, where available, the author/page-history URL
+- the applicable CC BY-SA version and licence URL
+- a notice that the project selected excerpts and added annotations/metadata
+- compatible ShareAlike terms for any combined text-plus-annotation release
+- annotator contribution/consent terms for the labels and rationales
+
+The current approval covers the proposed Simple Wikipedia-derived pool for engineering use.
+Whether to add other sources, and whether an institution requires a separate licence review,
+must be decided per source before adding it.
