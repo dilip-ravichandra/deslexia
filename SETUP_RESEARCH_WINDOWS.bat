@@ -1,7 +1,7 @@
 @echo off
 setlocal
 cd /d "%~dp0"
-echo DyslexiAdapt multilingual research setup - Python 3.12, CPU models.
+echo DyslexiAdapt multilingual research setup - Python 3.12.
 echo Downloads pinned public model files. Several GB of disk space are required.
 if not exist ".venv\Scripts\python.exe" (
  py -3.12 --version >nul 2>&1
@@ -18,7 +18,14 @@ if errorlevel 1 (
  echo Existing .venv uses an unsupported Python version. Create a Python 3.12 environment before continuing.
  goto fail
 )
-.venv\Scripts\python -m pip install torch --index-url https://download.pytorch.org/whl/cpu
+where nvidia-smi >nul 2>&1
+if errorlevel 1 (
+ echo No NVIDIA GPU detected. Installing the CPU PyTorch build.
+ .venv\Scripts\python -m pip install torch --index-url https://download.pytorch.org/whl/cpu
+) else (
+ echo NVIDIA GPU detected. Installing the CUDA 12.8 PyTorch build.
+ .venv\Scripts\python -m pip install torch --index-url https://download.pytorch.org/whl/cu128
+)
 if errorlevel 1 goto fail
 .venv\Scripts\python -m pip install llama-cpp-python==0.3.36 --extra-index-url https://abetlen.github.io/llama-cpp-python/whl/cpu
 if errorlevel 1 goto fail

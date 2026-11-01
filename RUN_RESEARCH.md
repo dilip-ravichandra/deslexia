@@ -10,10 +10,33 @@ Independent manual review is at `/human-review.html`; collection and merge instr
 
 ```powershell
 py -3.12 -m venv .venv
+```
+
+On an NVIDIA Windows PC, install the CUDA-enabled PyTorch build so training can use the GPU:
+
+```powershell
+.venv\Scripts\python -m pip install torch --index-url https://download.pytorch.org/whl/cu128
+```
+
+On a CPU-only Windows PC, use:
+
+```powershell
 .venv\Scripts\python -m pip install torch --index-url https://download.pytorch.org/whl/cpu
+```
+
+Then continue with:
+
+```powershell
 .venv\Scripts\python -m pip install -r BACKEND/requirements-research.txt
 .venv\Scripts\python -m ML.multilingual_setup --vision
 .venv\Scripts\python launch_interface.py
+```
+
+`SETUP_RESEARCH_WINDOWS.bat` detects `nvidia-smi` and selects the CUDA 12.8
+wheel automatically when an NVIDIA GPU is present. Verify the result with:
+
+```powershell
+.venv\Scripts\python -c "import torch; print(torch.cuda.is_available()); print(torch.cuda.get_device_name(0) if torch.cuda.is_available() else 'CPU')"
 ```
 
 For Windows with winget, install the verified community package with `winget install --id UB-Mannheim.TesseractOCR --exact --source winget`. Its package identifier and Apache-2.0 declaration are recorded in the Microsoft winget repository: https://github.com/microsoft/winget-pkgs/tree/master/manifests/u/UB-Mannheim/TesseractOCR . Install the native Tesseract executable and add its folder to PATH (or set TESSERACT_CMD to its full executable path). Language weights are downloaded and checked by multilingual_setup. Without the executable the app uses RapidOCR, which performed worse on the Indic engineering fixtures. Never accept extracted textbook text without checking it.
