@@ -2,7 +2,7 @@
   "project": "DyslexiAdapt",
   "version": "2.0-multilingual-learner-research",
   "status": "technical-implementation-with-explicit-research-gaps",
-  "current_task": "Project audit completed; next unblocked task awaits real research prerequisites",
+  "current_task": "Local Windows application validation completed; research gates remain",
   "completed_tasks": [
     "00",
     "01",
@@ -39,8 +39,12 @@
   ],
   "research_model_available": false,
   "gold_dataset_available": false,
-  "last_verified": "2026-10-12",
-  "known_failing_tests": [],
+  "last_verified": "2026-10-30",
+  "known_failing_tests": [
+    "Optional public CompLex and IndicQA guard tests require separately licensed DATA/public files",
+    "Full jsdom UI harness can exceed its 180-second timeout; direct browser workflows passed",
+    "QA audit retains documented provenance and static-analysis findings"
+  ],
   "resource_policy": "free-only datasets/models/services",
   "pending_decisions": [
     "ADR-009 source corpus licence (owner has not confirmed; PENDING)"
@@ -72,7 +76,7 @@
       "fail": 0
     },
     "ui_suite": "28 jsdom/API checks passed; targeted audit/interface Python run 11 passed in 70.75s.",
-    "note": "Previous full suite: 152 passed. This frontend-only update: targeted backend, audit and 26 UI checks passed. No new scientific results."
+    "note": "Windows validation: CUDA PyTorch executed on NVIDIA RTX 5050; model services downloaded and readiness verified; focused backend/document tests 41 passed; expanded backend/multilingual run 83 passed with 4 optional-public-data failures; direct browser workflows and all frontend routes returned successfully. No new scientific results."
   },
   "prepared_tasks": [
     "15",
